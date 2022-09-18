@@ -35,11 +35,7 @@ class TwitterReader:
         return int(data["id"])
 
     async def list_tweets(
-        self,
-        user_id: int,
-        start_time: datetime.datetime,
-        until_id: int | None = None
-
+        self, user_id: int, start_time: datetime.datetime, until_id: int | None = None
     ) -> AsyncIterable[Tweet]:
         paginator = tweepy.Paginator(
             method=self.api.get_users_tweets,

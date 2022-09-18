@@ -32,3 +32,7 @@ build-backend = "poetry.core.masonry.api"
 [[tool.mypy.overrides]]
 module = "google.cloud.*"
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "tweepy.*"
+ignore_missing_imports = true
