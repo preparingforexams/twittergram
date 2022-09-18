@@ -122,7 +122,7 @@ class StateConfig:
     @classmethod
     def from_env(cls, env: Env) -> StateConfig:
         return cls(
-            state_file=env.get_string("STATE_FILE_PATH"),
+            state_file=env.get_string("STATE_FILE_PATH"),  # type: ignore
         )
 
 
