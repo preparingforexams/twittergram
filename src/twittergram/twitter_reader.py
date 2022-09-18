@@ -19,9 +19,9 @@ class Tweet:
     id: int
 
     @classmethod
-    def from_data(cls, data: dict) -> Tweet:
+    def from_data(cls, data: tweepy.Tweet) -> Tweet:
         return cls(
-            id=int(data["id"]),
+            id=int(data.id),
         )
 
 
@@ -34,8 +34,8 @@ class TwitterReader:
         if response.errors:
             raise IoException(f"Error from Twitter: {response.errors}")
 
-        data: dict = response.data
-        return int(data["id"])
+        user: tweepy.User = response.data
+        return user.id
 
     async def list_tweets(
         self, user_id: int, start_time: datetime.datetime, until_id: int | None = None
