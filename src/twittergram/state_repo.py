@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import abc
 import dataclasses
 import json
@@ -11,6 +13,12 @@ from aiofiles.os import path as aio_path
 @dataclass
 class State:
     last_tweet_id: int | None
+
+    @classmethod
+    def initial(cls) -> State:
+        return cls(
+            last_tweet_id=None,
+        )
 
 
 class StateRepo(abc.ABC):

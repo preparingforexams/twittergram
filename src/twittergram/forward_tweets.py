@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 import pendulum
 
-from twittergram.state_repo import StateRepo
+from twittergram.state_repo import StateRepo, State
 from twittergram.twitter_reader import TwitterReader, Tweet
 
 _LOG = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ class ForwardTweets:
         _LOG.debug("Looking up user ID for user %s", username)
         user_id = await self.twitter_reader.lookup_user_id(username)
 
-        state = await self.state_repo.load_state()
+        state = await self.state_repo.load_state() or State.initial()
         until_id = state.last_tweet_id
 
         _LOG.info("Reading tweets for account %s", username)
