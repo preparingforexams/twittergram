@@ -1,0 +1,8 @@
+image:
+  app: ghcr.io/preparingforexams/twittergram:${GITHUB_SHA}
+sentry:
+  dsn: ${SENTRY_DSN}
+telegram:
+  apiKey: ${TELEGRAM_TOKEN}
+twitter:
+  apiKey: ${TWITTER_TOKEN}
