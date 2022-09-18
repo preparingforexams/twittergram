@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime
+import logging
 from dataclasses import dataclass
 from typing import AsyncIterable
 
@@ -9,6 +10,8 @@ from tweepy.asynchronous import AsyncClient
 
 from twittergram.config import TwitterConfig
 from twittergram.io_exception import IoException
+
+_LOG = logging.getLogger(__name__)
 
 
 @dataclass
@@ -37,16 +40,26 @@ class TwitterReader:
     async def list_tweets(
         self, user_id: int, start_time: datetime.datetime, until_id: int | None = None
     ) -> AsyncIterable[Tweet]:
-        paginator = tweepy.Paginator(
-            method=self.api.get_users_tweets,
-            id=user_id,
-            max_results=100,
-            since_id=until_id,
-            end_time=start_time,
-        )
+        async def _get_tweets(pagination_token: str | None) -> tweepy.Response:
+            return await self.api.get_users_tweets(
+                id=user_id,
+                max_results=100,
+                since_id=until_id,
+                end_time=start_time,
+                pagination_token=pagination_token,
+            )
 
-        async for response in paginator.flatten():
+        page_token: str | None = None
+        while True:
+            _LOG.debug("Loading next page of tweets")
+            response = await _get_tweets(page_token)
             if response.errors:
                 raise IoException(f"Error getting tweets: {response.errors}")
 
-            yield Tweet.from_data(response.data)
+            for tweet_data in response.data:
+                yield Tweet.from_data(tweet_data)
+
+            page_token = response.meta.get("next_token")
+            if not page_token:
+                _LOG.debug("Stopping pagination because of missing next token")
+                break
