@@ -56,7 +56,8 @@ class TwitterReader:
             if response.errors:
                 raise IoException(f"Error getting tweets: {response.errors}")
 
-            for tweet_data in response.data:
+            data: list[tweepy.Tweet] = response.data or []
+            for tweet_data in data:
                 yield Tweet.from_data(tweet_data)
 
             page_token = response.meta.get("next_token")
