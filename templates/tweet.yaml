@@ -1,3 +1,15 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: state
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -13,10 +25,20 @@ spec:
       template:
         spec:
           restartPolicy: Never
+          volumes:
+            - name: state
+              persistentVolumeClaim:
+                claimName: state
           containers:
             - name: app
               image: {{ .Values.image.app }}
               args: [ forward-tweets ]
+              env:
+                - name: STATE_FILE_PATH
+                  value: /state/state_v1.json
               envFrom:
                 - secretRef:
                     name: secrets
+              volumeMounts:
+                - mountPath: /state
+                  name: state

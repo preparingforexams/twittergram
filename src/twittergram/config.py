@@ -101,6 +101,7 @@ class SentryConfig:
 @dataclass
 class Config:
     sentry: SentryConfig
+    state: StateConfig
     telegram: TelegramConfig
     twitter: TwitterConfig
 
@@ -108,8 +109,20 @@ class Config:
     def from_env(cls, env: Env) -> Config:
         return cls(
             sentry=SentryConfig.from_env(env),
+            state=StateConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
             twitter=TwitterConfig.from_env(env),
+        )
+
+
+@dataclass
+class StateConfig:
+    state_file: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> StateConfig:
+        return cls(
+            state_file=env.get_string("STATE_FILE_PATH"),
         )
 
 
