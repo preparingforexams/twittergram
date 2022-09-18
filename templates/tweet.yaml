@@ -12,6 +12,7 @@ spec:
     spec:
       template:
         spec:
+          restartPolicy: Never
           containers:
             - name: app
               image: {{ .Values.image }}
