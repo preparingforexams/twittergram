@@ -5,6 +5,7 @@ import sentry_sdk
 from twittergram.application import Application
 from twittergram.config import load_env, Config, SentryConfig
 from twittergram.forward_tweets import ForwardTweets
+from twittergram.twitter_reader import TwitterReader
 
 _LOG = logging.getLogger(__name__)
 
@@ -35,5 +36,5 @@ def initialize() -> Application:
     _setup_sentry(config.sentry)
 
     return Application(
-        forward_tweets=ForwardTweets(),
+        forward_tweets=ForwardTweets(TwitterReader(config.twitter)),
     )
