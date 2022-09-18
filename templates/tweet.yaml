@@ -15,7 +15,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: app
-              image: {{ .Values.image }}
+              image: {{ .Values.image.app }}
               args: [ forward-tweets ]
               envFrom:
                 - secretRef:
