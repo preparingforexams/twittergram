@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+    spec:
+      volumes:
+        - name: state
+          persistentVolumeClaim:
+            claimName: state
+      containers:
+        - name: app
+          image: {{ .Values.image.app }}
+          command:
+            - sleep
+            - infinity
+          volumeMounts:
+            - mountPath: /state
+              name: state
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
