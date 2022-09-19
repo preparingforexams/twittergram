@@ -11,3 +11,4 @@ venv
 .env
 
 usages.db
+state.json

@@ -2,12 +2,12 @@ import logging
 from pathlib import Path
 
 import sentry_sdk
+from injector import Injector, Module, provider
 
-from twittergram.application import Application
+from twittergram.application import Application, repos, ports
 from twittergram.config import load_env, Config, SentryConfig
-from twittergram.forward_tweets import ForwardTweets
-from twittergram.state_repo import FileStateRepo
-from twittergram.twitter_reader import TwitterReader
+from twittergram.infrastructure.adapters import twitter_reader, twitter_downloader
+from twittergram.infrastructure.repos import state_repo
 
 _LOG = logging.getLogger(__name__)
 
@@ -31,15 +31,39 @@ def _setup_sentry(config: SentryConfig):
     )
 
 
+class ReposModule(Module):
+    def __init__(self, config: Config):
+        self.config = config
+
+    @provider
+    def provide_state_repo(self) -> repos.StateRepo:
+        return state_repo.FileStateRepo(Path(self.config.state.state_file))
+
+
+class PortsModule(Module):
+    def __init__(self, config: Config):
+        self.config = config
+
+    @provider
+    def provide_twitter_downloader(self) -> ports.TwitterDownloader:
+        # TODO: configure path
+        return twitter_downloader.GalleryDlTwitterDownloader(Path("/tmp/twittergram"))
+
+    @provider
+    def provide_twitter_reader(self) -> ports.TwitterReader:
+        return twitter_reader.TweepyTwitterReader(self.config.twitter)
+
+
 def initialize() -> Application:
     _setup_logging()
 
     config = Config.from_env(load_env(""))
     _setup_sentry(config.sentry)
 
-    return Application(
-        forward_tweets=ForwardTweets(
-            state_repo=FileStateRepo(Path(config.state.state_file)),
-            twitter_reader=TwitterReader(config.twitter),
-        ),
+    injector = Injector(
+        modules=[
+            ReposModule(config),
+            PortsModule(config),
+        ]
     )
+    return injector.get(Application)

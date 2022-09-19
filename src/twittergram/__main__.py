@@ -1,8 +1,8 @@
 import logging
 
-from twittergram import cli
+from twittergram.interface.cli import app
 
 _LOG = logging.getLogger(__package__)
 
 if __name__ == "__main__":
-    cli.main()
+    app.main()

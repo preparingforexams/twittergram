@@ -3,16 +3,19 @@ from dataclasses import dataclass
 
 import pendulum
 
-from twittergram.state_repo import StateRepo, State
-from twittergram.twitter_reader import TwitterReader, Tweet
+from twittergram.application import ports, repos
+from twittergram.domain.model import State, Tweet
 
 _LOG = logging.getLogger(__name__)
 
+from injector import inject
 
+
+@inject
 @dataclass
 class ForwardTweets:
-    state_repo: StateRepo
-    twitter_reader: TwitterReader
+    state_repo: repos.StateRepo
+    twitter_reader: ports.TwitterReader
 
     async def __call__(self):
         # TODO: dynamic config

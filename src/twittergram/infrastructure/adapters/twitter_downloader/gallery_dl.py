@@ -4,12 +4,13 @@ from pathlib import Path
 
 from aiofiles.os import listdir as aio_listdir  # type: ignore
 
-from twittergram.io_exception import IoException
+from twittergram.application.exceptions.io import IoException
+from twittergram.application.ports import TwitterDownloader
 
 _LOG = logging.getLogger(__name__)
 
 
-class Downloader:
+class GalleryDlTwitterDownloader(TwitterDownloader):
     def __init__(self, directory: Path):
         self.directory = directory
 

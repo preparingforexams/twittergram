@@ -1,31 +1,25 @@
-from __future__ import annotations
-
-import datetime
 import logging
-from dataclasses import dataclass
+from datetime import datetime
 from typing import AsyncIterable
 
 import tweepy
 from tweepy.asynchronous import AsyncClient
 
+from twittergram.application.exceptions.io import IoException
+from twittergram.application.ports import TwitterReader
 from twittergram.config import TwitterConfig
-from twittergram.io_exception import IoException
+from twittergram.domain.model import Tweet
 
 _LOG = logging.getLogger(__name__)
 
 
-@dataclass
-class Tweet:
-    id: int
-
-    @classmethod
-    def from_data(cls, data: tweepy.Tweet) -> Tweet:
-        return cls(
-            id=int(data.id),
-        )
+def _to_model(data: tweepy.Tweet) -> Tweet:
+    return Tweet(
+        id=int(data.id),
+    )
 
 
-class TwitterReader:
+class TweepyTwitterReader(TwitterReader):
     def __init__(self, config: TwitterConfig):
         self.api = AsyncClient(bearer_token=config.token)
 
@@ -38,7 +32,7 @@ class TwitterReader:
         return user.id
 
     async def list_tweets(
-        self, user_id: int, start_time: datetime.datetime, until_id: int | None = None
+        self, user_id: int, start_time: datetime, until_id: int | None = None
     ) -> AsyncIterable[Tweet]:
         async def _get_tweets(pagination_token: str | None) -> tweepy.Response:
             return await self.api.get_users_tweets(
@@ -58,7 +52,7 @@ class TwitterReader:
 
             data: list[tweepy.Tweet] = response.data or []
             for tweet_data in data:
-                yield Tweet.from_data(tweet_data)
+                yield _to_model(tweet_data)
 
             page_token = response.meta.get("next_token")
             if not page_token:
