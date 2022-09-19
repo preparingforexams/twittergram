@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  TELEGRAM_UPLOAD_CHAT_ID: "1259947317"
+  TELEGRAM_TARGET_CHAT_ID: "-1001226317314"

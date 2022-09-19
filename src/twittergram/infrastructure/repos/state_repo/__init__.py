@@ -1,1 +1,1 @@
-from .file import FileStateRepo
+from .file import FileStateRepo  # noqa: F401

@@ -37,6 +37,8 @@ spec:
                 - name: STATE_FILE_PATH
                   value: /state/state_v1.json
               envFrom:
+                - configMapRef:
+                    name: config
                 - secretRef:
                     name: secrets
               volumeMounts:

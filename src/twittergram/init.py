@@ -6,7 +6,11 @@ from injector import Injector, Module, provider
 
 from twittergram.application import Application, repos, ports
 from twittergram.config import load_env, Config, SentryConfig
-from twittergram.infrastructure.adapters import twitter_reader, twitter_downloader
+from twittergram.infrastructure.adapters import (
+    twitter_reader,
+    twitter_downloader,
+    telegram_uploader,
+)
 from twittergram.infrastructure.repos import state_repo
 
 _LOG = logging.getLogger(__name__)
@@ -43,6 +47,10 @@ class ReposModule(Module):
 class PortsModule(Module):
     def __init__(self, config: Config):
         self.config = config
+
+    @provider
+    def provide_telegram_uploader(self) -> ports.TelegramUploader:
+        return telegram_uploader.PtbTelegramUploader(self.config.telegram)
 
     @provider
     def provide_twitter_downloader(self) -> ports.TwitterDownloader:

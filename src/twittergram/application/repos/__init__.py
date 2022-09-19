@@ -1,1 +1,1 @@
-from .state import StateRepo
+from .state import StateRepo  # noqa: F401

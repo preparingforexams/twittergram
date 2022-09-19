@@ -1,1 +1,1 @@
-from .gallery_dl import GalleryDlTwitterDownloader
+from .gallery_dl import GalleryDlTwitterDownloader  # noqa: F401

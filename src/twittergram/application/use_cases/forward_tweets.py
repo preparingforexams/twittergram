@@ -3,19 +3,19 @@ import logging
 from dataclasses import dataclass
 
 import pendulum
+from injector import inject
 
 from twittergram.application import ports, repos
 from twittergram.domain.model import State, Tweet
 
 _LOG = logging.getLogger(__name__)
 
-from injector import inject
-
 
 @inject
 @dataclass
 class ForwardTweets:
     state_repo: repos.StateRepo
+    telegram_uploader: ports.TelegramUploader
     twitter_downloader: ports.TwitterDownloader
     twitter_reader: ports.TwitterReader
 
@@ -58,10 +58,10 @@ class ForwardTweets:
         media_files = []
         for task in done:
             media_files.extend(task.result())
+        media_files.reverse()
 
-        _LOG.info("Downloaded %d media files", len(media_files))
-
-        # TODO: upload the files to telegram
+        _LOG.info("Downloaded %d media files, uploading to Telegram", len(media_files))
+        await self.telegram_uploader.upload_media(media_files)
 
         _LOG.debug("Storing latest tweet ID")
         state.last_tweet_id = tweets[0].id

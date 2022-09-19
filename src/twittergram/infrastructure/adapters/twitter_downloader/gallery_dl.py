@@ -45,4 +45,4 @@ class GalleryDlTwitterDownloader(TwitterDownloader):
             )
             raise IoException("Could not download tweet")
 
-        return [Path(file) for file in await aio_listdir(directory)]
+        return [directory / file for file in await aio_listdir(directory)]
