@@ -15,7 +15,7 @@ kind: CronJob
 metadata:
   name: tweet
 spec:
-  schedule: "0 * * * *"
+  schedule: "*/15 * * * *"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
