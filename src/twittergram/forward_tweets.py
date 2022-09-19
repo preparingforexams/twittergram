@@ -34,7 +34,7 @@ class ForwardTweets:
             until_id=until_id,
         ):
             tweets.append(tweet)
-            if not until_id and len(tweets) == 10:
+            if not until_id and len(tweets) == 200:
                 _LOG.debug("Stopping tweet collection due to missing until_id")
                 break
 
