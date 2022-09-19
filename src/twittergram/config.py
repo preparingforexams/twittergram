@@ -100,6 +100,7 @@ class SentryConfig:
 
 @dataclass
 class Config:
+    download: DownloadConfig
     sentry: SentryConfig
     state: StateConfig
     telegram: TelegramConfig
@@ -108,10 +109,25 @@ class Config:
     @classmethod
     def from_env(cls, env: Env) -> Config:
         return cls(
+            download=DownloadConfig.from_env(env),
             sentry=SentryConfig.from_env(env),
             state=StateConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
             twitter=TwitterConfig.from_env(env),
+        )
+
+
+@dataclass
+class DownloadConfig:
+    download_directory: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> DownloadConfig:
+        return cls(
+            download_directory=env.get_string(
+                "DOWNLOAD_DIR",
+                default="/tmp/twittergram",
+            ),  # type: ignore
         )
 
 

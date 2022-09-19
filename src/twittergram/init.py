@@ -46,8 +46,9 @@ class PortsModule(Module):
 
     @provider
     def provide_twitter_downloader(self) -> ports.TwitterDownloader:
-        # TODO: configure path
-        return twitter_downloader.GalleryDlTwitterDownloader(Path("/tmp/twittergram"))
+        return twitter_downloader.GalleryDlTwitterDownloader(
+            Path(self.config.download.download_directory),
+        )
 
     @provider
     def provide_twitter_reader(self) -> ports.TwitterReader:

@@ -2,10 +2,11 @@ import asyncio
 import logging
 from pathlib import Path
 
-from aiofiles.os import listdir as aio_listdir  # type: ignore
+from aiofiles.os import listdir as aio_listdir, makedirs as aio_makedirs  # type: ignore
 
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.ports import TwitterDownloader
+from twittergram.domain.model import Tweet
 
 _LOG = logging.getLogger(__name__)
 
@@ -14,12 +15,15 @@ class GalleryDlTwitterDownloader(TwitterDownloader):
     def __init__(self, directory: Path):
         self.directory = directory
 
-    async def download(self, tweet_id: int) -> list[Path]:
-        url = f"https://twitter.com/intent/status/{tweet_id}"
+    async def download(self, tweet: Tweet) -> list[Path]:
+        directory = self.directory / str(tweet.id)
+        await aio_makedirs(directory, exist_ok=True)
+
+        url = f"https://twitter.com/intent/status/{tweet.id}"
         process = await asyncio.create_subprocess_exec(
             "gallery-dl",
             "--directory",
-            str(self.directory),
+            str(directory),
             url,
             stderr=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
@@ -41,4 +45,4 @@ class GalleryDlTwitterDownloader(TwitterDownloader):
             )
             raise IoException("Could not download tweet")
 
-        return [Path(file) for file in await aio_listdir(self.directory)]
+        return [Path(file) for file in await aio_listdir(directory)]

@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from dataclasses import dataclass
 
@@ -15,6 +16,7 @@ from injector import inject
 @dataclass
 class ForwardTweets:
     state_repo: repos.StateRepo
+    twitter_downloader: ports.TwitterDownloader
     twitter_reader: ports.TwitterReader
 
     async def __call__(self):
@@ -37,7 +39,7 @@ class ForwardTweets:
             until_id=until_id,
         ):
             tweets.append(tweet)
-            if not until_id and len(tweets) == 200:
+            if not until_id and len(tweets) == 10:
                 _LOG.debug("Stopping tweet collection due to missing until_id")
                 break
 
@@ -45,8 +47,21 @@ class ForwardTweets:
             _LOG.info("No tweets found")
             return
 
-        _LOG.info("Found %d new tweets", len(tweets))
-        # TODO: do stuff with it
+        _LOG.info("Found %d new tweets, downloading media now", len(tweets))
+        downloads = [self.twitter_downloader.download(tweet) for tweet in tweets]
+        _LOG.debug("Waiting up to 10 minutes until downloads are done")
+        done, pending = await asyncio.wait(downloads, timeout=600)
+
+        if pending:
+            _LOG.warning("%d downloads did not finish in time", len(pending))
+
+        media_files = []
+        for task in done:
+            media_files.extend(task.result())
+
+        _LOG.info("Downloaded %d media files", len(media_files))
+
+        # TODO: upload the files to telegram
 
         _LOG.debug("Storing latest tweet ID")
         state.last_tweet_id = tweets[0].id

@@ -12,3 +12,4 @@ venv
 
 usages.db
 state.json
+downloads/
