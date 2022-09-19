@@ -63,7 +63,10 @@ class ForwardTweets:
         if not media_files:
             _LOG.info("No media files found in the tweets")
         else:
-            _LOG.info("Downloaded %d media files, uploading to Telegram", len(media_files))
+            _LOG.info(
+                "Downloaded %d media files, uploading to Telegram",
+                len(media_files),
+            )
             await self.telegram_uploader.upload_media(media_files)
 
         _LOG.debug("Storing latest tweet ID")
