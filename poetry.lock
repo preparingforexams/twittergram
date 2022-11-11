@@ -751,7 +751,7 @@ multidict = ">=4.0"
 
 [[package]]
 name = "yt-dlp"
-version = "2022.10.4"
+version = "2022.11.11"
 description = "A youtube-dl fork with additional features and patches"
 category = "main"
 optional = false
@@ -768,7 +768,7 @@ websockets = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.10"
-content-hash = "241fc557d107073c7b569d854016cd459b1b369ce88d734d8601ce004f24f6bb"
+content-hash = "d91202178a66abe1c58651a8952cc48c42deb98099a4f5ee3557d6adf4d1d8b4"
 
 [metadata.files]
 aiofiles = [
@@ -1661,6 +1661,6 @@ yarl = [
     {file = "yarl-1.8.1.tar.gz", hash = "sha256:af887845b8c2e060eb5605ff72b6f2dd2aab7a761379373fd89d314f4752abbf"},
 ]
 yt-dlp = [
-    {file = "yt-dlp-2022.10.4.tar.gz", hash = "sha256:1772a2e6f32b971b4d026deae3044f576b8052035255ca340f345cfe90d38d38"},
-    {file = "yt_dlp-2022.10.4-py2.py3-none-any.whl", hash = "sha256:cc21d91048b275bda7018bdc3103374882261ccf29720206d61b10e168c8b719"},
+    {file = "yt-dlp-2022.11.11.tar.gz", hash = "sha256:f6b962023c17a77151476f0f6ed71be87d017629ba5d9994528bc548521191b6"},
+    {file = "yt_dlp-2022.11.11-py2.py3-none-any.whl", hash = "sha256:8bb7bd9ab2e6ecf4db7627e9151ce00572ae7ee24dedc78f611e7467b0ccd7d9"},
 ]
