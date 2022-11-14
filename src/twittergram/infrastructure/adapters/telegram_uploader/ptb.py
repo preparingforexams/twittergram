@@ -32,6 +32,7 @@ class PtbTelegramUploader(TelegramUploader):
                 photo=input_file,
                 caption=caption,
                 disable_notification=True,
+                write_timeout=180,
             )
             return max(message.photo, key=lambda p: p.file_size)
 
