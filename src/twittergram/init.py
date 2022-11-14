@@ -54,7 +54,7 @@ class PortsModule(Module):
 
     @provider
     def provide_twitter_downloader(self) -> ports.TwitterDownloader:
-        return twitter_downloader.GalleryDlTwitterDownloader(
+        return twitter_downloader.TweepyTwitterDownloader(
             Path(self.config.download.download_directory),
         )
 

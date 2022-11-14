@@ -1,13 +1,13 @@
 import abc
 import logging
-from pathlib import Path
 
-from twittergram.domain.model import Tweet
+from twittergram.domain.model import Medium
+from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)
 
 
 class TwitterDownloader(abc.ABC):
     @abc.abstractmethod
-    async def download(self, tweet: Tweet) -> list[Path]:
+    async def download(self, media: list[Medium]) -> list[MediaFile]:
         pass

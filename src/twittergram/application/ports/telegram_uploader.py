@@ -1,8 +1,15 @@
 import abc
-from pathlib import Path
+
+from twittergram.domain.value_objects import MediaFile
 
 
 class TelegramUploader(abc.ABC):
     @abc.abstractmethod
-    async def upload_media(self, media_files: list[Path]):
+    async def send_text_message(self, text: str):
+        pass
+
+    @abc.abstractmethod
+    async def send_image_message(
+        self, image_files: list[MediaFile], caption: str | None
+    ):
         pass

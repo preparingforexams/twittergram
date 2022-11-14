@@ -1,4 +1,3 @@
-import asyncio
 import logging
 from dataclasses import dataclass
 
@@ -6,7 +5,9 @@ import pendulum
 from injector import inject
 
 from twittergram.application import ports, repos
+from twittergram.application.exceptions.media import UnsupportedMediaTypeException
 from twittergram.domain.model import State, Tweet
+from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)
 
@@ -19,9 +20,9 @@ class ForwardTweets:
     twitter_downloader: ports.TwitterDownloader
     twitter_reader: ports.TwitterReader
 
-    async def __call__(self):
+    async def __call__(self) -> None:
         # TODO: dynamic config
-        username = "shirtsthtgohard"
+        username = "elhotzo"
 
         now = pendulum.now()
 
@@ -39,7 +40,7 @@ class ForwardTweets:
             until_id=until_id,
         ):
             tweets.append(tweet)
-            if not until_id and len(tweets) == 10:
+            if not until_id and len(tweets) == 100:
                 _LOG.debug("Stopping tweet collection due to missing until_id")
                 break
 
@@ -47,28 +48,44 @@ class ForwardTweets:
             _LOG.info("No tweets found")
             return
 
+        # Reverse reverse chronological
+        tweets.reverse()
+
+        media_by_tweet_id: dict[int, list[MediaFile] | None] = {}
+
         _LOG.info("Found %d new tweets, downloading media now", len(tweets))
-        downloads = [self.twitter_downloader.download(tweet) for tweet in tweets]
-        _LOG.debug("Waiting up to 10 minutes until downloads are done")
-        done, pending = await asyncio.wait(downloads, timeout=600)
 
-        if pending:
-            _LOG.warning("%d downloads did not finish in time", len(pending))
+        for tweet in tweets:
+            media = tweet.attachments.media
+            if media:
+                try:
+                    files = await self.twitter_downloader.download(media)
+                except UnsupportedMediaTypeException as e:
+                    _LOG.warning("Could not download medium", exc_info=e)
+                    media_by_tweet_id[tweet.id] = None
+                else:
+                    media_by_tweet_id[tweet.id] = files
+            else:
+                media_by_tweet_id[tweet.id] = []
 
-        media_files = []
-        for task in done:
-            media_files.extend(task.result())
-        media_files.reverse()
+        try:
+            for tweet in tweets:
+                if tweet.attachments.media:
+                    media_files = media_by_tweet_id[tweet.id]
 
-        if not media_files:
-            _LOG.info("No media files found in the tweets")
-        else:
-            _LOG.info(
-                "Downloaded %d media files, uploading to Telegram",
-                len(media_files),
-            )
-            await self.telegram_uploader.upload_media(media_files)
+                    if media_files:
+                        await self.telegram_uploader.send_image_message(
+                            media_files,
+                            tweet.text,
+                        )
+                    else:
+                        _LOG.info("Dropping tweet %d with None media files", tweet.id)
+                elif tweet.text:
+                    await self.telegram_uploader.send_text_message(tweet.text)
+                else:
+                    _LOG.info("Got tweet without media or text")
 
-        _LOG.debug("Storing latest tweet ID")
-        state.last_tweet_id = tweets[0].id
-        await self.state_repo.store_state(state)
+                state.last_tweet_id = tweet.id
+        finally:
+            _LOG.debug("Storing state")
+            await self.state_repo.store_state(state)

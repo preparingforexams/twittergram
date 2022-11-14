@@ -3,8 +3,7 @@ kind: CronJob
 metadata:
   name: tweet
 spec:
-  suspend: true
-  schedule: "0 7 * * *"
+  schedule: "0 7,12,18-21 * * *"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
@@ -24,7 +23,7 @@ spec:
               args: [ forward-tweets ]
               env:
                 - name: STATE_FILE_PATH
-                  value: /state/state_v1.json
+                  value: /state/state_v2.json
               envFrom:
                 - configMapRef:
                     name: config

@@ -1,1 +1,1 @@
-from .gallery_dl import GalleryDlTwitterDownloader  # noqa: F401
+from .tweepy import TweepyTwitterDownloader  # noqa: F401
