@@ -50,6 +50,7 @@ class PtbTelegramUploader(TelegramUploader):
                 video=input_file,
                 caption=caption,
                 disable_notification=True,
+                write_timeout=180,
             )
             return message.video
 
@@ -79,6 +80,7 @@ class PtbTelegramUploader(TelegramUploader):
                 chat_id=self.config.target_chat,
                 disable_notification=True,
                 text=text,
+                write_timeout=180,
             )
 
     async def send_image_message(
@@ -91,5 +93,15 @@ class PtbTelegramUploader(TelegramUploader):
                 await self._send_image(bot, chat_id, image_files[0].path, caption)
             else:
                 items = await self._create_items(bot, image_files)
-                await bot.send_message(chat_id, caption, disable_notification=True)
-                await bot.send_media_group(chat_id, items, disable_notification=True)
+                await bot.send_message(
+                    chat_id,
+                    caption,
+                    disable_notification=True,
+                    write_timeout=180,
+                )
+                await bot.send_media_group(
+                    chat_id,
+                    items,
+                    disable_notification=True,
+                    write_timeout=180,
+                )
