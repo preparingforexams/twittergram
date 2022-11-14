@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: tweet
 spec:
-  schedule: "0 7,12,18-21 * * *"
+  schedule: "0 6,11,17-20 * * *"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
