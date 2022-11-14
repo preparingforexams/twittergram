@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import asyncio
 import logging
 from pathlib import Path
+from typing import Callable, Awaitable, TypeVar
 
 import aiofiles
 import telegram
+from telegram.error import RetryAfter
 
 from twittergram.application.ports import TelegramUploader
 from twittergram.config import TelegramConfig
@@ -12,6 +15,22 @@ from twittergram.domain.model import MediaType
 from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)
+TIMEOUTS = dict(read_timeout=180, write_timeout=180, connect_timeout=180)
+
+T = TypeVar("T")
+
+
+async def _auto_retry(func: Callable[[], Awaitable[T]]) -> T:
+    try:
+        return await func()
+    except RetryAfter as e:
+        _LOG.debug(
+            "Received RetryAfter exception, waiting for %d seconds",
+            e.retry_after,
+        )
+        await asyncio.sleep(e.retry_after)
+
+    return await func()
 
 
 class PtbTelegramUploader(TelegramUploader):
@@ -27,12 +46,14 @@ class PtbTelegramUploader(TelegramUploader):
     ) -> telegram.PhotoSize:
         async with aiofiles.open(file_path, "rb") as fd:
             input_file = telegram.InputFile(await fd.read())
-            message = await bot.send_photo(
-                chat_id=chat_id,
-                photo=input_file,
-                caption=caption,
-                disable_notification=True,
-                write_timeout=180,
+            message = await _auto_retry(
+                lambda: bot.send_photo(
+                    chat_id=chat_id,
+                    photo=input_file,
+                    caption=caption,
+                    disable_notification=True,
+                    **TIMEOUTS,
+                )
             )
             return max(message.photo, key=lambda p: p.file_size)
 
@@ -45,12 +66,14 @@ class PtbTelegramUploader(TelegramUploader):
     ) -> telegram.Video:
         async with aiofiles.open(file_path, "rb") as fd:
             input_file = telegram.InputFile(await fd.read())
-            message = await bot.send_video(
-                chat_id=chat_id,
-                video=input_file,
-                caption=caption,
-                disable_notification=True,
-                write_timeout=180,
+            message = await _auto_retry(
+                lambda: bot.send_video(
+                    chat_id=chat_id,
+                    video=input_file,
+                    caption=caption,
+                    disable_notification=True,
+                    **TIMEOUTS,
+                )
             )
             return message.video
 
@@ -76,11 +99,13 @@ class PtbTelegramUploader(TelegramUploader):
 
     async def send_text_message(self, text: str):
         async with telegram.Bot(token=self.config.token) as bot:
-            await bot.send_message(
-                chat_id=self.config.target_chat,
-                disable_notification=True,
-                text=text,
-                write_timeout=180,
+            await _auto_retry(
+                lambda: bot.send_message(
+                    chat_id=self.config.target_chat,
+                    disable_notification=True,
+                    text=text,
+                    **TIMEOUTS,
+                )
             )
 
     async def send_image_message(
@@ -93,15 +118,19 @@ class PtbTelegramUploader(TelegramUploader):
                 await self._send_image(bot, chat_id, image_files[0].path, caption)
             else:
                 items = await self._create_items(bot, image_files)
-                await bot.send_message(
-                    chat_id,
-                    caption,
-                    disable_notification=True,
-                    write_timeout=180,
+                await _auto_retry(
+                    lambda: bot.send_message(
+                        chat_id,
+                        caption,
+                        disable_notification=True,
+                        **TIMEOUTS,
+                    )
                 )
-                await bot.send_media_group(
-                    chat_id,
-                    items,
-                    disable_notification=True,
-                    write_timeout=180,
+                await _auto_retry(
+                    lambda: bot.send_media_group(
+                        chat_id,
+                        items,
+                        disable_notification=True,
+                        **TIMEOUTS,
+                    )
                 )
