@@ -506,16 +506,17 @@ cli = ["click (>=5.0)"]
 
 [[package]]
 name = "python-telegram-bot-raw"
-version = "20.0a4"
+version = "20.0a5"
 description = "We have made you a wrapper you can't refuse"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
-httpx = ">=0.23.0,<0.24.0"
+httpx = ">=0.23.1,<0.24.0"
 
 [package.extras]
+all = ["cryptography (>=3.0,!=3.4,!=3.4.1,!=3.4.2,!=3.4.3)", "httpx[socks]"]
 passport = ["cryptography (>=3.0,!=3.4,!=3.4.1,!=3.4.2,!=3.4.3)"]
 socks = ["httpx[socks]"]
 
@@ -756,7 +757,7 @@ websockets = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.10"
-content-hash = "64290e3bad87b44fd18217fc7176b2418cd945788b102e1c87f64b9a4f4c2bef"
+content-hash = "dff31d0e6faa531227e0653c89af9e56936b395dbcef46cba9b101b582ed7d0a"
 
 [metadata.files]
 aiofiles = [
@@ -1418,8 +1419,8 @@ python-dotenv = [
     {file = "python_dotenv-0.21.0-py3-none-any.whl", hash = "sha256:1684eb44636dd462b66c3ee016599815514527ad99965de77f43e0944634a7e5"},
 ]
 python-telegram-bot-raw = [
-    {file = "python-telegram-bot-raw-20.0a4.tar.gz", hash = "sha256:3d3f68e388e84b18ea5673863783a90daa0e5ea0eb1f6cf9071a9ffd079e86d3"},
-    {file = "python_telegram_bot_raw-20.0a4-py3-none-any.whl", hash = "sha256:43e4be061d7d8a3f52081a610299e421a6501f4b5ed0dd8d052e5c2975c4d7d8"},
+    {file = "python-telegram-bot-raw-20.0a5.tar.gz", hash = "sha256:1f12add0d4115356137282ec1cc6d99e49b96d412a4beceb8c7443faa6d4247e"},
+    {file = "python_telegram_bot_raw-20.0a5-py3-none-any.whl", hash = "sha256:179982b2a535d5e58092cf420c2082d4a2831203886d8c6c758679d26df0ea6d"},
 ]
 pytzdata = [
     {file = "pytzdata-2020.1-py2.py3-none-any.whl", hash = "sha256:e1e14750bcf95016381e4d472bad004eef710f2d6417240904070b3d6654485f"},
