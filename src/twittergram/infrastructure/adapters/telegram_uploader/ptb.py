@@ -103,6 +103,7 @@ class PtbTelegramUploader(TelegramUploader):
                 lambda: bot.send_message(
                     chat_id=self.config.target_chat,
                     disable_notification=True,
+                    disable_web_page_preview=False,
                     text=text,
                     **TIMEOUTS,
                 )
@@ -123,6 +124,7 @@ class PtbTelegramUploader(TelegramUploader):
                         chat_id,
                         caption,
                         disable_notification=True,
+                        disable_web_page_preview=False,
                         **TIMEOUTS,
                     )
                 )
