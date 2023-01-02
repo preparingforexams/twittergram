@@ -1632,14 +1632,14 @@ multidict = ">=4.0"
 
 [[package]]
 name = "yt-dlp"
-version = "2022.11.11"
+version = "2023.1.2"
 description = "A youtube-dl fork with additional features and patches"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "yt-dlp-2022.11.11.tar.gz", hash = "sha256:f6b962023c17a77151476f0f6ed71be87d017629ba5d9994528bc548521191b6"},
-    {file = "yt_dlp-2022.11.11-py2.py3-none-any.whl", hash = "sha256:8bb7bd9ab2e6ecf4db7627e9151ce00572ae7ee24dedc78f611e7467b0ccd7d9"},
+    {file = "yt-dlp-2023.1.2.tar.gz", hash = "sha256:b8d7bbb5c1595f718855a31f34d8a0276a7086f5d3f542c021a8ded8b26d36ae"},
+    {file = "yt_dlp-2023.1.2-py2.py3-none-any.whl", hash = "sha256:37040bb0cda9f10168954eaf89f3d6e187106af81c11fded3c22ec0311194cd6"},
 ]
 
 [package.dependencies]
@@ -1653,4 +1653,4 @@ websockets = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "1258e71f84e46c36e70808a979ba8d067e1eaf0cacefed486d3eee3cde8214db"
+content-hash = "1eb72c992dc82bad82b1b215d273134ecca5261dc8a34b42400414e760402f68"
