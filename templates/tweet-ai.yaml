@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tweet
+spec:
+  schedule: "0 6,11,17-20 * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 5
+  startingDeadlineSeconds: 1200
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          volumes:
+            - name: state
+              persistentVolumeClaim:
+                claimName: state
+          containers:
+            - name: app
+              image: {{ .Values.image.app }}
+              args: [ forward-tweets ]
+              env:
+                - name: STATE_FILE_PATH
+                  value: /state/state_v2_ai.json
+                - name: TELEGRAM_TARGET_CHAT_ID
+                  value: "-1001764933154"
+                - name: TWITTER_SOURCE_ACCOUNT
+                  value: ai_hotzo
+              envFrom:
+                - configMapRef:
+                    name: config
+                - secretRef:
+                    name: secrets
+              volumeMounts:
+                - mountPath: /state
+                  name: state
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
