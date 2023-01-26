@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: tweet
+  name: tweet-original
 spec:
   schedule: "0 6,11,17-20 * * *"
   concurrencyPolicy: Forbid
