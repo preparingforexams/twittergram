@@ -165,10 +165,12 @@ class TelegramConfig:
 
 @dataclass
 class TwitterConfig:
+    source_account: str
     token: str
 
     @classmethod
     def from_env(cls, env: Env) -> TwitterConfig:
         return cls(
+            source_account=env.get_string("TWITTER_SOURCE_ACCOUNT"),  # type: ignore
             token=env.get_string("TWITTER_TOKEN"),  # type: ignore
         )

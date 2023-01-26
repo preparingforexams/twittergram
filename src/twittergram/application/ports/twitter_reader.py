@@ -10,7 +10,7 @@ _LOG = logging.getLogger(__name__)
 
 class TwitterReader(abc.ABC):
     @abc.abstractmethod
-    async def lookup_user_id(self, username: str) -> int:
+    async def lookup_user_id(self) -> int:
         pass
 
     @abc.abstractmethod

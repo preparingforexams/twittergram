@@ -21,18 +21,15 @@ class ForwardTweets:
     twitter_reader: ports.TwitterReader
 
     async def __call__(self) -> None:
-        # TODO: dynamic config
-        username = "elhotzo"
-
         now = pendulum.now()
 
-        _LOG.debug("Looking up user ID for user %s", username)
-        user_id = await self.twitter_reader.lookup_user_id(username)
+        _LOG.debug("Looking up user ID for twitter source account")
+        user_id = await self.twitter_reader.lookup_user_id()
 
         state = await self.state_repo.load_state() or State.initial()
         until_id = state.last_tweet_id
 
-        _LOG.info("Reading tweets for account %s", username)
+        _LOG.info("Reading tweets for account %s", user_id)
         tweets: list[Tweet] = []
         async for tweet in self.twitter_reader.list_tweets(
             user_id,

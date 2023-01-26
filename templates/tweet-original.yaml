@@ -24,6 +24,10 @@ spec:
               env:
                 - name: STATE_FILE_PATH
                   value: /state/state_v2.json
+                - name: TELEGRAM_TARGET_CHAT_ID
+                  value: "-1001604595097"
+                - name: TWITTER_SOURCE_ACCOUNT
+                  value: elhotzo
               envFrom:
                 - configMapRef:
                     name: config

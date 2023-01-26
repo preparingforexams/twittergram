@@ -38,9 +38,10 @@ def _to_model(data: tweepy.Tweet, media: dict[str, Medium]):
 class TweepyTwitterReader(TwitterReader):
     def __init__(self, config: TwitterConfig):
         self.api = AsyncClient(bearer_token=config.token)
+        self._username = config.source_account
 
-    async def lookup_user_id(self, username: str) -> int:
-        response: tweepy.Response = await self.api.get_user(username=username)
+    async def lookup_user_id(self) -> int:
+        response: tweepy.Response = await self.api.get_user(username=self._username)
         if response.errors:
             raise IoException(f"Error from Twitter: {response.errors}")
 
