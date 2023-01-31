@@ -5,8 +5,7 @@ import pendulum
 from injector import inject
 
 from twittergram.application import ports, repos
-from twittergram.application.exceptions.media import \
-    UnsupportedMediaTypeException
+from twittergram.application.exceptions.media import UnsupportedMediaTypeException
 from twittergram.domain.model import State, Tweet
 from twittergram.domain.value_objects import MediaFile
 
@@ -22,7 +21,7 @@ class ForwardTweets:
     twitter_reader: ports.TwitterReader
 
     @staticmethod
-    def _is_idiotic(self, text: str) -> bool:
+    def _is_idiotic(text: str) -> bool:
         return "@elhotzo" in text and (" folgt " in text or " entfolgt," in text)
 
     async def __call__(self) -> None:
