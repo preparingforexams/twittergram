@@ -5,7 +5,8 @@ import pendulum
 from injector import inject
 
 from twittergram.application import ports, repos
-from twittergram.application.exceptions.media import UnsupportedMediaTypeException
+from twittergram.application.exceptions.media import \
+    UnsupportedMediaTypeException
 from twittergram.domain.model import State, Tweet
 from twittergram.domain.value_objects import MediaFile
 
@@ -19,6 +20,10 @@ class ForwardTweets:
     telegram_uploader: ports.TelegramUploader
     twitter_downloader: ports.TwitterDownloader
     twitter_reader: ports.TwitterReader
+
+    @staticmethod
+    def _is_idiotic(self, text: str) -> bool:
+        return "@elhotzo" in text and (" folgt " in text or " entfolgt," in text)
 
     async def __call__(self) -> None:
         now = pendulum.now()
@@ -77,7 +82,7 @@ class ForwardTweets:
                         )
                     else:
                         _LOG.info("Dropping tweet %d with None media files", tweet.id)
-                elif tweet.text:
+                elif tweet.text and not self._is_idiotic(tweet.text):
                     await self.telegram_uploader.send_text_message(tweet.text)
                 else:
                     _LOG.info("Got tweet without media or text")
