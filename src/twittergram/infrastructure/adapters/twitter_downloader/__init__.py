@@ -1,1 +1,0 @@
-from .tweepy import HttpMediaDownloader

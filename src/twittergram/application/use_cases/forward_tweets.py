@@ -17,7 +17,7 @@ _LOG = logging.getLogger(__name__)
 class ForwardTweets:
     state_repo: repos.StateRepo
     telegram_uploader: ports.TelegramUploader
-    twitter_downloader: ports.MediaDownloader
+    media_downloader: ports.MediaDownloader
     twitter_reader: ports.TwitterReader
 
     @staticmethod
@@ -60,7 +60,7 @@ class ForwardTweets:
             media = tweet.attachments.media
             if media:
                 try:
-                    files = await self.twitter_downloader.download(media)
+                    files = await self.media_downloader.download(media)
                 except UnsupportedMediaTypeException as e:
                     _LOG.warning("Could not download medium", exc_info=e)
                     media_by_tweet_id[tweet.id] = None

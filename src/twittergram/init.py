@@ -8,7 +8,7 @@ from twittergram.application import Application, repos, ports
 from twittergram.config import load_env, Config, SentryConfig
 from twittergram.infrastructure.adapters import (
     twitter_reader,
-    twitter_downloader,
+    media_downloader,
     telegram_uploader,
 )
 from twittergram.infrastructure.repos import state_repo
@@ -63,7 +63,7 @@ class PortsModule(Module):
 
     @provider
     def provide_twitter_downloader(self) -> ports.MediaDownloader:
-        return twitter_downloader.HttpMediaDownloader(
+        return media_downloader.HttpMediaDownloader(
             Path(self.config.download.download_directory),
         )
 
