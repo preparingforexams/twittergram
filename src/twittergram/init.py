@@ -10,6 +10,7 @@ from twittergram.infrastructure.adapters import (
     twitter_reader,
     media_downloader,
     telegram_uploader,
+    mastodon_reader,
 )
 from twittergram.infrastructure.repos import state_repo
 
@@ -55,7 +56,11 @@ class PortsModule(Module):
 
     @provider
     def provide_mastodon_reader(self) -> ports.MastodonReader:
-        raise ValueError("Not implemented")
+        config = self.config.mastodon
+        if not config:
+            raise ValueError("Missing mastodon config")
+
+        return mastodon_reader.MastodonPyMastodonReader(config)
 
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:

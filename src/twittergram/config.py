@@ -171,12 +171,14 @@ class MastodonConfig:
     api_base_url: str
     client_id: str
     client_secret: str
+    source_account: str
 
     @classmethod
     def from_env(cls, env: Env) -> MastodonConfig | None:
         client_id = env.get_string("MASTODON_CLIENT_ID")
         client_secret = env.get_string("MASTODON_CLIENT_SECRET")
-        if not (client_id and client_secret):
+        source_account = env.get_string("MASTODON_SOURCE_ACCOUNT")
+        if not (client_id and client_secret and source_account):
             return None
 
         return cls(
@@ -186,6 +188,7 @@ class MastodonConfig:
             ),
             client_id=client_id,
             client_secret=client_secret,
+            source_account=source_account,
         )
 
 

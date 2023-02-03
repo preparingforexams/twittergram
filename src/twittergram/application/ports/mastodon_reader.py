@@ -11,6 +11,8 @@ class MastodonReader(abc.ABC):
 
     @abc.abstractmethod
     def list_toots(
-        self, user_id: int, until_id: int | None = None
+        self,
+        user_id: int,
+        until_id: int | None = None,
     ) -> AsyncIterable[Toot]:
         pass

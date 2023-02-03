@@ -41,7 +41,6 @@ class ForwardToots:
             _LOG.info("No toots found")
             return
 
-        # TODO: check order
         # Reverse reverse chronological
         toots.reverse()
 
@@ -77,7 +76,10 @@ class ForwardToots:
                     else:
                         _LOG.info("Dropping toot %d with None media files", toot.id)
                 elif toot.content:
-                    await self.uploader.send_text_message(toot.content)
+                    await self.uploader.send_text_message(
+                        toot.content,
+                        use_html=True,
+                    )
                 else:
                     _LOG.info("Got toot without media or text")
 
