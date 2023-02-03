@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: toot-hotzo
+spec:
+  schedule: "0 6,11,17-20 * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 5
+  startingDeadlineSeconds: 1200
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          volumes:
+            - name: state
+              persistentVolumeClaim:
+                claimName: state
+          containers:
+            - name: app
+              image: {{ .Values.image.app }}
+              args: [ forward-toots ]
+              env:
+                - name: STATE_FILE_PATH
+                  value: /state/state_v2_mastodon_hotzo.json
+                - name: TELEGRAM_TARGET_CHAT_ID
+                  value: "133399998"
+                - name: MASTODON_SOURCE_ACCOUNT
+                  value: "@elhotzo@mastodon.social"
+              envFrom:
+                - configMapRef:
+                    name: base
+                - configMapRef:
+                    name: mastodon
+                - secretRef:
+                    name: base
+                - secretRef:
+                    name: mastodon
+              volumeMounts:
+                - mountPath: /state
+                  name: state
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
