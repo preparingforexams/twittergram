@@ -1,60 +1,93 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Dict, Tuple, Optional, Union
+from typing import overload
 
 from dotenv import dotenv_values
 
 
 class Env:
-    def __init__(self, values: Dict[str, str]):
+    def __init__(self, values: dict[str, str]):
         self._values = values
+
+    @overload
+    def get_string(
+        self,
+        key: str,
+        default: str,
+    ) -> str:
+        pass
+
+    @overload
+    def get_string(
+        self,
+        key: str,
+        default: None = None,
+    ) -> str | None:
+        pass
 
     def get_string(
         self,
         key: str,
-        default: Optional[str] = None,
-        required: bool = True,
-    ) -> Optional[str]:
-        value = self._values.get(key, default)
-        if required:
-            if value is None:
-                raise ValueError(f"Value for {key} is missing")
-            if not value.strip():
-                raise ValueError(f"Value for {key} is blank")
+        default: str | None = None,
+    ) -> str | None:
+        value = self._values.get(key)
+        if value is None or not value.strip():
+            return default
 
         return value
+
+    @overload
+    def get_int(
+        self,
+        key: str,
+        default: int,
+    ) -> int:
+        pass
+
+    @overload
+    def get_int(
+        self,
+        key: str,
+        default: None = None,
+    ) -> int | None:
+        pass
 
     def get_int(
         self,
         key: str,
-        default: Optional[int] = None,
-        required: bool = True,
-    ) -> Optional[int]:
+        default: int | None = None,
+    ) -> int | None:
         value = self._values.get(key)
-        if required and default is None:
-            if value is None:
-                raise ValueError(f"Value for {key} is missing")
-            if not value.strip():
-                raise ValueError(f"Value for {key} is blank")
-        elif value is None or not value.strip() and default is not None:
+        if value is None or not value.strip():
             return default
 
         return int(value)
 
+    @overload
     def get_int_list(
         self,
         key: str,
-        default: Optional[List[int]] = None,
-        required: bool = True,
-    ) -> Optional[List[int]]:
+        default: list[int],
+    ) -> list[int]:
+        pass
+
+    @overload
+    def get_int_list(
+        self,
+        key: str,
+        default: None = None,
+    ) -> list[int] | None:
+        pass
+
+    def get_int_list(
+        self,
+        key: str,
+        default: list[int] | None = None,
+    ) -> list[int] | None:
         values = self._values.get(key)
-        if required and default is None:
-            if values is None:
-                raise ValueError(f"Value for {key} is missing")
-            if not values.strip():
-                raise ValueError(f"Value for {key} is blank")
-        elif values is None or not values.strip() and default is not None:
+
+        if values is None or not values.strip():
             return default
 
         return [int(value) for value in values.split(",")]
@@ -67,7 +100,7 @@ def _load_env(name: str) -> dict:
         return dotenv_values(f".env.{name}")
 
 
-def load_env(names: Union[str, Tuple[str, ...]]) -> Env:
+def load_env(names: str | tuple[str, ...]) -> Env:
     result = {}
 
     if isinstance(names, str):
@@ -88,12 +121,12 @@ def load_env(names: Union[str, Tuple[str, ...]]) -> Env:
 @dataclass
 class SentryConfig:
     dsn: str | None
-    release: str | None
+    release: str
 
     @classmethod
     def from_env(cls, env: Env) -> SentryConfig:
         return cls(
-            dsn=env.get_string("SENTRY_DSN", required=False),
+            dsn=env.get_string("SENTRY_DSN"),
             release=env.get_string("APP_VERSION", default="debug"),
         )
 
@@ -103,8 +136,8 @@ class Config:
     download: DownloadConfig
     sentry: SentryConfig
     state: StateConfig
-    telegram: TelegramConfig
-    twitter: TwitterConfig
+    telegram: TelegramConfig | None
+    twitter: TwitterConfig | None
 
     @classmethod
     def from_env(cls, env: Env) -> Config:
@@ -127,18 +160,18 @@ class DownloadConfig:
             download_directory=env.get_string(
                 "DOWNLOAD_DIR",
                 default="/tmp/twittergram",
-            ),  # type: ignore
+            ),
         )
 
 
 @dataclass
 class StateConfig:
-    state_file: str
+    state_file: str | None
 
     @classmethod
     def from_env(cls, env: Env) -> StateConfig:
         return cls(
-            state_file=env.get_string("STATE_FILE_PATH"),  # type: ignore
+            state_file=env.get_string("STATE_FILE_PATH"),
         )
 
 
@@ -149,17 +182,20 @@ class TelegramConfig:
     upload_chat: int
 
     @classmethod
-    def from_env(cls, env: Env) -> TelegramConfig:
+    def from_env(cls, env: Env) -> TelegramConfig | None:
+        token = env.get_string("TELEGRAM_TOKEN")
+        if not token:
+            return None
         return cls(
             target_chat=env.get_int(
                 "TELEGRAM_TARGET_CHAT_ID",
                 default=133399998,
-            ),  # type: ignore
-            token=env.get_string("TELEGRAM_TOKEN"),  # type: ignore
+            ),
+            token=token,
             upload_chat=env.get_int(
                 "TELEGRAM_UPLOAD_CHAT_ID",
                 default=1259947317,
-            ),  # type: ignore
+            ),
         )
 
 
@@ -169,8 +205,14 @@ class TwitterConfig:
     token: str
 
     @classmethod
-    def from_env(cls, env: Env) -> TwitterConfig:
+    def from_env(cls, env: Env) -> TwitterConfig | None:
+        source_account = env.get_string("TWITTER_SOURCE_ACCOUNT")
+        token = env.get_string("TWITTER_TOKEN")
+
+        if not (source_account and token):
+            return None
+
         return cls(
-            source_account=env.get_string("TWITTER_SOURCE_ACCOUNT"),  # type: ignore
-            token=env.get_string("TWITTER_TOKEN"),  # type: ignore
+            source_account=source_account,
+            token=token,
         )

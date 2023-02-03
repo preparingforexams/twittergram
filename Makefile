@@ -1,8 +1,8 @@
-.PHONY: check coding_standards test
+.PHONY: check nice test
 
-check: coding_standards test
+check: nice test
 
-coding_standards:
+nice:
 	poetry run black src/
 	poetry run flake8 --exit-zero src/
 	poetry run mypy src/

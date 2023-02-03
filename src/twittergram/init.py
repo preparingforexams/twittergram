@@ -41,7 +41,12 @@ class ReposModule(Module):
 
     @provider
     def provide_state_repo(self) -> repos.StateRepo:
-        return state_repo.FileStateRepo(Path(self.config.state.state_file))
+        state_file = self.config.state.state_file
+
+        if not state_file:
+            raise ValueError("State file path not configured")
+
+        return state_repo.FileStateRepo(Path(state_file))
 
 
 class PortsModule(Module):
@@ -50,7 +55,11 @@ class PortsModule(Module):
 
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
-        return telegram_uploader.PtbTelegramUploader(self.config.telegram)
+        config = self.config.telegram
+        if not config:
+            raise ValueError("Missing Telegram config")
+
+        return telegram_uploader.PtbTelegramUploader(config)
 
     @provider
     def provide_twitter_downloader(self) -> ports.TwitterDownloader:
@@ -60,7 +69,10 @@ class PortsModule(Module):
 
     @provider
     def provide_twitter_reader(self) -> ports.TwitterReader:
-        return twitter_reader.TweepyTwitterReader(self.config.twitter)
+        config = self.config.twitter
+        if not config:
+            raise ValueError("Missing Twitter config")
+        return twitter_reader.TweepyTwitterReader(config)
 
 
 def initialize() -> Application:
