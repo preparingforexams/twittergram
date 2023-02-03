@@ -135,6 +135,7 @@ class SentryConfig:
 class Config:
     download: DownloadConfig
     mastodon: MastodonConfig | None
+    sanitizer: HtmlSanitizerConfig
     sentry: SentryConfig
     state: StateConfig
     telegram: TelegramConfig | None
@@ -145,6 +146,7 @@ class Config:
         return cls(
             download=DownloadConfig.from_env(env),
             mastodon=MastodonConfig.from_env(env),
+            sanitizer=HtmlSanitizerConfig.from_env(env),
             sentry=SentryConfig.from_env(env),
             state=StateConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
@@ -164,6 +166,15 @@ class DownloadConfig:
                 default="/tmp/twittergram",
             ),
         )
+
+
+@dataclass
+class HtmlSanitizerConfig:
+    type: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> HtmlSanitizerConfig:
+        return cls(type=env.get_string("HTML_SANITIZER_TYPE", default="naive"))
 
 
 @dataclass

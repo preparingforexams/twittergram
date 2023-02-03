@@ -11,6 +11,7 @@ from twittergram.infrastructure.adapters import (
     media_downloader,
     telegram_uploader,
     mastodon_reader,
+    html_sanitizer,
 )
 from twittergram.infrastructure.repos import state_repo
 
@@ -53,6 +54,16 @@ class ReposModule(Module):
 class PortsModule(Module):
     def __init__(self, config: Config):
         self.config = config
+
+    @provider
+    def provide_html_sanitizer(self) -> ports.HtmlSanitizer:
+        config = self.config.sanitizer
+
+        match config.type:
+            case "naive":
+                return html_sanitizer.NaiveHtmlSanitizer()
+            case other:
+                raise ValueError(f"Unsupported HTML sanitizer type: {other}")
 
     @provider
     def provide_mastodon_reader(self) -> ports.MastodonReader:

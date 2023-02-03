@@ -14,9 +14,10 @@ _LOG = logging.getLogger(__name__)
 @inject
 @dataclass
 class ForwardToots:
-    state_repo: repos.StateRepo
-    reader: ports.MastodonReader
     downloader: ports.MediaDownloader
+    sanitizer: ports.HtmlSanitizer
+    reader: ports.MastodonReader
+    state_repo: repos.StateRepo
     uploader: ports.TelegramUploader
 
     async def __call__(self) -> None:
@@ -64,20 +65,24 @@ class ForwardToots:
         _LOG.info("Forwarding toots")
         try:
             for toot in toots:
+                sanitized_text: str | None = None
+                if toot.content:
+                    sanitized_text = await self.sanitizer.sanitize(toot.content)
+
                 if toot.media_attachments:
                     media_files = media_by_toot_id[toot.id]
 
                     if media_files:
                         await self.uploader.send_image_message(
                             media_files,
-                            toot.content,
+                            sanitized_text,
                             use_html=True,
                         )
                     else:
                         _LOG.info("Dropping toot %d with None media files", toot.id)
-                elif toot.content:
+                elif sanitized_text:
                     await self.uploader.send_text_message(
-                        toot.content,
+                        sanitized_text,
                         use_html=True,
                     )
                 else:
