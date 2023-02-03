@@ -134,6 +134,7 @@ class SentryConfig:
 @dataclass
 class Config:
     download: DownloadConfig
+    mail: MailConfig | None
     mastodon: MastodonConfig | None
     sanitizer: HtmlSanitizerConfig
     sentry: SentryConfig
@@ -145,6 +146,7 @@ class Config:
     def from_env(cls, env: Env) -> Config:
         return cls(
             download=DownloadConfig.from_env(env),
+            mail=MailConfig.from_env(env),
             mastodon=MastodonConfig.from_env(env),
             sanitizer=HtmlSanitizerConfig.from_env(env),
             sentry=SentryConfig.from_env(env),
@@ -169,12 +171,38 @@ class DownloadConfig:
 
 
 @dataclass
+class MailConfig:
+    api_host: str
+    mailbox_name: str
+    token: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> MailConfig | None:
+        mailbox_name = env.get_string("MAIL_MAILBOX_NAME")
+        token = env.get_string("MAIL_TOKEN")
+
+        if not (mailbox_name and token):
+            return None
+
+        return cls(
+            api_host=env.get_string(
+                "MAIL_API_HOST",
+                default="api.fastmail.com",
+            ),
+            mailbox_name=mailbox_name,
+            token=token,
+        )
+
+
+@dataclass
 class HtmlSanitizerConfig:
     type: str
 
     @classmethod
     def from_env(cls, env: Env) -> HtmlSanitizerConfig:
-        return cls(type=env.get_string("HTML_SANITIZER_TYPE", default="naive"))
+        return cls(
+            type=env.get_string("HTML_SANITIZER_TYPE", default="naive"),
+        )
 
 
 @dataclass

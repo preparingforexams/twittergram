@@ -12,6 +12,7 @@ from twittergram.infrastructure.adapters import (
     telegram_uploader,
     mastodon_reader,
     html_sanitizer,
+    mail_reader,
 )
 from twittergram.infrastructure.repos import state_repo
 
@@ -54,6 +55,15 @@ class ReposModule(Module):
 class PortsModule(Module):
     def __init__(self, config: Config):
         self.config = config
+
+    @provider
+    def provide_mail_reader(self) -> ports.MailReader:
+        config = self.config.mail
+
+        if not config:
+            raise ValueError("Missing mail config")
+
+        return mail_reader.JmapcMailReader(config)
 
     @provider
     def provide_html_sanitizer(self) -> ports.HtmlSanitizer:
