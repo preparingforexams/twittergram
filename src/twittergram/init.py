@@ -87,4 +87,4 @@ def initialize() -> Application:
             PortsModule(config),
         ]
     )
-    return injector.get(Application)
+    return Application(injector)

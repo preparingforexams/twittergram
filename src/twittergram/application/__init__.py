@@ -1,11 +1,12 @@
-from dataclasses import dataclass
-
-from injector import inject
+from injector import Injector
 
 from twittergram.application import use_cases
 
 
-@inject
-@dataclass
 class Application:
-    forward_tweets: use_cases.ForwardTweets
+    def __init__(self, injector: Injector):
+        self._injector = injector
+
+    @property
+    def forward_tweets(self) -> use_cases.ForwardTweets:
+        return self._injector.get(use_cases.ForwardTweets)
