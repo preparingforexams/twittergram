@@ -62,8 +62,8 @@ class PortsModule(Module):
         return telegram_uploader.PtbTelegramUploader(config)
 
     @provider
-    def provide_twitter_downloader(self) -> ports.TwitterDownloader:
-        return twitter_downloader.TweepyTwitterDownloader(
+    def provide_twitter_downloader(self) -> ports.MediaDownloader:
+        return twitter_downloader.HttpMediaDownloader(
             Path(self.config.download.download_directory),
         )
 

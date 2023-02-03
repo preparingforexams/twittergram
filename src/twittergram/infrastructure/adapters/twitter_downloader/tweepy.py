@@ -7,14 +7,14 @@ import aiohttp
 from aiofiles.os import makedirs
 
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
-from twittergram.application.ports import TwitterDownloader
+from twittergram.application.ports import MediaDownloader
 from twittergram.domain.model import Medium, MediaType
 from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)
 
 
-class TweepyTwitterDownloader(TwitterDownloader):
+class HttpMediaDownloader(MediaDownloader):
     def __init__(self, directory: Path):
         self.directory = directory
 

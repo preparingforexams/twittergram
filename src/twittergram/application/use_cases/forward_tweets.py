@@ -17,7 +17,7 @@ _LOG = logging.getLogger(__name__)
 class ForwardTweets:
     state_repo: repos.StateRepo
     telegram_uploader: ports.TelegramUploader
-    twitter_downloader: ports.TwitterDownloader
+    twitter_downloader: ports.MediaDownloader
     twitter_reader: ports.TwitterReader
 
     @staticmethod

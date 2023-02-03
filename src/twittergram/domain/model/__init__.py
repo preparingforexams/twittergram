@@ -1,2 +1,3 @@
 from .state import State
-from .tweet import Attachments, MediaType, Medium, Tweet
+from .media import Medium, MediaType
+from .tweet import Attachments, Tweet

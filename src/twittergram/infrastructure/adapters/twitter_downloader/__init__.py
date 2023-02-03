@@ -1,1 +1,1 @@
-from .tweepy import TweepyTwitterDownloader
+from .tweepy import HttpMediaDownloader
