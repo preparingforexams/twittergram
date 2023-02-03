@@ -1,1 +1,1 @@
-from .ptb import PtbTelegramUploader  # noqa: F401
+from .ptb import PtbTelegramUploader

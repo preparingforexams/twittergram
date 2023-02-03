@@ -24,7 +24,6 @@ yt-dlp = "2023.1.6"
 
 [tool.poetry.dev-dependencies]
 black = "^23.0.0"
-flake8 = "^6.0.0"
 mypy = "0.991"
 pytest = "^7.1.2"
 types-aiofiles = "^22.1.0"

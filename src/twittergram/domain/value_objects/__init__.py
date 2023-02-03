@@ -1,1 +1,1 @@
-from .media_file import MediaFile  # noqa: F401
+from .media_file import MediaFile

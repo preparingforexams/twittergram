@@ -1,1 +1,1 @@
-from .forward_tweets import ForwardTweets  # noqa: F401
+from .forward_tweets import ForwardTweets

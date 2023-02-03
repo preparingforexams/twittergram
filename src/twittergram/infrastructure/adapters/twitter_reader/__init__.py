@@ -1,1 +1,1 @@
-from .tweepy import TweepyTwitterReader  # noqa: F401
+from .tweepy import TweepyTwitterReader

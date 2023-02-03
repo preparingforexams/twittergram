@@ -1,1 +1,1 @@
-from .tweepy import TweepyTwitterDownloader  # noqa: F401
+from .tweepy import TweepyTwitterDownloader
