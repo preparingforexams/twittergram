@@ -54,6 +54,10 @@ class PortsModule(Module):
         self.config = config
 
     @provider
+    def provide_mastodon_reader(self) -> ports.MastodonReader:
+        raise ValueError("Not implemented")
+
+    @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
         config = self.config.telegram
         if not config:

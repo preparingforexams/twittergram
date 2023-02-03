@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mastodon
+data:
+  MASTODON_API_BASE_URL: {{ .Values.mastodon.apiBase | quote }}
+  MASTODON_CLIENT_ID: {{ .Values.mastodon.clientId | quote }}

@@ -14,5 +14,11 @@ def main(context: click.Context):
 
 @main.command
 @click.pass_obj
+def forward_toots(app: Application):
+    asyncio.run(app.forward_toots())
+
+
+@main.command
+@click.pass_obj
 def forward_tweets(app: Application):
     asyncio.run(app.forward_tweets())

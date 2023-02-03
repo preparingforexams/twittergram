@@ -30,7 +30,7 @@ spec:
                   value: elhotzo
               envFrom:
                 - configMapRef:
-                    name: config
+                    name: base
                 - secretRef:
                     name: base
                 - secretRef:

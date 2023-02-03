@@ -8,7 +8,7 @@ from typing import Callable, Awaitable, TypeVar
 import aiofiles
 import telegram
 from telegram.error import RetryAfter
-
+from telegram.constants import ParseMode
 from twittergram.application.ports import TelegramUploader
 from twittergram.config import TelegramConfig
 from twittergram.domain.model import MediaType
@@ -43,6 +43,7 @@ class PtbTelegramUploader(TelegramUploader):
         chat_id: int,
         file_path: Path,
         caption: str | None,
+        use_html: bool,
     ) -> telegram.PhotoSize:
         async with aiofiles.open(file_path, "rb") as fd:
             input_file = telegram.InputFile(await fd.read())
@@ -52,6 +53,7 @@ class PtbTelegramUploader(TelegramUploader):
                     photo=input_file,
                     caption=caption,
                     disable_notification=True,
+                    parse_mode=ParseMode.HTML if use_html else None,
                     **TIMEOUTS,
                 )
             )
@@ -63,6 +65,7 @@ class PtbTelegramUploader(TelegramUploader):
         chat_id: int,
         file_path: Path,
         caption: str | None,
+        use_html: bool,
     ) -> telegram.Video:
         async with aiofiles.open(file_path, "rb") as fd:
             input_file = telegram.InputFile(await fd.read())
@@ -72,6 +75,7 @@ class PtbTelegramUploader(TelegramUploader):
                     video=input_file,
                     caption=caption,
                     disable_notification=True,
+                    parse_mode=ParseMode.HTML if use_html else None,
                     **TIMEOUTS,
                 )
             )
@@ -87,17 +91,33 @@ class PtbTelegramUploader(TelegramUploader):
         for file in files:
             media_type = file.medium.type
             if media_type == MediaType.VIDEO:
-                video = await self._send_video(bot, chat_id, file.path, caption=None)
+                video = await self._send_video(
+                    bot,
+                    chat_id,
+                    file.path,
+                    caption=None,
+                    use_html=False,
+                )
                 items.append(telegram.InputMediaVideo(media=video))
             elif media_type == MediaType.PHOTO:
-                photo = await self._send_image(bot, chat_id, file.path, caption=None)
+                photo = await self._send_image(
+                    bot,
+                    chat_id,
+                    file.path,
+                    caption=None,
+                    use_html=False,
+                )
                 items.append(telegram.InputMediaPhoto(photo))
             else:
                 raise ValueError(f"Unknown media type {media_type}")
 
         return items
 
-    async def send_text_message(self, text: str):
+    async def send_text_message(
+        self,
+        text: str,
+        use_html: bool = False,
+    ):
         async with telegram.Bot(token=self.config.token) as bot:
             await _auto_retry(
                 lambda: bot.send_message(
@@ -105,18 +125,28 @@ class PtbTelegramUploader(TelegramUploader):
                     disable_notification=True,
                     disable_web_page_preview=True,
                     text=text,
+                    parse_mode=ParseMode.HTML if use_html else None,
                     **TIMEOUTS,
                 )
             )
 
     async def send_image_message(
-        self, image_files: list[MediaFile], caption: str | None
+        self,
+        image_files: list[MediaFile],
+        caption: str | None,
+        use_html: bool = False,
     ):
         chat_id = self.config.target_chat
 
         async with telegram.Bot(token=self.config.token) as bot:
             if len(image_files) == 1:
-                await self._send_image(bot, chat_id, image_files[0].path, caption)
+                await self._send_image(
+                    bot,
+                    chat_id,
+                    image_files[0].path,
+                    caption,
+                    use_html,
+                )
             else:
                 items = await self._create_items(bot, image_files)
                 await _auto_retry(
@@ -125,6 +155,7 @@ class PtbTelegramUploader(TelegramUploader):
                         caption,
                         disable_notification=True,
                         disable_web_page_preview=True,
+                        parse_mode=ParseMode.HTML if use_html else None,
                         **TIMEOUTS,
                     )
                 )

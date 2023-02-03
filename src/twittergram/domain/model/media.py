@@ -11,5 +11,5 @@ class MediaType(Enum):
 @dataclass(frozen=True)
 class Medium:
     type: MediaType
-    key: str
+    id: str
     url: str

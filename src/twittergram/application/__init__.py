@@ -10,3 +10,7 @@ class Application:
     @property
     def forward_tweets(self) -> use_cases.ForwardTweets:
         return self._injector.get(use_cases.ForwardTweets)
+
+    @property
+    def forward_toots(self) -> use_cases.ForwardToots:
+        return self._injector.get(use_cases.ForwardToots)

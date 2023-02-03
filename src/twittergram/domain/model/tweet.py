@@ -4,7 +4,7 @@ from twittergram.domain.model.media import Medium
 
 
 @dataclass(frozen=True)
-class Attachments:
+class TweetAttachments:
     media: list[Medium]
 
 
@@ -12,4 +12,4 @@ class Attachments:
 class Tweet:
     id: int
     text: str | None
-    attachments: Attachments
+    attachments: TweetAttachments

@@ -30,7 +30,7 @@ spec:
                   value: ai_hotzo
               envFrom:
                 - configMapRef:
-                    name: config
+                    name: base
                 - secretRef:
                     name: base
                 - secretRef:

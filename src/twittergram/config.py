@@ -134,6 +134,7 @@ class SentryConfig:
 @dataclass
 class Config:
     download: DownloadConfig
+    mastodon: MastodonConfig | None
     sentry: SentryConfig
     state: StateConfig
     telegram: TelegramConfig | None
@@ -143,6 +144,7 @@ class Config:
     def from_env(cls, env: Env) -> Config:
         return cls(
             download=DownloadConfig.from_env(env),
+            mastodon=MastodonConfig.from_env(env),
             sentry=SentryConfig.from_env(env),
             state=StateConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
@@ -161,6 +163,29 @@ class DownloadConfig:
                 "DOWNLOAD_DIR",
                 default="/tmp/twittergram",
             ),
+        )
+
+
+@dataclass
+class MastodonConfig:
+    api_base_url: str
+    client_id: str
+    client_secret: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> MastodonConfig | None:
+        client_id = env.get_string("MASTODON_CLIENT_ID")
+        client_secret = env.get_string("MASTODON_CLIENT_SECRET")
+        if not (client_id and client_secret):
+            return None
+
+        return cls(
+            api_base_url=env.get_string(
+                "MASTODON_API_BASE_URL",
+                "https://mastodon.social",
+            ),
+            client_id=client_id,
+            client_secret=client_secret,
         )
 
 

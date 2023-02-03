@@ -34,7 +34,7 @@ class HttpMediaDownloader(MediaDownloader):
             for medium in media:
                 async with session.get(medium.url) as response:
                     if response.status == 200:
-                        path = directory / medium.key
+                        path = directory / medium.id
 
                         async with aiofiles.open(path, "wb") as f:
                             await f.write(await response.read())

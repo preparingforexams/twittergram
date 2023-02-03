@@ -69,6 +69,8 @@ class ForwardTweets:
             else:
                 media_by_tweet_id[tweet.id] = []
 
+        _LOG.info("Forwarding tweets")
+
         try:
             for tweet in tweets:
                 if tweet.attachments.media:

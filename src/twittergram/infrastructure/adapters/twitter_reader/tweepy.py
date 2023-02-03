@@ -9,14 +9,14 @@ from tweepy.client import Response
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.ports import TwitterReader
 from twittergram.config import TwitterConfig
-from twittergram.domain.model import Tweet, MediaType, Attachments, Medium
+from twittergram.domain.model import Tweet, MediaType, TweetAttachments, Medium
 
 _LOG = logging.getLogger(__name__)
 
 
 def _media_to_model(data: tweepy.Media) -> Medium:
     return Medium(
-        key=data.media_key,
+        id=data.media_key,
         type=MediaType(data.type),
         url=data.url,
     )
@@ -29,7 +29,7 @@ def _to_model(data: tweepy.Tweet, media: dict[str, Medium]):
         id=int(data.id),
         # Make empty strings None
         text=data.text or None,
-        attachments=Attachments(
+        attachments=TweetAttachments(
             media=[media[media_key] for media_key in media_keys],
         ),
     )
