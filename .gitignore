@@ -13,3 +13,4 @@ venv
 usages.db
 state.json
 downloads/
+mastodon.secret

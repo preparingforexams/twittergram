@@ -1,3 +1,5 @@
+mastodon:
+  secrets: ${MASTODON_SECRETS}
 image:
   app: ghcr.io/preparingforexams/twittergram:${GITHUB_SHA}
 sentry:

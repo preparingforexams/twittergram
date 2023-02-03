@@ -32,7 +32,9 @@ spec:
                 - configMapRef:
                     name: config
                 - secretRef:
-                    name: secrets
+                    name: base
+                - secretRef:
+                    name: twitter
               volumeMounts:
                 - mountPath: /state
                   name: state
