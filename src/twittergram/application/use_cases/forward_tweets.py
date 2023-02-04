@@ -6,7 +6,7 @@ from injector import inject
 
 from twittergram.application import ports, repos
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
-from twittergram.domain.model import State, Tweet
+from twittergram.domain.model import Tweet, TwitterState
 from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)
@@ -30,7 +30,7 @@ class ForwardTweets:
         _LOG.debug("Looking up user ID for twitter source account")
         user_id = await self.twitter_reader.lookup_user_id()
 
-        state = await self.state_repo.load_state() or State.initial()
+        state = await self.state_repo.load_state(TwitterState) or TwitterState()
         until_id = state.last_tweet_id
 
         _LOG.info("Reading tweets for account %s", user_id)

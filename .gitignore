@@ -11,6 +11,6 @@ venv
 .env*
 
 usages.db
-state.json
+state*.json
 downloads/
 mastodon.secret

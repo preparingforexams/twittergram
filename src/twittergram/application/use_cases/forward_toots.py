@@ -5,7 +5,7 @@ from injector import inject
 
 from twittergram.application import ports, repos
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
-from twittergram.domain.model import State, Toot
+from twittergram.domain.model import Toot, MastodonState
 from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)
@@ -24,7 +24,7 @@ class ForwardToots:
         _LOG.debug("Looking up user ID for Mastodon source account")
         user_id = await self.reader.lookup_user_id()
 
-        state = await self.state_repo.load_state() or State.initial()
+        state = await self.state_repo.load_state(MastodonState) or MastodonState()
         until_id = state.last_toot_id
 
         _LOG.info("Reading toots for account %s", user_id)
