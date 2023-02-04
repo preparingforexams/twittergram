@@ -94,8 +94,13 @@ class PortsModule(Module):
 
     @provider
     def provide_twitter_downloader(self) -> ports.MediaDownloader:
+        download_directory = self.config.download.download_directory
+
+        if not download_directory:
+            raise ValueError("Missing download directory")
+
         return media_downloader.HttpMediaDownloader(
-            Path(self.config.download.download_directory),
+            Path(download_directory),
         )
 
     @provider

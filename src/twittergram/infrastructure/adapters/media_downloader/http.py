@@ -7,6 +7,7 @@ import aiofiles
 import aiohttp
 import certifi
 from aiofiles.os import makedirs
+from aiofiles.tempfile import TemporaryDirectory
 
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
 from twittergram.application.ports import MediaDownloader

@@ -153,15 +153,12 @@ class Config:
 
 @dataclass
 class DownloadConfig:
-    download_directory: str
+    download_directory: str | None
 
     @classmethod
     def from_env(cls, env: Env) -> DownloadConfig:
         return cls(
-            download_directory=env.get_string(
-                "DOWNLOAD_DIR",
-                default="/tmp/twittergram",
-            ),
+            download_directory=env.get_string("DOWNLOAD_DIR"),
         )
 
 
@@ -245,19 +242,17 @@ class TelegramConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> TelegramConfig | None:
+        target_chat = env.get_int("TELEGRAM_TARGET_CHAT_ID")
         token = env.get_string("TELEGRAM_TOKEN")
-        if not token:
+        upload_chat = env.get_int("TELEGRAM_UPLOAD_CHAT_ID")
+
+        if not (target_chat and token and upload_chat):
             return None
+
         return cls(
-            target_chat=env.get_int(
-                "TELEGRAM_TARGET_CHAT_ID",
-                default=133399998,
-            ),
+            target_chat=target_chat,
             token=token,
-            upload_chat=env.get_int(
-                "TELEGRAM_UPLOAD_CHAT_ID",
-                default=1259947317,
-            ),
+            upload_chat=upload_chat,
         )
 
 
