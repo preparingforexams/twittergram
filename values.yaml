@@ -1,8 +1,9 @@
+mail:
+  token: ${MAIL_TOKEN}
 mastodon:
   apiBase: "https://mastodon.social"
   clientId: jTRdISbXG5U1BDtHjYgjBIgmSTg2YAn-eK5mWcfGjbA
   clientSecret: ${MASTODON_CLIENT_SECRET}
-
 image:
   app: ghcr.io/preparingforexams/twittergram:${GITHUB_SHA}
 sentry:

@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mail-dart
+spec:
+  schedule: "0 20 * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 5
+  startingDeadlineSeconds: 1200
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          volumes:
+            - name: state
+              persistentVolumeClaim:
+                claimName: state
+          containers:
+            - name: app
+              image: {{ .Values.image.app }}
+              args: [ forward-mails ]
+              env:
+                - name: STATE_FILE_PATH
+                  value: /state/state_v2_mail_dart.json
+                - name: TELEGRAM_TARGET_CHAT_ID
+                  value: "-1001708495465"
+                - name: MAIL_MAILBOX_NAME
+                  value: Dart News
+              envFrom:
+                - configMapRef:
+                    name: base
+                - secretRef:
+                    name: base
+                - secretRef:
+                    name: mail
+              volumeMounts:
+                - mountPath: /state
+                  name: state
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
