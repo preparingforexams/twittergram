@@ -39,8 +39,8 @@ twittergram --env mail forward-mails
 ```
 
 In the example above, the `.env` file would be loaded, then the `.env.mail`. If any keys are present
-in both files, the value from the `.env.mail` file takes precedence. It's also possible to load even
-more dotenv by repeating the `--env` command line option:
+in both files, the respective values from the `.env.mail` file take precedence. It's also possible
+to load even more dotenv by repeating the `--env` command line option:
 
 ```
 twittergram --env mail --env override forward-mails
