@@ -113,9 +113,13 @@ class JmapcMailReader(MailReader):
             methods = [
                 EmailQueryChanges(
                     since_query_state=mailbox_state,
+                    sort=[Comparator("receivedAt", is_ascending=False)],
+                    filter=EmailQueryFilterCondition(
+                        in_mailbox=mailbox_id,
+                    ),
                 ),
                 EmailGet(
-                    ids=Ref("/ids"),
+                    ids=Ref("/added/*/id"),
                     fetch_text_body_values=True,
                 ),
             ]

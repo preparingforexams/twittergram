@@ -1,10 +1,12 @@
 import logging
 from dataclasses import dataclass
+from typing import cast
 
 from injector import inject
+from more_itertools import sliced
 
 from twittergram.application import ports, repos
-from twittergram.domain.model import MailState
+from twittergram.domain.model import MailState, Mail
 
 _LOG = logging.getLogger(__name__)
 
@@ -15,6 +17,18 @@ class ForwardMails:
     reader: ports.MailReader
     state_repo: repos.StateRepo
     uploader: ports.TelegramUploader
+
+    @staticmethod
+    def _format_for_telegram(mail: Mail) -> str:
+        result = ""
+
+        if subject := mail.subject:
+            result += subject
+            result += "\n\n"
+
+        result += mail.text_body
+
+        return result
 
     async def __call__(self) -> None:
         _LOG.debug("Loading state")
@@ -35,8 +49,14 @@ class ForwardMails:
                 state.mailbox_state,
             )
             for mail in mails:
-                _LOG.info("Found mail with ID %s. Subject: %s", mail.id, mail.subject)
+                _LOG.info("Found mail with ID %s from %s", mail.id, mail.received_at)
+                formatted = self._format_for_telegram(mail)
+                for text_part in sliced(formatted, 4096):
+                    await self.uploader.send_text_message(
+                        text=cast(str, text_part),
+                    )
 
-            # state.mailbox_state = mailbox_state
+                state.mailbox_state = mailbox_state
         finally:
+            _LOG.debug("Storing state")
             await self.state_repo.store_state(state)
