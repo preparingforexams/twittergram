@@ -5,7 +5,7 @@ forwards them to a Telegram chat.
 
 ## Supported Sources
 
-The following message sources are supported right now:
+The following message sources are supported:
 
 - A Twitter account's timeline ([see below](#twitter))
 - A Mastodon account's timeline ([see below](#mastodon))
