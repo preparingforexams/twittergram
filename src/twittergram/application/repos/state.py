@@ -8,7 +8,7 @@ T = TypeVar("T", bound=State)
 
 class StateRepo(abc.ABC):
     @abc.abstractmethod
-    async def load_state(self, state_type: type[T]) -> T | None:
+    async def load_state(self, state_type: type[T]) -> T:
         pass
 
     @abc.abstractmethod

@@ -30,7 +30,7 @@ class ForwardTweets:
         _LOG.debug("Looking up user ID for twitter source account")
         user_id = await self.twitter_reader.lookup_user_id()
 
-        state = await self.state_repo.load_state(TwitterState) or TwitterState()
+        state = await self.state_repo.load_state(TwitterState)
         until_id = state.last_tweet_id
 
         _LOG.info("Reading tweets for account %s", user_id)

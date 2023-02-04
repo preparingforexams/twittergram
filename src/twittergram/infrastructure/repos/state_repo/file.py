@@ -1,4 +1,3 @@
-import dataclasses
 import json
 from pathlib import Path
 
@@ -14,9 +13,9 @@ class FileStateRepo(StateRepo):
     def __init__(self, path: Path):
         self.path = path
 
-    async def load_state(self, state_type: type[T]) -> T | None:
+    async def load_state(self, state_type: type[T]) -> T:
         if not await aio_path.isfile(self.path):
-            return None
+            return state_type.initial()
 
         async with aio_open(self.path) as f:
             content = await f.read()

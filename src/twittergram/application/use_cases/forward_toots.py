@@ -24,7 +24,7 @@ class ForwardToots:
         _LOG.debug("Looking up user ID for Mastodon source account")
         user_id = await self.reader.lookup_user_id()
 
-        state = await self.state_repo.load_state(MastodonState) or MastodonState()
+        state = await self.state_repo.load_state(MastodonState)
         until_id = state.last_toot_id
 
         _LOG.info("Reading toots for account %s", user_id)
