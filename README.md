@@ -30,6 +30,13 @@ python -m twittergram <command-name>
 poetry run twittergram <command-name>
 ```
 
+The command name differs depending on whether you want to forward tweets, toots, or emails. The app
+will forward all messages that were published since the last time it ran, you'll have to take care
+of scheduling runs yourself, e.g. using a cron job. If the app never ran before, it'll forward the
+ten most recent messages.
+
+### Configuration
+
 The app is configured using dotenv files and environment variables, the latter taking precedence.
 If a file called `.env` exists, it will always be loaded. You can specify additional dotenv files to
 load with the `--env` command line option:
@@ -49,7 +56,7 @@ twittergram --env mail --env override forward-mails
 In that example, three dotenv files would be loaded (if they exist): `.env`, `.env.mail` and
 `.env.override`. The last file you specify will have the highest precedence.
 
-### Required Configuration
+#### Required Configuration
 
 The following configuration options must be set no matter your use case.
 
