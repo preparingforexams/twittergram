@@ -14,5 +14,5 @@ class MailReader(abc.ABC):
         self,
         mailbox_id: str,
         mailbox_state: str | None,
-    ) -> tuple[str, Iterable[Mail]]:
+    ) -> tuple[str, list[Mail]]:
         pass

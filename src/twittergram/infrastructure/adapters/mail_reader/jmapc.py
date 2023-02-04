@@ -89,7 +89,7 @@ class JmapcMailReader(MailReader):
         self,
         mailbox_id: str,
         mailbox_state: str | None,
-    ) -> tuple[str, Iterable[Mail]]:
+    ) -> tuple[str, list[Mail]]:
         client = self._client
 
         if mailbox_state is None:
@@ -152,7 +152,7 @@ class JmapcMailReader(MailReader):
         self,
         mailbox_id: str,
         mailbox_state: str | None,
-    ) -> tuple[str, Iterable[Mail]]:
+    ) -> tuple[str, list[Mail]]:
         loop = asyncio.get_running_loop()
         return await loop.run_in_executor(
             None,

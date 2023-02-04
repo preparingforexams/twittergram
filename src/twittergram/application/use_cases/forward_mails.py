@@ -48,7 +48,8 @@ class ForwardMails:
                 mailbox_id,
                 state.mailbox_state,
             )
-            for mail in mails:
+
+            for mail in reversed(mails):
                 _LOG.info("Found mail with ID %s from %s", mail.id, mail.received_at)
                 formatted = self._format_for_telegram(mail)
                 for text_part in sliced(formatted, 4096):
