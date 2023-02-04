@@ -27,18 +27,20 @@ class State(abc.ABC):
 @dataclass
 class MailState(State):
     mailbox_id: str | None
+    mailbox_state: str | None
 
     def to_dict(self) -> dict[str, JsonSerializable]:
         return dataclasses.asdict(self)
 
     @classmethod
     def initial(cls) -> Self:
-        return cls(None)
+        return cls(None, None)
 
     @classmethod
     def from_dict(cls, data: dict[str, JsonSerializable]) -> Self:
         return cls(
-            mailbox_id=cast(str | None, data.get("mailbox_id_by_name")),
+            mailbox_id=cast(str | None, data.get("mailbox_id")),
+            mailbox_state=cast(str | None, data.get("mailbox_state")),
         )
 
 

@@ -1,15 +1,35 @@
 import asyncio
+import logging
+from datetime import datetime
+from typing import Iterable, cast
 
-from jmapc import Client, MailboxQueryFilterCondition, Error
+from jmapc import (
+    Client,
+    MailboxQueryFilterCondition,
+    Error,
+    EmailQueryFilterCondition,
+    Comparator,
+    Ref,
+    Email,
+)
 from jmapc.methods import (
     MailboxQuery,
     MailboxQueryResponse,
     Response,
+    EmailQuery,
+    EmailGet,
+    EmailQueryResponse,
+    EmailGetResponse,
+    EmailQueryChanges,
+    EmailQueryChangesResponse,
 )
 
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.ports import MailReader
 from twittergram.config import MailConfig
+from twittergram.domain.model import Mail
+
+_LOG = logging.getLogger(__name__)
 
 
 class JmapcMailReader(MailReader):
@@ -48,4 +68,92 @@ class JmapcMailReader(MailReader):
         return await loop.run_in_executor(
             None,
             self._lookup_mailbox_id,
+        )
+
+    @staticmethod
+    def _parse_mail(mail: Email) -> Mail:
+        text_body = mail.text_body or []
+        body_values = mail.body_values or {}
+        part_ids = [cast(str, tb.part_id) for tb in text_body]
+        return Mail(
+            id=cast(str, mail.id),
+            thread_id=cast(str, mail.thread_id),
+            received_at=cast(datetime, mail.received_at),
+            subject=mail.subject,
+            text_body="\n\n".join(
+                cast(str, body_values[part_id].value) for part_id in part_ids
+            ),
+        )
+
+    def _list_mails(
+        self,
+        mailbox_id: str,
+        mailbox_state: str | None,
+    ) -> tuple[str, Iterable[Mail]]:
+        client = self._client
+
+        if mailbox_state is None:
+            _LOG.info("Making initial query")
+            methods = [
+                EmailQuery(
+                    sort=[Comparator("receivedAt", is_ascending=False)],
+                    limit=10,
+                    filter=EmailQueryFilterCondition(
+                        in_mailbox=mailbox_id,
+                    ),
+                ),
+                EmailGet(
+                    ids=Ref("/ids"),
+                    fetch_text_body_values=True,
+                ),
+            ]
+            result = client.request(methods)
+        else:
+            _LOG.info("Looking for changes with existing state")
+            methods = [
+                EmailQueryChanges(
+                    since_query_state=mailbox_state,
+                ),
+                EmailGet(
+                    ids=Ref("/ids"),
+                    fetch_text_body_values=True,
+                ),
+            ]
+            result = client.request(methods)
+
+        query_result, email_result = result
+
+        if isinstance(query_result, Error):
+            raise IoException(f"Could not query mails: {query_result.to_json()}")
+
+        if isinstance(email_result, Error):
+            raise IoException(f"Could not get mails: {email_result.to_json()}")
+
+        query_response = cast(
+            EmailQueryResponse | EmailQueryChangesResponse,
+            query_result.response,
+        )
+        new_state: str
+        if isinstance(query_response, EmailQueryResponse):
+            new_state = query_response.query_state
+        else:
+            new_state = query_response.new_query_state
+
+        email_data = cast(EmailGetResponse, email_result.response).data
+        mails = [self._parse_mail(m) for m in email_data]
+
+        return new_state, mails
+
+    async def list_mails(
+        self,
+        mailbox_id: str,
+        mailbox_state: str | None,
+    ) -> tuple[str, Iterable[Mail]]:
+        loop = asyncio.get_running_loop()
+        return await loop.run_in_executor(
+            None,
+            lambda: self._list_mails(
+                mailbox_id=mailbox_id,
+                mailbox_state=mailbox_state,
+            ),
         )

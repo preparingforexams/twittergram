@@ -28,4 +28,15 @@ class ForwardMails:
             _LOG.info("Found ID %s", mailbox_id)
             state.mailbox_id = mailbox_id
 
-        # TODO: forward mails
+        _LOG.info("Querying mails")
+        try:
+            mailbox_state, mails = await self.reader.list_mails(
+                mailbox_id,
+                state.mailbox_state,
+            )
+            for mail in mails:
+                _LOG.info("Found mail with ID %s. Subject: %s", mail.id, mail.subject)
+
+            # state.mailbox_state = mailbox_state
+        finally:
+            await self.state_repo.store_state(state)
