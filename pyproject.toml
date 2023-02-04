@@ -5,6 +5,9 @@ version = "1.0.0"
 authors = ["OpenAlcoholics <team@openalcoholics.group>"]
 license = "MIT"
 
+[tool.poetry.scripts]
+twittergram = "twittergram.interface.cli.app:main"
+
 [tool.poetry.dependencies]
 aiofiles = "^22.1.0"
 certifi = "2022.12.7"
