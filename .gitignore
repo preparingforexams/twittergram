@@ -8,7 +8,7 @@ venv
 # IntelliJ IDEA
 .idea/
 
-.env
+.env*
 
 usages.db
 state.json

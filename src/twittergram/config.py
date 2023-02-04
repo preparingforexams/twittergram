@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import overload
+from typing import overload, Iterable
 
 from dotenv import dotenv_values
 
@@ -93,23 +93,18 @@ class Env:
         return [int(value) for value in values.split(",")]
 
 
-def _load_env(name: str) -> dict:
+def _load_env(name: str | None) -> dict:
     if not name:
         return dotenv_values(".env")
     else:
         return dotenv_values(f".env.{name}")
 
 
-def load_env(names: str | tuple[str, ...]) -> Env:
-    result = {}
+def load_env(names: Iterable[str]) -> Env:
+    result = {**_load_env(None)}
 
-    if isinstance(names, str):
-        result.update(_load_env(names))
-    elif isinstance(names, tuple):
-        for name in names:
-            result.update(_load_env(name))
-    else:
-        raise ValueError(f"Invalid .env names: {names}")
+    for name in names:
+        result.update(_load_env(name))
 
     from os import environ
 

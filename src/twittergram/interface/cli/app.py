@@ -8,8 +8,9 @@ from twittergram.init import initialize
 
 @click.group
 @click.pass_context
-def main(context: click.Context):
-    context.obj = initialize()
+@click.option("--env", multiple=True)
+def main(context: click.Context, env: list[str]):
+    context.obj = initialize(env)
 
 
 @main.command

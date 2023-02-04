@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import Iterable
 
 import sentry_sdk
 from injector import Injector, Module, provider
@@ -105,10 +106,10 @@ class PortsModule(Module):
         return twitter_reader.TweepyTwitterReader(config)
 
 
-def initialize() -> Application:
+def initialize(env_names: Iterable[str]) -> Application:
     _setup_logging()
 
-    config = Config.from_env(load_env(""))
+    config = Config.from_env(load_env(env_names))
     _setup_sentry(config.sentry)
 
     injector = Injector(
