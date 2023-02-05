@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: mail-dart
 spec:
-  schedule: "0 20 * * *"
+  schedule: "0 8,19 * * *"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
