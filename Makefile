@@ -4,7 +4,7 @@ check: nice test
 
 nice:
 	poetry run black src/
-	poetry run mypy src/ --exclude src/tests
+	poetry run mypy src/
 
 test:
 	poetry run pytest src/
