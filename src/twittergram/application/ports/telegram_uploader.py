@@ -9,7 +9,7 @@ class TelegramUploader(abc.ABC):
         self,
         text: str,
         use_html: bool = False,
-    ):
+    ) -> None:
         pass
 
     @abc.abstractmethod
@@ -18,5 +18,5 @@ class TelegramUploader(abc.ABC):
         image_files: list[MediaFile],
         caption: str | None,
         use_html: bool = False,
-    ):
+    ) -> None:
         pass

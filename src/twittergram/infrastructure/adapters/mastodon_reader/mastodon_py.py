@@ -1,10 +1,8 @@
 import asyncio
 import logging
-from typing import AsyncIterable, Iterable
+from typing import AsyncIterable, Iterable, cast
 
-import pendulum
 from mastodon import Mastodon
-
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.ports import MastodonReader
 from twittergram.config import MastodonConfig
@@ -38,7 +36,7 @@ class MastodonPyMastodonReader(MastodonReader):
         loop = asyncio.get_running_loop()
         return await loop.run_in_executor(None, self._lookup_user_id)
 
-    def _parse_media(self, media: list[dict]) -> list[Medium]:
+    def _parse_media(self, media: list[dict[str, str | int]]) -> list[Medium]:
         result: list[Medium] = []
 
         for m in media:
@@ -49,7 +47,7 @@ class MastodonPyMastodonReader(MastodonReader):
         return result
 
     @staticmethod
-    def _parse_medium(m: dict) -> Medium | None:
+    def _parse_medium(m: dict[str, str | int]) -> Medium | None:
         media_type: MediaType
 
         match m["type"]:
@@ -65,7 +63,7 @@ class MastodonPyMastodonReader(MastodonReader):
 
         return Medium(
             id=str(["id"]),
-            url=m["url"],
+            url=cast(str, m["url"]),
             type=media_type,
         )
 

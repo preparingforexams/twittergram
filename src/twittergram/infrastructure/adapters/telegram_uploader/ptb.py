@@ -117,7 +117,7 @@ class PtbTelegramUploader(TelegramUploader):
         self,
         text: str,
         use_html: bool = False,
-    ):
+    ) -> None:
         async with telegram.Bot(token=self.config.token) as bot:
             await _auto_retry(
                 lambda: bot.send_message(
@@ -135,7 +135,7 @@ class PtbTelegramUploader(TelegramUploader):
         image_files: list[MediaFile],
         caption: str | None,
         use_html: bool = False,
-    ):
+    ) -> None:
         chat_id = self.config.target_chat
 
         async with telegram.Bot(token=self.config.token) as bot:

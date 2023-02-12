@@ -22,7 +22,7 @@ class FileStateRepo(StateRepo):
             data = json.loads(content)
             return state_type.from_dict(data)
 
-    async def store_state(self, state: State):
+    async def store_state(self, state: State) -> None:
         async with aio_open(self.path, "w") as f:
             content = json.dumps(state.to_dict())
             await f.write(content)

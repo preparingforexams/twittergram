@@ -38,6 +38,14 @@ types-requests = "^2.28.11"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.mypy]
+# TODO (goals): strict = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+
 [[tool.mypy.overrides]]
 module = "google.cloud.*"
 ignore_missing_imports = true

@@ -22,7 +22,7 @@ def _media_to_model(data: tweepy.Media) -> Medium:
     )
 
 
-def _to_model(data: tweepy.Tweet, media: dict[str, Medium]):
+def _to_model(data: tweepy.Tweet, media: dict[str, Medium]) -> Tweet:
     attachments = data.attachments or {}
     media_keys = attachments.get("media_keys", [])
     return Tweet(
@@ -36,7 +36,7 @@ def _to_model(data: tweepy.Tweet, media: dict[str, Medium]):
 
 
 class TweepyTwitterReader(TwitterReader):
-    def __init__(self, config: TwitterConfig):
+    def __init__(self, config: TwitterConfig) -> None:
         self.api = AsyncClient(bearer_token=config.token)
         self._username = config.source_account
 

@@ -20,14 +20,14 @@ from twittergram.infrastructure.repos import state_repo
 _LOG = logging.getLogger(__name__)
 
 
-def _setup_logging():
+def _setup_logging() -> None:
     logging.basicConfig()
 
     logging.root.level = logging.WARNING
     logging.getLogger(__package__).level = logging.DEBUG
 
 
-def _setup_sentry(config: SentryConfig):
+def _setup_sentry(config: SentryConfig) -> None:
     dsn = config.dsn
     if not dsn:
         _LOG.warning("Sentry DSN not found")
@@ -40,7 +40,7 @@ def _setup_sentry(config: SentryConfig):
 
 
 class ReposModule(Module):
-    def __init__(self, config: Config):
+    def __init__(self, config: Config) -> None:
         self.config = config
 
     @provider
@@ -54,7 +54,7 @@ class ReposModule(Module):
 
 
 class PortsModule(Module):
-    def __init__(self, config: Config):
+    def __init__(self, config: Config) -> None:
         self.config = config
 
     @provider

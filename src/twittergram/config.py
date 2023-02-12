@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import overload, Iterable
+from typing import overload, Iterable, cast
 
 from dotenv import dotenv_values
 
@@ -93,11 +93,19 @@ class Env:
         return [int(value) for value in values.split(",")]
 
 
-def _load_env(name: str | None) -> dict:
+def _remove_none_values(data: dict[str, str | None]) -> dict[str, str]:
+    for key, value in data.items():
+        if value is None:
+            del data[key]
+
+    return cast(dict[str, str], data)
+
+
+def _load_env(name: str | None) -> dict[str, str]:
     if not name:
-        return dotenv_values(".env")
+        return _remove_none_values(dotenv_values(".env"))
     else:
-        return dotenv_values(f".env.{name}")
+        return _remove_none_values(dotenv_values(f".env.{name}"))
 
 
 def load_env(names: Iterable[str]) -> Env:

@@ -12,5 +12,5 @@ class StateRepo(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def store_state(self, state: T):
+    async def store_state(self, state: T) -> None:
         pass
