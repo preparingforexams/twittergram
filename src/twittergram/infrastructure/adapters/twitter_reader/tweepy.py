@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-from typing import AsyncIterable
+from typing import AsyncIterable, cast
 
 import tweepy
 from tweepy.asynchronous import AsyncClient, AsyncPaginator
@@ -46,7 +46,7 @@ class TweepyTwitterReader(TwitterReader):
             raise IoException(f"Error from Twitter: {response.errors}")
 
         user: tweepy.User = response.data
-        return user.id
+        return cast(int, user.id)
 
     async def list_tweets(
         self, user_id: int, start_time: datetime, until_id: int | None = None

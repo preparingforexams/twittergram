@@ -1,3 +1,5 @@
+# mypy: implicit-reexport
+
 from .html_sanitizer import HtmlSanitizer
 from .mail_reader import MailReader
 from .mastodon_reader import MastodonReader

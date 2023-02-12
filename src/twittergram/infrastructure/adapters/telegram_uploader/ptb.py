@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from pathlib import Path
-from typing import Callable, Awaitable, TypeVar
+from typing import Callable, Awaitable, TypeVar, cast
 
 import aiofiles
 import telegram
@@ -79,7 +79,7 @@ class PtbTelegramUploader(TelegramUploader):
                     **TIMEOUTS,
                 )
             )
-            return message.video
+            return cast(telegram.Video, message.video)
 
     async def _create_items(
         self,

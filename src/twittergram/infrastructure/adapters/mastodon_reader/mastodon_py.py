@@ -30,7 +30,7 @@ class MastodonPyMastodonReader(MastodonReader):
         if account is None:
             raise IoException(f"Could not look up user {account_name}")
 
-        return account["id"]
+        return cast(int, account["id"])
 
     async def lookup_user_id(self) -> int:
         loop = asyncio.get_running_loop()
