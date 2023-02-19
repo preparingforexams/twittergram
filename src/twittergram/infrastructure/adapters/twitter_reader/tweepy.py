@@ -56,7 +56,7 @@ class TweepyTwitterReader(TwitterReader):
             id=user_id,
             expansions=["attachments.media_keys"],
             media_fields=["url", "type", "media_key"],
-            exclude=["replies"],
+            exclude=["replies", "retweets"],
             since_id=until_id,
             end_time=start_time,
             max_results=100,
