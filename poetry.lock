@@ -766,14 +766,14 @@ dev = ["black", "check-manifest", "dataclasses", "mypy", "pytest", "pytest-cov (
 
 [[package]]
 name = "jmapc"
-version = "0.2.13"
+version = "0.2.16"
 description = "JMAP client library for Python"
 category = "main"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "jmapc-0.2.13-py3-none-any.whl", hash = "sha256:9f0d09d34855530cf21f99e127971712327454961d85ede0c7e968596c9cd51f"},
-    {file = "jmapc-0.2.13.tar.gz", hash = "sha256:6fb44f345c4ed6f836ce8205b5892ef4d1fb66cdf0b17d084f33ce9150deebf8"},
+    {file = "jmapc-0.2.16-py3-none-any.whl", hash = "sha256:c1a16da2374b0208b196ac56f277082977759f4a1e0fd2bc10d2d30a8682d85d"},
+    {file = "jmapc-0.2.16.tar.gz", hash = "sha256:569439a2b863af78b10e94971b171a8ca8362d603714d37fcba047cb12532f34"},
 ]
 
 [package.dependencies]
@@ -1368,38 +1368,38 @@ test = ["vcrpy (>=1.10.3)"]
 
 [[package]]
 name = "types-aiofiles"
-version = "22.1.0.8"
+version = "22.1.0.9"
 description = "Typing stubs for aiofiles"
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-aiofiles-22.1.0.8.tar.gz", hash = "sha256:841ef2a69091be3ea798b8928c96e9368f3e1e22c2899fde62120b359b03927f"},
-    {file = "types_aiofiles-22.1.0.8-py3-none-any.whl", hash = "sha256:10c733cb87f820c7b2d7ac949a7553d2704020d1359ba6a5e187b96f3037b4c0"},
+    {file = "types-aiofiles-22.1.0.9.tar.gz", hash = "sha256:d46712556746cb4c9b63f86217c8cc0e9c54b5cf228ed9d8c1c21e38c2d9de99"},
+    {file = "types_aiofiles-22.1.0.9-py3-none-any.whl", hash = "sha256:d0bdc4d978528c6df37816879b7ff9dc0096dd70483d885e9c8624a560f31cc5"},
 ]
 
 [[package]]
 name = "types-deprecated"
-version = "1.2.9"
+version = "1.2.9.1"
 description = "Typing stubs for Deprecated"
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-Deprecated-1.2.9.tar.gz", hash = "sha256:e04ce58929509865359e91dcc38720123262b4cd68fa2a8a90312d50390bb6fa"},
-    {file = "types_Deprecated-1.2.9-py3-none-any.whl", hash = "sha256:53d05621e1d75de537f5a57d93508c8df17e37c07ee60b9fb09d39e1b7586c1e"},
+    {file = "types-Deprecated-1.2.9.1.tar.gz", hash = "sha256:71d99b62849c1be5dae6b1e3b516db012d073a99e16d6f7d63e753aa4df3a6dd"},
+    {file = "types_Deprecated-1.2.9.1-py3-none-any.whl", hash = "sha256:744b278f86ea5e19f01bf7584f3fdba2995cd26483c5fea6620279655cbfc181"},
 ]
 
 [[package]]
 name = "types-requests"
-version = "2.28.11.13"
+version = "2.28.11.14"
 description = "Typing stubs for requests"
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-requests-2.28.11.13.tar.gz", hash = "sha256:3fd332842e8759ea5f7eb7789df8aa772ba155216ccf10ef4aa3b0e5b42e1b46"},
-    {file = "types_requests-2.28.11.13-py3-none-any.whl", hash = "sha256:94896f6f8e9f3db11e422c6e3e4abbc5d7ccace853eac74b23bdd65eeee3cdee"},
+    {file = "types-requests-2.28.11.14.tar.gz", hash = "sha256:232792870b60adb07d23175451ab4e6190021b0c584edf052d92d9b993118f06"},
+    {file = "types_requests-2.28.11.14-py3-none-any.whl", hash = "sha256:f84613b0d4c5d0eeb7879dfa05e14a3702b9c1f7a4ee81dfe9b4321b13fe93a1"},
 ]
 
 [package.dependencies]
@@ -1407,14 +1407,14 @@ types-urllib3 = "<1.27"
 
 [[package]]
 name = "types-urllib3"
-version = "1.26.25.6"
+version = "1.26.25.7"
 description = "Typing stubs for urllib3"
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-urllib3-1.26.25.6.tar.gz", hash = "sha256:35586727cbd7751acccf2c0f34a88baffc092f435ab62458f10776466590f2d5"},
-    {file = "types_urllib3-1.26.25.6-py3-none-any.whl", hash = "sha256:a6c23c41bd03e542eaee5423a018f833077b51c4bf9ceb5aa544e12b812d5604"},
+    {file = "types-urllib3-1.26.25.7.tar.gz", hash = "sha256:df4d3e5472bf8830bd74eac12d56e659f88662ba040c7d106bf3a5bee26fff28"},
+    {file = "types_urllib3-1.26.25.7-py3-none-any.whl", hash = "sha256:28d2d7f5c31ff8ed4d9d2e396ce906c49d37523c3ec207d03d3b1695755a7199"},
 ]
 
 [[package]]
