@@ -1,6 +1,5 @@
 import logging
 from dataclasses import dataclass
-from typing import cast
 
 from injector import inject
 from more_itertools import sliced
@@ -53,9 +52,7 @@ class ForwardMails:
                 _LOG.info("Found mail with ID %s from %s", mail.id, mail.received_at)
                 formatted = self._format_for_telegram(mail)
                 for text_part in sliced(formatted, 4096):
-                    await self.uploader.send_text_message(
-                        text=cast(str, text_part),
-                    )
+                    await self.uploader.send_text_message(text=text_part)
 
                 state.mailbox_state = mailbox_state
         finally:
