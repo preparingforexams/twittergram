@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from dataclasses import dataclass
-from typing import overload, Iterable, cast
+from typing import overload, Iterable, cast, Self
 
 from dotenv import dotenv_values
 
@@ -127,35 +125,10 @@ class SentryConfig:
     release: str
 
     @classmethod
-    def from_env(cls, env: Env) -> SentryConfig:
+    def from_env(cls, env: Env) -> Self:
         return cls(
             dsn=env.get_string("SENTRY_DSN"),
             release=env.get_string("APP_VERSION", default="debug"),
-        )
-
-
-@dataclass
-class Config:
-    download: DownloadConfig
-    mail: MailConfig | None
-    mastodon: MastodonConfig | None
-    sanitizer: HtmlSanitizerConfig
-    sentry: SentryConfig
-    state: StateConfig
-    telegram: TelegramConfig | None
-    twitter: TwitterConfig | None
-
-    @classmethod
-    def from_env(cls, env: Env) -> Config:
-        return cls(
-            download=DownloadConfig.from_env(env),
-            mail=MailConfig.from_env(env),
-            mastodon=MastodonConfig.from_env(env),
-            sanitizer=HtmlSanitizerConfig.from_env(env),
-            sentry=SentryConfig.from_env(env),
-            state=StateConfig.from_env(env),
-            telegram=TelegramConfig.from_env(env),
-            twitter=TwitterConfig.from_env(env),
         )
 
 
@@ -164,7 +137,7 @@ class DownloadConfig:
     download_directory: str | None
 
     @classmethod
-    def from_env(cls, env: Env) -> DownloadConfig:
+    def from_env(cls, env: Env) -> Self:
         return cls(
             download_directory=env.get_string("DOWNLOAD_DIR"),
         )
@@ -177,7 +150,7 @@ class MailConfig:
     token: str
 
     @classmethod
-    def from_env(cls, env: Env) -> MailConfig | None:
+    def from_env(cls, env: Env) -> Self | None:
         mailbox_name = env.get_string("MAIL_MAILBOX_NAME")
         token = env.get_string("MAIL_TOKEN")
 
@@ -199,7 +172,7 @@ class HtmlSanitizerConfig:
     type: str
 
     @classmethod
-    def from_env(cls, env: Env) -> HtmlSanitizerConfig:
+    def from_env(cls, env: Env) -> Self:
         return cls(
             type=env.get_string("HTML_SANITIZER_TYPE", default="naive"),
         )
@@ -213,7 +186,7 @@ class MastodonConfig:
     source_account: str
 
     @classmethod
-    def from_env(cls, env: Env) -> MastodonConfig | None:
+    def from_env(cls, env: Env) -> Self | None:
         client_id = env.get_string("MASTODON_CLIENT_ID")
         client_secret = env.get_string("MASTODON_CLIENT_SECRET")
         source_account = env.get_string("MASTODON_SOURCE_ACCOUNT")
@@ -236,7 +209,7 @@ class StateConfig:
     state_file: str | None
 
     @classmethod
-    def from_env(cls, env: Env) -> StateConfig:
+    def from_env(cls, env: Env) -> Self:
         return cls(
             state_file=env.get_string("STATE_FILE_PATH"),
         )
@@ -249,7 +222,7 @@ class TelegramConfig:
     upload_chat: int
 
     @classmethod
-    def from_env(cls, env: Env) -> TelegramConfig | None:
+    def from_env(cls, env: Env) -> Self | None:
         target_chat = env.get_int("TELEGRAM_TARGET_CHAT_ID")
         token = env.get_string("TELEGRAM_TOKEN")
         upload_chat = env.get_int("TELEGRAM_UPLOAD_CHAT_ID")
@@ -270,7 +243,7 @@ class TwitterConfig:
     token: str
 
     @classmethod
-    def from_env(cls, env: Env) -> TwitterConfig | None:
+    def from_env(cls, env: Env) -> Self | None:
         source_account = env.get_string("TWITTER_SOURCE_ACCOUNT")
         token = env.get_string("TWITTER_TOKEN")
 
@@ -280,4 +253,29 @@ class TwitterConfig:
         return cls(
             source_account=source_account,
             token=token,
+        )
+
+
+@dataclass
+class Config:
+    download: DownloadConfig
+    mail: MailConfig | None
+    mastodon: MastodonConfig | None
+    sanitizer: HtmlSanitizerConfig
+    sentry: SentryConfig
+    state: StateConfig
+    telegram: TelegramConfig | None
+    twitter: TwitterConfig | None
+
+    @classmethod
+    def from_env(cls, env: Env) -> Self:
+        return cls(
+            download=DownloadConfig.from_env(env),
+            mail=MailConfig.from_env(env),
+            mastodon=MastodonConfig.from_env(env),
+            sanitizer=HtmlSanitizerConfig.from_env(env),
+            sentry=SentryConfig.from_env(env),
+            state=StateConfig.from_env(env),
+            telegram=TelegramConfig.from_env(env),
+            twitter=TwitterConfig.from_env(env),
         )
