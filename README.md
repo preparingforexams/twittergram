@@ -1,7 +1,15 @@
 # Twittergram
 
+[![CI status][github-actions-image]][github-actions-link]
+[![Maintainability Rating][sonarcloud-image]][sonarcloud-link]
+
 This application takes messages from one of various sources, like a Twitter or Mastodon account, and
 forwards them to a Telegram chat.
+
+[github-actions-image]: https://github.com/preparingforexams/twittergram/actions/workflows/workflow.yml/badge.svg
+[github-actions-link]: https://github.com/preparingforexams/twittergram/actions/workflows/workflow.yml
+[sonarcloud-image]: https://sonarcloud.io/api/project_badges/measure?project=preparingforexams_twittergram&metric=sqale_rating
+[sonarcloud-link]: https://sonarcloud.io/summary/new_code?id=preparingforexams_twittergram
 
 ## Supported Sources
 
