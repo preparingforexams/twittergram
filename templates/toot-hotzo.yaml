@@ -25,7 +25,7 @@ spec:
                 - name: STATE_FILE_PATH
                   value: /state/state_v2_mastodon_hotzo.json
                 - name: TELEGRAM_TARGET_CHAT_ID
-                  value: "133399998"
+                  value: "-1001604595097"
                 - name: MASTODON_SOURCE_ACCOUNT
                   value: "@elhotzo@mastodon.social"
               envFrom:
