@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: xcode
+spec:
+  suspend: true
+  schedule: "0 6,11 * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 5
+  startingDeadlineSeconds: 1200
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          volumes:
+            - name: state
+              persistentVolumeClaim:
+                claimName: state
+          containers:
+            - name: app
+              image: {{ .Values.image.app }}
+              args: [ forward-xcode ]
+              env:
+                - name: STATE_FILE_PATH
+                  value: /state/state_v2_xcode.json
+                - name: TELEGRAM_TARGET_CHAT_ID
+                  value: "-1001914864431"
+              envFrom:
+                - configMapRef:
+                    name: base
+                - secretRef:
+                    name: base
+              volumeMounts:
+                - mountPath: /state
+                  name: state
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi

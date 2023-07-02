@@ -18,3 +18,7 @@ class Application:
     @property
     def forward_tweets(self) -> use_cases.ForwardTweets:
         return self._injector.get(use_cases.ForwardTweets)
+
+    @property
+    def forward_xcode(self) -> use_cases.ForwardXcode:
+        return self._injector.get(use_cases.ForwardXcode)

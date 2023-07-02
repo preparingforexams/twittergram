@@ -42,3 +42,9 @@ def forward_toots(app: Application) -> None:
 @click.pass_obj
 def forward_tweets(app: Application) -> None:
     _run_command(app.forward_tweets())
+
+
+@main.command
+@click.pass_obj
+def forward_xcode(app: Application) -> None:
+    _run_command(app.forward_xcode())
