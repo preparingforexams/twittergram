@@ -130,5 +130,5 @@ available for Email forwarding.
 |         Key         |       Example Value        | Description                                                                                  |
 |:-------------------:|:--------------------------:|----------------------------------------------------------------------------------------------|
 | `MAIL_MAILBOX_NAME` |        `Dart News`         | (**required**) The name of the Mailbox you want to forward emails from.                      |
-|    `EMAIL_TOKEN`    | `fmul-ertiuhf-24uhsd[...]` | (**required**) Your JMAP API token. The way to obtain this varies by provider.               |
+|    `MAIL_TOKEN`     | `fmul-ertiuhf-24uhsd[...]` | (**required**) Your JMAP API token. The way to obtain this varies by provider.               |
 |   `MAIL_API_HOST`   |     `api.fastmail.com`     | (optional) The hostname to use when accessing the JMAP API. Defaults to Fastmail's hostname. |
