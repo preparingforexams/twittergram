@@ -3,7 +3,6 @@ kind: CronJob
 metadata:
   name: xcode
 spec:
-  suspend: true
   schedule: "0 6,11 * * *"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
