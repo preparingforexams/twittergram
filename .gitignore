@@ -16,3 +16,5 @@ downloads/
 mastodon.secret
 
 .tool-versions
+
+/scratch/
