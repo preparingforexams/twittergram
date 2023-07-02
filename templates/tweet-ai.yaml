@@ -3,6 +3,7 @@ kind: CronJob
 metadata:
   name: tweet-ai
 spec:
+  suspend: true
   schedule: "0 6,11,17-20 * * *"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
