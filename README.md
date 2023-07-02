@@ -7,8 +7,11 @@ This application takes messages from one of various sources, like a Twitter or M
 forwards them to a Telegram chat.
 
 [github-actions-image]: https://github.com/preparingforexams/twittergram/actions/workflows/workflow.yml/badge.svg
+
 [github-actions-link]: https://github.com/preparingforexams/twittergram/actions/workflows/workflow.yml
+
 [sonarcloud-image]: https://sonarcloud.io/api/project_badges/measure?project=preparingforexams_twittergram&metric=sqale_rating
+
 [sonarcloud-link]: https://sonarcloud.io/summary/new_code?id=preparingforexams_twittergram
 
 ## Supported Sources
@@ -78,7 +81,10 @@ The following configuration options must be set no matter your use case.
 
 ### Twitter
 
-To forward Tweets, first you'll have to register your application with Twitter in their
+**Note:** the Twitter integration uses the v1 API, which has been discontinued. The integration will
+not be updated until their developer offerings have reached some semblance of stability again.
+
+To forward tweets, first you'll have to register your application with Twitter in their
 [Developer Portal](https://developer.twitter.com). Since this app doesn't authenticate on behalf
 of any user, you can ignore most of the options and just create a Bearer token for your project.
 
@@ -94,10 +100,22 @@ required for Twitter.
 | `TWITTER_SOURCE_ACCOUNT` |            `elhotzo`            | The username of a (public) Twitter account whose messages you want to forward. |
 |     `TWITTER_TOKEN`      | `AAAAAAAAAAAAAAAAAAAAAPvo[...]` | The Twitter API Bearer token you've obtained as described above.               |
 
-
 ### Mastodon
 
-TODO: document this
+To forward Mastodon toots, you need to register your application to obtain an OAuth client ID and
+client secret.
+
+#### Mastodon Configuration Options
+
+The following configuration options (in addition to [the ones above](#required-configuration)) are
+available for Mastodon.
+
+|            Key            |          Example Value          | Description                                                                                 |
+|:-------------------------:|:-------------------------------:|---------------------------------------------------------------------------------------------|
+| `MASTODON_SOURCE_ACCOUNT` |   `@elhotzo@mastodon.social`    | (**required**) The username of a (public) Mastodon account whose toots you want to forward. |
+|   `MASTODON_CLIENT_ID`    | `sdfjhkxckvsdfe[...]-FSL889fds` | (**required**) Your Mastodon OAuth client ID.                                               |
+| `MASTODON_CLIENT_SECRET`  |   `sdfjhkxckv_FSL889fds[...]`   | (**required**) Your Mastodon OAuth client ID.                                               |
+|  `MASTODON_API_BASE_URL`  |    `https://mastodon.social`    | (optional) The API base URL of the Mastodon instance you want to use.                       |
 
 ### Email
 
