@@ -14,6 +14,7 @@ from twittergram.infrastructure.adapters import (
     mastodon_reader,
     html_sanitizer,
     mail_reader,
+    xcode_release_reader,
 )
 from twittergram.infrastructure.repos import state_repo
 
@@ -109,6 +110,10 @@ class PortsModule(Module):
         if not config:
             raise ValueError("Missing Twitter config")
         return twitter_reader.TweepyTwitterReader(config)
+
+    @provider
+    def provide_xcode_release_reader(self) -> ports.XcodeReleaseReader:
+        return xcode_release_reader.XcrXcodeReleaseReader()
 
 
 def initialize(env_names: Iterable[str]) -> Application:

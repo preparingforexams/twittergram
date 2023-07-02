@@ -78,3 +78,23 @@ class TwitterState(State):
         return cls(
             last_tweet_id=cast(int | None, data.get("last_tweet_id")),
         )
+
+
+@dataclass
+class XcodeState(State):
+    last_release_build: str | None
+
+    def to_dict(self) -> dict[str, JsonSerializable]:
+        return dataclasses.asdict(self)
+
+    @classmethod
+    def initial(cls) -> Self:
+        return cls(
+            last_release_build=None,
+        )
+
+    @classmethod
+    def from_dict(cls, data: dict[str, JsonSerializable]) -> Self:
+        return cls(
+            last_release_build=cast(str | None, data.get("last_release_build")),
+        )
