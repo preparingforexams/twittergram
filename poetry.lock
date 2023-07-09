@@ -1091,17 +1091,17 @@ files = [
 
 [[package]]
 name = "python-telegram-bot-raw"
-version = "20.3"
+version = "20.4"
 description = "We have made you a wrapper you can't refuse"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "python-telegram-bot-raw-20.3.tar.gz", hash = "sha256:51001068b151b3e9f23e9d3e716e450fed76d042aeb682d59e00dbbf6a7c0ce5"},
-    {file = "python_telegram_bot_raw-20.3-py3-none-any.whl", hash = "sha256:679620edd05c5a24138eaad501386ceb4530e54a4898c2a832861211b8bb9dc7"},
+    {file = "python-telegram-bot-raw-20.4.tar.gz", hash = "sha256:d361cff765e7f16685dda6465ebeadb9069f779301cca59523842ee304fee461"},
+    {file = "python_telegram_bot_raw-20.4-py3-none-any.whl", hash = "sha256:c92f86f80a5f3397c5fccd6b34efd4fea535de90a7a930e3ecd30f9463288a49"},
 ]
 
 [package.dependencies]
-httpx = ">=0.24.0,<0.25.0"
+httpx = ">=0.24.1,<0.25.0"
 
 [package.extras]
 all = ["cryptography (>=39.0.1)", "httpx[http2]", "httpx[socks]"]
@@ -1526,4 +1526,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "0b4a037ee98f7d7dd1c6e3d601441b795cebde11f06a9c9a4481b13a57230660"
+content-hash = "cd97f6203b81c7bb705847738796c08e1e832da6f79b8d7020cfdf29cd0842c9"
