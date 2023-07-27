@@ -5,7 +5,7 @@ mastodon:
   clientId: jTRdISbXG5U1BDtHjYgjBIgmSTg2YAn-eK5mWcfGjbA
   clientSecret: ${MASTODON_CLIENT_SECRET}
 image:
-  app: ghcr.io/preparingforexams/twittergram:${GITHUB_SHA}
+  app: ${IMAGE_NAME}:${GITHUB_SHA}
 sentry:
   dsn: ${SENTRY_DSN}
 telegram:
