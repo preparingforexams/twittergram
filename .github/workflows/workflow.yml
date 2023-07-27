@@ -16,6 +16,7 @@ jobs:
       - name: Check coding standards
         run: |
           poetry run black --check src/
+          poetry run isort --check-only src/
           poetry run mypy src/
 
   test:
