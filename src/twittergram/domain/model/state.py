@@ -1,7 +1,7 @@
 import abc
 import dataclasses
 from dataclasses import dataclass
-from typing import Self, cast, TypeAlias
+from typing import Self, TypeAlias, cast
 
 JsonSerializable: TypeAlias = (
     str | int | None | list["JsonSerializable"] | dict[str, "JsonSerializable"]

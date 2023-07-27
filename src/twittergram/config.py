@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import overload, Iterable, cast, Self
+from typing import Iterable, Self, cast, overload
 
 from dotenv import dotenv_values
 

@@ -5,7 +5,7 @@ from injector import inject
 
 from twittergram.application import ports, repos
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
-from twittergram.domain.model import Toot, MastodonState
+from twittergram.domain.model import MastodonState, Toot
 from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 from injector import inject
 
-from twittergram.application import repos, ports
+from twittergram.application import ports, repos
 from twittergram.domain import model
 from twittergram.domain.model import XcodeState
 

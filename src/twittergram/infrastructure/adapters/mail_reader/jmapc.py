@@ -5,23 +5,23 @@ from typing import Iterable, cast
 
 from jmapc import (
     Client,
-    MailboxQueryFilterCondition,
-    Error,
-    EmailQueryFilterCondition,
     Comparator,
-    Ref,
     Email,
+    EmailQueryFilterCondition,
+    Error,
+    MailboxQueryFilterCondition,
+    Ref,
 )
 from jmapc.methods import (
+    EmailGet,
+    EmailGetResponse,
+    EmailQuery,
+    EmailQueryChanges,
+    EmailQueryChangesResponse,
+    EmailQueryResponse,
     MailboxQuery,
     MailboxQueryResponse,
     Response,
-    EmailQuery,
-    EmailGet,
-    EmailQueryResponse,
-    EmailGetResponse,
-    EmailQueryChanges,
-    EmailQueryChangesResponse,
 )
 
 from twittergram.application.exceptions.io import IoException

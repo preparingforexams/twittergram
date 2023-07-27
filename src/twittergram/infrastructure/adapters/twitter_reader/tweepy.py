@@ -9,7 +9,7 @@ from tweepy.client import Response
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.ports import TwitterReader
 from twittergram.config import TwitterConfig
-from twittergram.domain.model import Tweet, MediaType, TweetAttachments, Medium
+from twittergram.domain.model import MediaType, Medium, Tweet, TweetAttachments
 
 _LOG = logging.getLogger(__name__)
 

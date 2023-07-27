@@ -5,15 +5,15 @@ from typing import Iterable
 import sentry_sdk
 from injector import Injector, Module, provider
 
-from twittergram.application import Application, repos, ports
-from twittergram.config import load_env, Config, SentryConfig
+from twittergram.application import Application, ports, repos
+from twittergram.config import Config, SentryConfig, load_env
 from twittergram.infrastructure.adapters import (
-    twitter_reader,
-    media_downloader,
-    telegram_uploader,
-    mastodon_reader,
     html_sanitizer,
     mail_reader,
+    mastodon_reader,
+    media_downloader,
+    telegram_uploader,
+    twitter_reader,
     xcode_release_reader,
 )
 from twittergram.infrastructure.repos import state_repo

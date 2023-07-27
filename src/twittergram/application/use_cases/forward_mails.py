@@ -5,7 +5,7 @@ from injector import inject
 from more_itertools import sliced
 
 from twittergram.application import ports, repos
-from twittergram.domain.model import MailState, Mail
+from twittergram.domain.model import Mail, MailState
 
 _LOG = logging.getLogger(__name__)
 

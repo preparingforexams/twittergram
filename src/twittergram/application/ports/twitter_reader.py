@@ -1,7 +1,7 @@
 import abc
+import logging
 from collections.abc import AsyncIterable
 from datetime import datetime
-import logging
 
 from twittergram.domain.model import Tweet
 

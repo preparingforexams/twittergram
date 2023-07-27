@@ -11,7 +11,7 @@ from aiofiles.tempfile import TemporaryDirectory
 
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
 from twittergram.application.ports import MediaDownloader
-from twittergram.domain.model import Medium, MediaType
+from twittergram.domain.model import MediaType, Medium
 from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)

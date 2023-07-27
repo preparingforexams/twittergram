@@ -1,12 +1,13 @@
 import asyncio
 import logging
 from pathlib import Path
-from typing import Callable, Awaitable, TypeVar, cast
+from typing import Awaitable, Callable, TypeVar, cast
 
 import aiofiles
 import telegram
-from telegram.error import RetryAfter
 from telegram.constants import ParseMode
+from telegram.error import RetryAfter
+
 from twittergram.application.ports import TelegramUploader
 from twittergram.config import TelegramConfig
 from twittergram.domain.model import MediaType

@@ -1,9 +1,9 @@
 # mypy: implicit-reexport
 
 from .mail import Mail
-from .media import Medium, MediaType
-from .state import State, TwitterState, MailState, MastodonState, XcodeState
+from .media import MediaType, Medium
+from .state import MailState, MastodonState, State, TwitterState, XcodeState
 from .toot import Toot
-from .tweet import TweetAttachments, Tweet
+from .tweet import Tweet, TweetAttachments
 from .url import URL
 from .xcode import XcodeRelease
