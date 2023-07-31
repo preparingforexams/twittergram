@@ -22,6 +22,7 @@ The following message sources are supported:
 - A Mastodon account's timeline ([see below](#mastodon))
 - A mailbox/folder in an email account with [JMAP protocol](https://jmap.io/) support
   ([see below](#email))
+- Notifications about new Xcode releases ([see below](#xcode-releases))
 
 ## Usage
 
@@ -132,3 +133,7 @@ available for Email forwarding.
 | `MAIL_MAILBOX_NAME` |        `Dart News`         | (**required**) The name of the Mailbox you want to forward emails from.                      |
 |    `MAIL_TOKEN`     | `fmul-ertiuhf-24uhsd[...]` | (**required**) Your JMAP API token. The way to obtain this varies by provider.               |
 |   `MAIL_API_HOST`   |     `api.fastmail.com`     | (optional) The hostname to use when accessing the JMAP API. Defaults to Fastmail's hostname. |
+
+### Xcode Releases
+
+TODO: Document
