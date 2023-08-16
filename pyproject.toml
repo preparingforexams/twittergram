@@ -2,7 +2,7 @@
 name = "twittergram"
 description = "Sends telegrams"
 version = "1.0.0"
-authors = ["OpenAlcoholics <team@openalcoholics.group>"]
+authors = ["Blindfolded Surgery <team@blindfolded.surgery>"]
 license = "MIT"
 
 [tool.poetry.scripts]
