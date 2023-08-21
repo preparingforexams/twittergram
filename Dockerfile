@@ -7,7 +7,7 @@ ENV PATH=$PATH:/app/.local/bin
 WORKDIR /app
 
 RUN pip install pipx==1.2.0 --user --no-cache
-RUN pipx install poetry==1.5.1
+RUN pipx install poetry==1.6.1
 RUN poetry config virtualenvs.create false
 
 COPY [ "poetry.toml", "poetry.lock", "pyproject.toml", "./" ]
