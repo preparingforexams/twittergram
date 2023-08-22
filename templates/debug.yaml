@@ -16,6 +16,8 @@ spec:
         - name: state
           persistentVolumeClaim:
             claimName: state
+      securityContext:
+        fsGroup: 999
       containers:
         - name: app
           image: {{ .Values.image.app }}
