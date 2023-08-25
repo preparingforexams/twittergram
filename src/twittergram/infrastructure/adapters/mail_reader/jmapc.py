@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from datetime import datetime
-from typing import Iterable, cast
+from typing import cast
 
 from jmapc import (
     Client,

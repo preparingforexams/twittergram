@@ -1,5 +1,4 @@
 import abc
-from typing import Iterable
 
 from twittergram.domain.model.mail import Mail
 
