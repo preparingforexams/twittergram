@@ -4,6 +4,7 @@ __pycache__
 venv
 .mypy_cache/
 .pytest_cache/
+.ruff_cache/
 
 # IntelliJ IDEA
 .idea/
