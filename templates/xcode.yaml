@@ -3,11 +3,12 @@ kind: CronJob
 metadata:
   name: xcode
 spec:
-  schedule: "0 6,11 * * *"
+  schedule: "0 7,12 * * *"
+  startingDeadlineSeconds: {{ .Values.cron.defaultStartDeadlineSeconds }}
+  timeZone: {{ .Values.cron.defaultTimezone }}
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
-  startingDeadlineSeconds: 1200
   jobTemplate:
     spec:
       template:

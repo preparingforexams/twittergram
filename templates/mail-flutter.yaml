@@ -3,11 +3,12 @@ kind: CronJob
 metadata:
   name: mail-flutter
 spec:
-  schedule: "0 8,19 * * *"
+  schedule: "0 9,20 * * *"
+  startingDeadlineSeconds: {{ .Values.cron.defaultStartDeadlineSeconds }}
+  timeZone: {{ .Values.cron.defaultTimezone }}
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
-  startingDeadlineSeconds: 1200
   jobTemplate:
     spec:
       template:
