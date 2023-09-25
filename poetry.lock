@@ -345,13 +345,13 @@ files = [
 
 [[package]]
 name = "bs-config"
-version = "0.1.0"
+version = "0.1.1"
 description = "Config"
 optional = false
 python-versions = ">=3.10,<3.12"
 files = [
-    {file = "bs_config-0.1.0-py3-none-any.whl", hash = "sha256:d5f5a255d2dde8f4523b7cc4f94d8283d3e190975b10d4e62f8b523a441252b2"},
-    {file = "bs_config-0.1.0.tar.gz", hash = "sha256:1adb373c00037ce652cbc34af4778a2c875fcd67f484c0e4eb94a39e5a32a808"},
+    {file = "bs_config-0.1.1-py3-none-any.whl", hash = "sha256:8a1483293598b64c1a24f2c488bd5d54abca9e4cbfa5b1609fe67ccba5dcd9cd"},
+    {file = "bs_config-0.1.1.tar.gz", hash = "sha256:5e0891450df29dfaf06a983d34f14841adcd5128bde103c46e7ce642f8ff3508"},
 ]
 
 [package.dependencies]
@@ -1541,4 +1541,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "6ad563e75080523d41e7da14f26271d0abbed6c105b85df5dfcb66957e91da51"
+content-hash = "f9452fb574ca447af1471f26751e8d45e1b20e5caa21f2e3d0085b88a6b12c91"
