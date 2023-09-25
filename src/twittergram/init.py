@@ -3,10 +3,11 @@ from pathlib import Path
 from typing import Iterable
 
 import sentry_sdk
+from bs_config import Env
 from injector import Injector, Module, provider
 
 from twittergram.application import Application, ports, repos
-from twittergram.config import Config, SentryConfig, load_env
+from twittergram.config import Config, SentryConfig
 from twittergram.infrastructure.adapters import (
     html_sanitizer,
     mail_reader,
@@ -119,7 +120,12 @@ class PortsModule(Module):
 def initialize(env_names: Iterable[str]) -> Application:
     _setup_logging()
 
-    config = Config.from_env(load_env(env_names))
+    config = Config.from_env(
+        Env.load(
+            include_default_dotenv=True,
+            additional_dotenvs=list(env_names),
+        )
+    )
     _setup_sentry(config.sentry)
 
     injector = Injector(
