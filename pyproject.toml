@@ -25,7 +25,7 @@ mastodon-py = "^1.8.0"
 more-itertools = "^10.0.0"
 pendulum = "^2.0.0"
 python = "~3.11"
-python-telegram-bot-raw = "20.5"
+python-telegram-bot-raw = "20.6"
 sentry-sdk = "^1.14.0"
 tweepy = { extras = ["async"], version = "^4.10.1" }
 
