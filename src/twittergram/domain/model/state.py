@@ -1,6 +1,7 @@
 import abc
 import dataclasses
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Self, TypeAlias, cast
 
 JsonSerializable: TypeAlias = (
@@ -60,6 +61,30 @@ class MastodonState(State):
         return cls(
             last_toot_id=cast(int | None, data.get("last_toot_id")),
         )
+
+
+@dataclass
+class RedditState(State):
+    last_post_time: datetime | None
+
+    def to_dict(self) -> dict[str, JsonSerializable]:
+        if (last_post_time := self.last_post_time) is not None:
+            return {"last_post_time": last_post_time.isoformat()}
+
+        return {}
+
+    @classmethod
+    def initial(cls) -> Self:
+        return cls(None)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, JsonSerializable]) -> Self:
+        if last_post_time := data.get("last_post_time"):
+            return cls(
+                last_post_time=datetime.fromisoformat(cast(str, last_post_time)),
+            )
+
+        return cls.initial()
 
 
 @dataclass

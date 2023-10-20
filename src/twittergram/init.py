@@ -7,7 +7,7 @@ from bs_config import Env
 from injector import Injector, Module, provider
 
 from twittergram.application import Application, ports, repos
-from twittergram.config import Config, SentryConfig
+from twittergram.config import Config, RedditConfig, SentryConfig
 from twittergram.infrastructure.adapters import (
     html_sanitizer,
     mail_reader,
@@ -40,6 +40,18 @@ def _setup_sentry(config: SentryConfig) -> None:
         dsn=dsn,
         release=config.release,
     )
+
+
+class ConfigsModule(Module):
+    def __init__(self, config: Config) -> None:
+        self.config = config
+
+    @provider
+    def provide_reddit_config(self) -> RedditConfig:
+        config = self.config.reddit
+        if config is None:
+            raise ValueError("Missing Reddit config")
+        return config
 
 
 class ReposModule(Module):
@@ -88,12 +100,7 @@ class PortsModule(Module):
         return mastodon_reader.MastodonPyMastodonReader(config)
 
     @provider
-    def provide_reddit_reader(self) -> ports.RedditReader:
-        config = self.config.reddit
-
-        if not config:
-            raise ValueError("Missing Reddit config")
-
+    def provide_reddit_reader(self, config: RedditConfig) -> ports.RedditReader:
         return reddit_reader.PrawRedditReader(config)
 
     @provider
@@ -136,6 +143,7 @@ def initialize(env_names: Iterable[str]) -> Application:
 
     injector = Injector(
         modules=[
+            ConfigsModule(config),
             ReposModule(config),
             PortsModule(config),
         ]

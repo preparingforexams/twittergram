@@ -113,7 +113,7 @@ class RedditConfig:
             client_secret=client_secret,
             user_agent=env.get_string("USER_AGENT", default="twittergram"),
             source_username=env.get_string("SOURCE_USERNAME", required=True),
-            subreddit_filter=env.get_string("SUBREDDIT_FILTER")
+            subreddit_filter=env.get_string("SUBREDDIT_FILTER"),
         )
 
 
