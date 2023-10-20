@@ -16,7 +16,7 @@ spec:
         spec:
           restartPolicy: Never
           securityContext:
-            fsGroup: 999
+            fsGroup: 500
           volumes:
             - name: state
               persistentVolumeClaim:
