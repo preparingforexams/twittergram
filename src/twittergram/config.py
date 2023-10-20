@@ -102,7 +102,7 @@ class RedditConfig:
         env = env.scoped("REDDIT_")
         client_id = env.get_string("CLIENT_ID")
         client_secret = env.get_string("CLIENT_SECRET")
-        user_agent = env.get_string("USER_AGENT")
+        user_agent = env.get_string("USER_AGENT", default="twittergram")
 
         if not (client_id and client_secret and user_agent):
             return None
@@ -166,6 +166,7 @@ class Config:
     download: DownloadConfig
     mail: MailConfig | None
     mastodon: MastodonConfig | None
+    reddit: RedditConfig | None
     sanitizer: HtmlSanitizerConfig
     sentry: SentryConfig
     state: StateConfig
@@ -178,6 +179,7 @@ class Config:
             download=DownloadConfig.from_env(env),
             mail=MailConfig.from_env(env),
             mastodon=MastodonConfig.from_env(env),
+            reddit=RedditConfig.from_env(env),
             sanitizer=HtmlSanitizerConfig.from_env(env),
             sentry=SentryConfig.from_env(env),
             state=StateConfig.from_env(env),

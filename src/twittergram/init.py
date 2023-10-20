@@ -13,6 +13,7 @@ from twittergram.infrastructure.adapters import (
     mail_reader,
     mastodon_reader,
     media_downloader,
+    reddit_reader,
     telegram_uploader,
     twitter_reader,
     xcode_release_reader,
@@ -85,6 +86,15 @@ class PortsModule(Module):
             raise ValueError("Missing mastodon config")
 
         return mastodon_reader.MastodonPyMastodonReader(config)
+
+    @provider
+    def provide_reddit_reader(self) -> ports.RedditReader:
+        config = self.config.reddit
+
+        if not config:
+            raise ValueError("Missing Reddit config")
+
+        return reddit_reader.PrawRedditReader(config)
 
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:

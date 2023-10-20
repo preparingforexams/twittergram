@@ -64,6 +64,10 @@ module = "mastodon.*"
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
+module = "praw.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
 module = "tweepy.*"
 ignore_missing_imports = true
 

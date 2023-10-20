@@ -12,6 +12,10 @@ class Application:
         return self._injector.get(use_cases.ForwardMails)
 
     @property
+    def forward_reddit_posts(self) -> use_cases.ForwardRedditPosts:
+        return self._injector.get(use_cases.ForwardRedditPosts)
+
+    @property
     def forward_toots(self) -> use_cases.ForwardToots:
         return self._injector.get(use_cases.ForwardToots)
 

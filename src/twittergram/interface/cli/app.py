@@ -34,6 +34,12 @@ def forward_mails(app: Application) -> None:
 
 @main.command
 @click.pass_obj
+def forward_reddit_posts(app: Application) -> None:
+    _run_command(app.forward_reddit_posts())
+
+
+@main.command
+@click.pass_obj
 def forward_toots(app: Application) -> None:
     _run_command(app.forward_toots())
 
