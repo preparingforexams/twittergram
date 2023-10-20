@@ -36,15 +36,16 @@ class MailConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        mailbox_name = env.get_string("MAIL_MAILBOX_NAME")
-        token = env.get_string("MAIL_TOKEN")
+        env = env.scoped("MAIL_")
+        mailbox_name = env.get_string("MAILBOX_NAME")
+        token = env.get_string("TOKEN")
 
         if not (mailbox_name and token):
             return None
 
         return cls(
             api_host=env.get_string(
-                "MAIL_API_HOST",
+                "API_HOST",
                 default="api.fastmail.com",
             ),
             mailbox_name=mailbox_name,
@@ -72,15 +73,16 @@ class MastodonConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        client_id = env.get_string("MASTODON_CLIENT_ID")
-        client_secret = env.get_string("MASTODON_CLIENT_SECRET")
-        source_account = env.get_string("MASTODON_SOURCE_ACCOUNT")
+        env = env.scoped("MASTODON_")
+        client_id = env.get_string("CLIENT_ID")
+        client_secret = env.get_string("CLIENT_SECRET")
+        source_account = env.get_string("SOURCE_ACCOUNT")
         if not (client_id and client_secret and source_account):
             return None
 
         return cls(
             api_base_url=env.get_string(
-                "MASTODON_API_BASE_URL",
+                "API_BASE_URL",
                 default="https://mastodon.social",
             ),
             client_id=client_id,
@@ -108,9 +110,10 @@ class TelegramConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        target_chat = env.get_int("TELEGRAM_TARGET_CHAT_ID")
-        token = env.get_string("TELEGRAM_TOKEN")
-        upload_chat = env.get_int("TELEGRAM_UPLOAD_CHAT_ID")
+        env = env.scoped("TELEGRAM_")
+        target_chat = env.get_int("TARGET_CHAT_ID")
+        token = env.get_string("TOKEN")
+        upload_chat = env.get_int("UPLOAD_CHAT_ID")
 
         if not (target_chat and token and upload_chat):
             return None
@@ -129,8 +132,9 @@ class TwitterConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        source_account = env.get_string("TWITTER_SOURCE_ACCOUNT")
-        token = env.get_string("TWITTER_TOKEN")
+        env = env.scoped("TWITTER_")
+        source_account = env.get_string("SOURCE_ACCOUNT")
+        token = env.get_string("TOKEN")
 
         if not (source_account and token):
             return None
