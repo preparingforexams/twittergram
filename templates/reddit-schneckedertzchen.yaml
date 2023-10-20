@@ -3,7 +3,6 @@ kind: CronJob
 metadata:
   name: reddit-schneckedertzchen
 spec:
-  suspend: true
   schedule: {{ .Values.cron.defaultSchedule }}
   startingDeadlineSeconds: {{ .Values.cron.defaultStartDeadlineSeconds }}
   timeZone: {{ .Values.cron.defaultTimezone }}
