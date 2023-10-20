@@ -92,6 +92,29 @@ class MastodonConfig:
 
 
 @dataclass
+class RedditConfig:
+    client_id: str
+    client_secret: str
+    user_agent: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> Self | None:
+        env = env.scoped("REDDIT_")
+        client_id = env.get_string("CLIENT_ID")
+        client_secret = env.get_string("CLIENT_SECRET")
+        user_agent = env.get_string("USER_AGENT")
+
+        if not (client_id and client_secret and user_agent):
+            return None
+
+        return cls(
+            client_id=client_id,
+            client_secret=client_secret,
+            user_agent=user_agent,
+        )
+
+
+@dataclass
 class StateConfig:
     state_file: str | None
 
