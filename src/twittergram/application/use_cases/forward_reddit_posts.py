@@ -28,13 +28,13 @@ class ForwardRedditPosts:
         subreddit_filter = self.config.subreddit_filter
         posts: list[RedditPost] = []
         async for post in self.reddit_reader.list_posts():
+            if last_post_time is not None and post.created_at <= last_post_time:
+                break
+
             if subreddit_filter is not None and post.subreddit_name == subreddit_filter:
                 posts.append(post)
 
             if last_post_time is None and len(posts) == 5:
-                break
-
-            if last_post_time is not None and post.created_at <= last_post_time:
                 break
 
         if not posts:
