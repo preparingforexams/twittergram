@@ -1,7 +1,11 @@
+from datetime import datetime, timezone
+from typing import AsyncIterable
+
 import asyncpraw
 
 from twittergram.application.ports import RedditReader
 from twittergram.config import RedditConfig
+from twittergram.domain.model import URL, RedditPost
 
 
 class PrawRedditReader(RedditReader):
@@ -17,7 +21,20 @@ class PrawRedditReader(RedditReader):
             user_agent=config.user_agent,
         )
 
-    async def lookup_user_id(self, name: str) -> str:
+    async def list_posts(self) -> AsyncIterable[RedditPost]:
         async with self.reddit as reddit:
-            redditor = await reddit.redditor(name, fetch=True)
-            return redditor.id
+            user = await reddit.redditor(self.config.source_username)
+            async for submission in user.submissions.new():
+                subreddit = submission.subreddit
+                await subreddit.load()
+                created_at = datetime.fromtimestamp(
+                    submission.created_utc,
+                    timezone.utc,
+                )
+                yield RedditPost(
+                    id=submission.id,
+                    created_at=created_at,
+                    title=submission.title,
+                    url=URL(submission.url),
+                    subreddit_name=subreddit.display_name,
+                )

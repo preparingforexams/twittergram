@@ -1,7 +1,10 @@
 import abc
+from typing import AsyncIterable
+
+from twittergram.domain.model import RedditPost
 
 
 class RedditReader(abc.ABC):
     @abc.abstractmethod
-    async def lookup_user_id(self, name: str) -> str:
+    def list_posts(self) -> AsyncIterable[RedditPost]:
         pass

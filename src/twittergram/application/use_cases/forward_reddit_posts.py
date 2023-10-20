@@ -16,5 +16,7 @@ class ForwardRedditPosts:
     telegram_uploader: ports.TelegramUploader
 
     async def __call__(self) -> None:
-        user_id = await self.reddit_reader.lookup_user_id("schneckedertzchen")
-        _LOG.info("Found user ID: %s", user_id)
+        posts = self.reddit_reader.list_posts()
+        async for post in posts:
+            _LOG.info("First post: %s", post)
+            break
