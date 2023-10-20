@@ -88,11 +88,7 @@ class PortsModule(Module):
 
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
-        config = self.config.telegram
-        if not config:
-            raise ValueError("Missing Telegram config")
-
-        return telegram_uploader.PtbTelegramUploader(config)
+        return telegram_uploader.PtbTelegramUploader(self.config.telegram)
 
     @provider
     def provide_twitter_downloader(self) -> ports.MediaDownloader:

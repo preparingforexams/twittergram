@@ -132,19 +132,12 @@ class TelegramConfig:
     upload_chat: int
 
     @classmethod
-    def from_env(cls, env: Env) -> Self | None:
+    def from_env(cls, env: Env) -> Self:
         env = env.scoped("TELEGRAM_")
-        target_chat = env.get_int("TARGET_CHAT_ID")
-        token = env.get_string("TOKEN")
-        upload_chat = env.get_int("UPLOAD_CHAT_ID")
-
-        if not (target_chat and token and upload_chat):
-            return None
-
         return cls(
-            target_chat=target_chat,
-            token=token,
-            upload_chat=upload_chat,
+            target_chat=env.get_int("TARGET_CHAT_ID", required=True),
+            token=env.get_string("TOKEN", required=True),
+            upload_chat=env.get_int("UPLOAD_CHAT_ID", required=True),
         )
 
 
@@ -176,7 +169,7 @@ class Config:
     sanitizer: HtmlSanitizerConfig
     sentry: SentryConfig
     state: StateConfig
-    telegram: TelegramConfig | None
+    telegram: TelegramConfig
     twitter: TwitterConfig | None
 
     @classmethod
