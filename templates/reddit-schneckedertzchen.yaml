@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: reddit-schneckedertzchen
+spec:
+  suspend: true
+  schedule: {{ .Values.cron.defaultSchedule }}
+  startingDeadlineSeconds: {{ .Values.cron.defaultStartDeadlineSeconds }}
+  timeZone: {{ .Values.cron.defaultTimezone }}
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          securityContext:
+            fsGroup: 999
+          volumes:
+            - name: state
+              persistentVolumeClaim:
+                claimName: state
+          containers:
+            - name: app
+              image: {{ .Values.image.app }}
+              args: [ forward-reddit-posts ]
+              env:
+                - name: STATE_FILE_PATH
+                  value: /state/state_v2_reddit_schnecke.json
+                - name: TELEGRAM_TARGET_CHAT_ID
+                  value: "-1001604595097"
+                - name: REDDIT_SOURCE_USERNAME
+                  value: schneckedertzchen
+                - name: REDDIT_SUBREDDIT_FILTER
+                  value: DeutscheComics
+              envFrom:
+                - configMapRef:
+                    name: base
+                - configMapRef:
+                    name: reddit
+                - secretRef:
+                    name: base
+                - secretRef:
+                    name: reddit
+              volumeMounts:
+                - mountPath: /state
+                  name: state
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi

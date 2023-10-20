@@ -97,6 +97,7 @@ class RedditConfig:
     client_secret: str
     user_agent: str
     source_username: str
+    subreddit_filter: str | None
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
@@ -112,6 +113,7 @@ class RedditConfig:
             client_secret=client_secret,
             user_agent=env.get_string("USER_AGENT", default="twittergram"),
             source_username=env.get_string("SOURCE_USERNAME", required=True),
+            subreddit_filter=env.get_string("SUBREDDIT_FILTER")
         )
 
 
