@@ -8,6 +8,9 @@ mastodon:
   apiBase: "https://mastodon.social"
   clientId: jTRdISbXG5U1BDtHjYgjBIgmSTg2YAn-eK5mWcfGjbA
   clientSecret: ${MASTODON_CLIENT_SECRET}
+reddit:
+  clientId: L1bt67W1iuqv255IpkiTYg
+  clientSecret: ${REDDIT_CLIENT_SECRET}
 image:
   app: ${IMAGE_NAME}:${GITHUB_SHA}
 sentry:
