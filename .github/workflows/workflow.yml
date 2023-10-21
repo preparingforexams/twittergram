@@ -19,7 +19,7 @@ jobs:
     needs:
       - lint
       - test
-    uses: BlindfoldedSurgery/actions-container/.github/workflows/build-image-docker.yml@v1
+    uses: BlindfoldedSurgery/actions-container/.github/workflows/build-image-docker.yml@v2
     with:
       push-image: ${{ github.ref_name == github.event.repository.default_branch }}
 
@@ -49,16 +49,8 @@ jobs:
           kubeconfig: '${{ secrets.KUBECONFIG_RAW }}'
 
   clean:
-    runs-on: ubuntu-latest
     concurrency: cleanup
-    continue-on-error: true
     needs: [ deploy ]
-    steps:
-      - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v4
-      - name: Clean up old app container images
-        uses: actions/delete-package-versions@v4
-        with:
-          package-name: ${{ env.GITHUB_REPOSITORY_NAME_PART_SLUG }}
-          package-type: container
-          min-versions-to-keep: 10
+    uses: BlindfoldedSurgery/actions-container/.github/workflows/clean.yml@v2
+    with:
+      continue-on-error: true
