@@ -65,7 +65,7 @@ class ReposModule(Module):
         if not state_file:
             raise ValueError("State file path not configured")
 
-        return state_repo.FileStateRepo(Path(state_file))
+        return state_repo.BsStateRepo(Path(state_file))
 
 
 class PortsModule(Module):
