@@ -22,6 +22,7 @@ The following message sources are supported:
 - A Mastodon account's timeline ([see below](#mastodon))
 - A mailbox/folder in an email account with [JMAP protocol](https://jmap.io/) support
   ([see below](#email))
+- A Reddit user's submissions in a specific subreddit ([see below](#reddit))
 - Notifications about new Xcode releases ([see below](#xcode-releases))
 
 ## Usage
@@ -134,6 +135,27 @@ available for Email forwarding.
 |    `MAIL_TOKEN`     | `fmul-ertiuhf-24uhsd[...]` | (**required**) Your JMAP API token. The way to obtain this varies by provider.               |
 |   `MAIL_API_HOST`   |     `api.fastmail.com`     | (optional) The hostname to use when accessing the JMAP API. Defaults to Fastmail's hostname. |
 
+### Reddit
+
+Twittergram can forward submissions of a Reddit user, optionally filtered by a specific subreddit.
+
+To use this feature, you'll need to obtain a Reddit client ID and client secret [here][reddit-apps].
+You can select "script" as the type of your app, and don't need to go through additional
+verification steps (at time of writing, October 2023).
+
+[reddit-apps]: https://old.reddit.com/prefs/apps/
+
+#### Reddit Configuration Options
+
+|            Key            |       Example Value        | Description                                                                             |
+|:-------------------------:|:--------------------------:|-----------------------------------------------------------------------------------------|
+|    `REDDIT_CLIENT_ID`     |    `L234LKJsdjfdg74325`    | (**required**) Your Reddit OAuth client ID.                                             |
+|  `REDDIT_CLIENT_SECRET`   | `usdflSD45364536Jjjdsfg45` | (**required**) Your Reddit OAuth client secret.                                         |
+| `REDDIT_SOURCE_USERNAME`  |     `sellyourcomputer`     | (**required**) The username of the user you want to forward posts/submissions from.     |
+| `REDDIT_SUBREDDIT_FILTER` |    `extrafabulousomics`    | (optional) Only forward the post if the user submitted it to this subreddit.            |
+|    `REDDIT_USER_AGENT`    |       `twittergram`        | (optional) The user agent string to use when calling Reddit. Defaults to `twittergram`. |
+
 ### Xcode Releases
 
-TODO: Document
+To receive notifications about new stable releases, just use the `forward-xcode` subcommand. No
+configuration beyond the [required section above](#required-configuration) needed.
