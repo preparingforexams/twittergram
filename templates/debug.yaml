@@ -14,23 +14,15 @@ spec:
       labels:
         app: debug
     spec:
-      volumes:
-        - name: state
-          persistentVolumeClaim:
-            claimName: state
-      securityContext:
-        fsGroup: 500
       serviceAccountName: {{ .Release.Name }}
       terminationGracePeriodSeconds: 2
       containers:
         - name: app
           image: {{ .Values.image.app }}
-          command:
+          command: [ "tini", "--" ]
+          args:
             - sleep
             - infinity
-          volumeMounts:
-            - mountPath: /state
-              name: state
           resources:
             requests:
               cpu: 100m
