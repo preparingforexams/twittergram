@@ -1,26 +1,23 @@
 from asyncio import Lock
-from pathlib import Path
-from typing import Any, cast
+from typing import Any, Awaitable, Callable, TypeAlias, cast
 
 from bs_state import StateStorage
-from bs_state.implementation import file_storage
 
 from twittergram.application.repos import StateRepo
 from twittergram.application.repos.state import T
 from twittergram.domain.model import State
 
+StorageLoader: TypeAlias = Callable[[State], Awaitable[StateStorage[State]]]
+
 
 class BsStateRepo(StateRepo):
-    def __init__(self, path: Path):
-        self._path = path
+    def __init__(self, storage_loader: StorageLoader):
         self._storages_lock = Lock()
         self._storages: dict[type, StateStorage[Any]] = {}
+        self.storage_loader = storage_loader
 
     async def _load_storage(self, state_type: type[T]) -> StateStorage[T]:
-        return await file_storage.load(
-            initial_state=state_type.initial(),
-            file=self._path,
-        )
+        return cast(StateStorage[T], await self.storage_loader(state_type.initial()))
 
     async def _get_storage(self, state_type: type[T]) -> StateStorage[T]:
         storage = cast(StateStorage[T] | None, self._storages.get(state_type))

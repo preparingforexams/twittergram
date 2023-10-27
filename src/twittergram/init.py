@@ -4,10 +4,13 @@ from typing import Iterable
 
 import sentry_sdk
 from bs_config import Env
+from bs_state import StateStorage
+from bs_state.implementation import file_storage
 from injector import Injector, Module, provider
 
 from twittergram.application import Application, ports, repos
 from twittergram.config import Config, RedditConfig, SentryConfig
+from twittergram.domain.model import State
 from twittergram.infrastructure.adapters import (
     html_sanitizer,
     mail_reader,
@@ -65,7 +68,15 @@ class ReposModule(Module):
         if not state_file:
             raise ValueError("State file path not configured")
 
-        return state_repo.BsStateRepo(Path(state_file))
+        async def load_file_storage(
+            initial_state: State,
+        ) -> StateStorage[State]:
+            return await file_storage.load(
+                initial_state=initial_state,
+                file=Path(state_file),
+            )
+
+        return state_repo.BsStateRepo(load_file_storage)
 
 
 class PortsModule(Module):
