@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: base
 data:
-  DOWNLOAD_DIR: /tmp/twittergram
+  DOWNLOAD_DIR: "/tmp/twittergram"
   TELEGRAM_UPLOAD_CHAT_ID: "1259947317"
