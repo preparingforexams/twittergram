@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: debug
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: debug
@@ -31,3 +31,8 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
+          envFrom:
+            - configMapRef:
+                name: base
+            - configMapRef:
+                name: cm-state
