@@ -18,6 +18,7 @@ spec:
             claimName: state
       securityContext:
         fsGroup: 500
+      serviceAccountName: {{ .Release.Name }}
       containers:
         - name: app
           image: {{ .Values.image.app }}
