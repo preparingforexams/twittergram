@@ -35,8 +35,13 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
+          env:
+            - name: TELEGRAM_TARGET_CHAT_ID
+              value: "133399998"
           envFrom:
             - configMapRef:
                 name: base
             - configMapRef:
                 name: cm-state
+            - secretRef:
+                name: base
