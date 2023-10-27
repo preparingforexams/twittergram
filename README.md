@@ -18,7 +18,7 @@ forwards them to a Telegram chat.
 
 The following message sources are supported:
 
-- A Twitter account's timeline ([see below](#twitter))
+- ~~A Twitter account's timeline~~ ([see below](#twitter))
 - A Mastodon account's timeline ([see below](#mastodon))
 - A mailbox/folder in an email account with [JMAP protocol](https://jmap.io/) support
   ([see below](#email))
