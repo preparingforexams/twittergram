@@ -3,8 +3,8 @@ kind: CronJob
 metadata:
   name: reddit-schneckedertzchen
 spec:
-  schedule: "0 * * * *"
-  startingDeadlineSeconds: {{ .Values.cron.defaultStartDeadlineSeconds }}
+  schedule: "*/20 * * * *"
+  startingDeadlineSeconds: 900
   timeZone: {{ .Values.cron.defaultTimezone }}
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
