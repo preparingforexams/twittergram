@@ -26,6 +26,7 @@ jmapc = "^0.2.13"
 mastodon-py = "^1.8.0"
 more-itertools = "^10.0.0"
 pendulum = "^2.0.0"
+pydantic = "^2.4.2"
 python = "~3.11"
 python-telegram-bot-raw = "20.6"
 sentry-sdk = "^1.14.0"
@@ -46,6 +47,8 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
+plugins = ["pydantic.mypy"]
+
 strict = true
 warn_unused_ignores = true
 warn_return_any = false
@@ -71,6 +74,10 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "tweepy.*"
 ignore_missing_imports = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
 
 [tool.ruff]
 extend-select = [
