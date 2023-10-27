@@ -13,6 +13,18 @@ class TelegramUploader(abc.ABC):
         pass
 
     @abc.abstractmethod
+    async def send_document_message(
+        self,
+        document: MediaFile,
+        *,
+        caption: str | None,
+        use_html: bool = False,
+        file_name: str | None = None,
+        disable_notification: bool = False,
+    ) -> None:
+        pass
+
+    @abc.abstractmethod
     async def send_image_message(
         self,
         image_files: list[MediaFile],

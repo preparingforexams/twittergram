@@ -129,6 +129,33 @@ class PtbTelegramUploader(TelegramUploader):
                 )
             )
 
+    async def send_document_message(
+        self,
+        document: MediaFile,
+        *,
+        caption: str | None,
+        use_html: bool = False,
+        file_name: str | None = None,
+        disable_notification: bool = False,
+    ) -> None:
+        chat_id = self.config.target_chat
+        async with telegram.Bot(token=self.config.token) as bot:
+            async with aiofiles.open(document.path, "rb") as fd:
+                input_file = telegram.InputFile(
+                    await fd.read(),
+                    filename=file_name,
+                )
+                await _auto_retry(
+                    lambda: bot.send_document(
+                        chat_id=chat_id,
+                        document=input_file,
+                        caption=caption,
+                        disable_notification=disable_notification,
+                        parse_mode=ParseMode.HTML if use_html else None,
+                        **TIMEOUTS,
+                    )
+                )
+
     async def send_image_message(
         self,
         image_files: list[MediaFile],
@@ -148,16 +175,17 @@ class PtbTelegramUploader(TelegramUploader):
                 )
             else:
                 items = await self._create_items(bot, image_files)
-                await _auto_retry(
-                    lambda: bot.send_message(
-                        chat_id,
-                        caption,
-                        disable_notification=True,
-                        disable_web_page_preview=True,
-                        parse_mode=ParseMode.HTML if use_html else None,
-                        **TIMEOUTS,
+                if caption:
+                    await _auto_retry(
+                        lambda: bot.send_message(
+                            chat_id,
+                            caption,
+                            disable_notification=True,
+                            disable_web_page_preview=True,
+                            parse_mode=ParseMode.HTML if use_html else None,
+                            **TIMEOUTS,
+                        )
                     )
-                )
                 await _auto_retry(
                     lambda: bot.send_media_group(
                         chat_id,

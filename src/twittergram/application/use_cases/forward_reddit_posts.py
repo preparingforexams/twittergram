@@ -56,9 +56,10 @@ class ForwardRedditPosts:
         _LOG.info("Forwarding %d posts", len(posts))
         try:
             for post in posts:
-                await self.telegram_uploader.send_image_message(
-                    image_files=[media_file_by_post_id[post.id]],
+                await self.telegram_uploader.send_document_message(
+                    document=media_file_by_post_id[post.id],
                     caption=post.title,
+                    file_name="Image",
                 )
                 state.last_post_time = post.created_at
         finally:
