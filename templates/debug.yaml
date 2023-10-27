@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: debug
 spec:
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   selector:
@@ -41,7 +41,5 @@ spec:
           envFrom:
             - configMapRef:
                 name: base
-            - configMapRef:
-                name: cm-state
             - secretRef:
                 name: base

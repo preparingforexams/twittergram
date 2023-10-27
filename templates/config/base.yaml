@@ -5,3 +5,6 @@ metadata:
 data:
   DOWNLOAD_DIR: "/tmp/twittergram"
   TELEGRAM_UPLOAD_CHAT_ID: "1259947317"
+  STATE_TYPE: "configmap"
+  STATE_CONFIG_MAP_NAMESPACE: "{{ .Release.Namespace }}"
+  STATE_CONFIG_MAP_NAME_PREFIX: "state"

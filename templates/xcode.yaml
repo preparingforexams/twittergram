@@ -14,12 +14,7 @@ spec:
       template:
         spec:
           restartPolicy: Never
-          securityContext:
-            fsGroup: 500
-          volumes:
-            - name: state
-              persistentVolumeClaim:
-                claimName: state
+          serviceAccountName: {{ .Release.Name }}
           containers:
             - name: app
               image: {{ .Values.image.app }}
@@ -34,9 +29,6 @@ spec:
                     name: base
                 - secretRef:
                     name: base
-              volumeMounts:
-                - mountPath: /state
-                  name: state
               resources:
                 requests:
                   cpu: 100m

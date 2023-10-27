@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cm-state
-data:
-  STATE_TYPE: "configmap"
-  STATE_CONFIG_MAP_NAMESPACE: "{{ .Release.Namespace }}"
-  STATE_CONFIG_MAP_NAME_PREFIX: "state"

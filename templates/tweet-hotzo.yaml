@@ -15,19 +15,14 @@ spec:
       template:
         spec:
           restartPolicy: Never
-          securityContext:
-            fsGroup: 500
-          volumes:
-            - name: state
-              persistentVolumeClaim:
-                claimName: state
+          serviceAccountName: {{ .Release.Name }}
           containers:
             - name: app
               image: {{ .Values.image.app }}
               args: [ forward-tweets ]
               env:
-                - name: STATE_FILE_PATH
-                  value: /state/state_v2.json
+                - name: STATE_CONFIG_MAP_NAME_SUFFIX
+                  value: hotzo
                 - name: TELEGRAM_TARGET_CHAT_ID
                   value: "-1001604595097"
                 - name: TWITTER_SOURCE_ACCOUNT
@@ -39,9 +34,6 @@ spec:
                     name: base
                 - secretRef:
                     name: twitter
-              volumeMounts:
-                - mountPath: /state
-                  name: state
               resources:
                 requests:
                   cpu: 100m

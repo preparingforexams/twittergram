@@ -14,19 +14,14 @@ spec:
       template:
         spec:
           restartPolicy: Never
-          securityContext:
-            fsGroup: 500
-          volumes:
-            - name: state
-              persistentVolumeClaim:
-                claimName: state
+          serviceAccountName: {{ .Release.Name }}
           containers:
             - name: app
               image: {{ .Values.image.app }}
               args: [ forward-reddit-posts ]
               env:
-                - name: STATE_FILE_PATH
-                  value: /state/state_v2_reddit_schnecke.json
+                - name: STATE_CONFIG_MAP_NAME_SUFFIX
+                  value: schnecke
                 - name: TELEGRAM_TARGET_CHAT_ID
                   value: "-1002055910690"
                 - name: REDDIT_SOURCE_USERNAME
@@ -42,9 +37,6 @@ spec:
                     name: base
                 - secretRef:
                     name: reddit
-              volumeMounts:
-                - mountPath: /state
-                  name: state
               resources:
                 requests:
                   cpu: 100m
