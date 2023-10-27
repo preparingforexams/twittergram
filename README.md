@@ -3,7 +3,7 @@
 [![CI status][github-actions-image]][github-actions-link]
 [![Maintainability Rating][sonarcloud-image]][sonarcloud-link]
 
-This application takes messages from one of various sources, like a Twitter or Mastodon account, and
+This application takes messages from one of various sources, like a Reddit or Mastodon account, and
 forwards them to a Telegram chat.
 
 [github-actions-image]: https://github.com/preparingforexams/twittergram/actions/workflows/workflow.yml/badge.svg
