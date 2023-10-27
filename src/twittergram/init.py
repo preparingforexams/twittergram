@@ -93,7 +93,7 @@ class ReposModule(Module):
             slug_name = self._camel_to_slug(type(initial_state).__name__)
             config_map_name = f"{config.name_prefix}-{slug_name}"
             if config.name_suffix is not None:
-                config_map_name = f"f{config_map_name}-{config.name_suffix}"
+                config_map_name = f"{config_map_name}-{config.name_suffix}"
 
             return await config_map_storage.load(
                 initial_state=initial_state,
