@@ -5,11 +5,10 @@ from typing import Iterable
 import sentry_sdk
 from bs_config import Env
 from bs_state import StateStorage
-from bs_state.implementation import file_storage
 from injector import Injector, Module, provider
 
 from twittergram.application import Application, ports, repos
-from twittergram.config import Config, RedditConfig, SentryConfig
+from twittergram.config import Config, ConfigMapStateConfig, RedditConfig, SentryConfig
 from twittergram.domain.model import State
 from twittergram.infrastructure.adapters import (
     html_sanitizer,
@@ -61,22 +60,53 @@ class ReposModule(Module):
     def __init__(self, config: Config) -> None:
         self.config = config
 
-    @provider
-    def provide_state_repo(self) -> repos.StateRepo:
-        state_file = self.config.state.state_file
-
-        if not state_file:
-            raise ValueError("State file path not configured")
+    @staticmethod
+    def _create_file_repo(file_path: str) -> repos.StateRepo:
+        from bs_state.implementation import file_storage
 
         async def load_file_storage(
             initial_state: State,
         ) -> StateStorage[State]:
             return await file_storage.load(
                 initial_state=initial_state,
-                file=Path(state_file),
+                file=Path(file_path),
             )
 
         return state_repo.BsStateRepo(load_file_storage)
+
+    @staticmethod
+    def _create_config_map_repo(config: ConfigMapStateConfig) -> repos.StateRepo:
+        from bs_state.implementation import config_map_storage
+
+        async def load_configmap_storage(
+            initial_state: State,
+        ) -> StateStorage[State]:
+            slug_name = type(initial_state).__name__.replace("_", "-")
+            return await config_map_storage.load(
+                initial_state=initial_state,
+                namespace=config.namespace,
+                config_map_name=f"{config.name_prefix}-{slug_name}",
+            )
+
+        return state_repo.BsStateRepo(load_configmap_storage)
+
+    @provider
+    def provide_state_repo(self) -> repos.StateRepo:
+        state_type = self.config.state.type
+
+        match state_type:
+            case "file":
+                state_file = self.config.state.state_file
+                if not state_file:
+                    raise ValueError("State file path not configured")
+                return self._create_file_repo(state_file)
+            case "configmap":
+                config_map_config = self.config.state.config_map
+                if not config_map_config:
+                    raise ValueError("ConfigMap state is not configured, but selected")
+                return self._create_config_map_repo(config_map_config)
+            case _:
+                raise ValueError(f"Unknown state repo type: {state_type}")
 
 
 class PortsModule(Module):

@@ -118,12 +118,33 @@ class RedditConfig:
 
 
 @dataclass
+class ConfigMapStateConfig:
+    namespace: str
+    name_prefix: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> Self | None:
+        env = env.scoped("STATE_CONFIG_MAP_")
+        try:
+            return cls(
+                namespace=env.get_string("NAMESPACE", required=True),
+                name_prefix=env.get_string("NAME_PREFIX", required=True),
+            )
+        except ValueError:
+            return None
+
+
+@dataclass
 class StateConfig:
+    type: str
+    config_map: ConfigMapStateConfig | None
     state_file: str | None
 
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
+            type=env.get_string("STATE_TYPE", default="file"),
+            config_map=ConfigMapStateConfig.from_env(env),
             state_file=env.get_string("STATE_FILE_PATH"),
         )
 
