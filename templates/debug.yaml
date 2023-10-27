@@ -21,6 +21,7 @@ spec:
       securityContext:
         fsGroup: 500
       serviceAccountName: {{ .Release.Name }}
+      terminationGracePeriodSeconds: 2
       containers:
         - name: app
           image: {{ .Values.image.app }}
