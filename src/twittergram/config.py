@@ -121,6 +121,7 @@ class RedditConfig:
 class ConfigMapStateConfig:
     namespace: str
     name_prefix: str
+    name_suffix: str | None
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
@@ -129,6 +130,7 @@ class ConfigMapStateConfig:
             return cls(
                 namespace=env.get_string("NAMESPACE", required=True),
                 name_prefix=env.get_string("NAME_PREFIX", required=True),
+                name_suffix=env.get_string("NAME_SUFFIX"),
             )
         except ValueError:
             return None

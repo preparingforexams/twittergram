@@ -75,17 +75,30 @@ class ReposModule(Module):
         return state_repo.BsStateRepo(load_file_storage)
 
     @staticmethod
-    def _create_config_map_repo(config: ConfigMapStateConfig) -> repos.StateRepo:
+    def _camel_to_slug(value: str) -> str:
+        result = value[0].lower()
+        for char in value[1:]:
+            if char.isupper():
+                result += f"-{char.lower()}"
+            else:
+                result += char
+        return result
+
+    def _create_config_map_repo(self, config: ConfigMapStateConfig) -> repos.StateRepo:
         from bs_state.implementation import config_map_storage
 
         async def load_configmap_storage(
             initial_state: State,
         ) -> StateStorage[State]:
-            slug_name = type(initial_state).__name__.replace("_", "-")
+            slug_name = self._camel_to_slug(type(initial_state).__name__)
+            config_map_name = f"{config.name_prefix}-{slug_name}"
+            if config.name_suffix is not None:
+                config_map_name = f"f{config_map_name}-{config.name_suffix}"
+
             return await config_map_storage.load(
                 initial_state=initial_state,
                 namespace=config.namespace,
-                config_map_name=f"{config.name_prefix}-{slug_name}",
+                config_map_name=config_map_name,
             )
 
         return state_repo.BsStateRepo(load_configmap_storage)
