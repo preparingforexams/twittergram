@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 
 from aiofiles import open as aio_open
@@ -19,10 +18,9 @@ class FileStateRepo(StateRepo):
 
         async with aio_open(self.path) as f:
             content = await f.read()
-            data = json.loads(content)
-            return state_type.from_dict(data)
+            return state_type.model_validate_json(content)
 
     async def store_state(self, state: State) -> None:
         async with aio_open(self.path, "w") as f:
-            content = json.dumps(state.to_dict())
+            content = state.model_dump_json()
             await f.write(content)
