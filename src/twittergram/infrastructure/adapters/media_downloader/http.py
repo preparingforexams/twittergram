@@ -1,4 +1,5 @@
 import logging
+import mimetypes
 import ssl
 import uuid
 from pathlib import Path
@@ -42,7 +43,9 @@ class HttpMediaDownloader(MediaDownloader):
             for medium in media:
                 async with session.get(medium.url) as response:
                     if response.status == 200:
-                        path = directory / medium.id
+                        mime_type = response.content_type
+                        extension = mimetypes.guess_extension(mime_type) or ""
+                        path = directory / f"{medium.id}.{extension}"
 
                         async with aiofiles.open(path, "wb") as f:
                             await f.write(await response.read())
@@ -50,7 +53,7 @@ class HttpMediaDownloader(MediaDownloader):
                         media_file = MediaFile(
                             medium=medium,
                             path=path,
-                            mime_type=response.content_type,
+                            mime_type=mime_type,
                         )
                         result.append(media_file)
 

@@ -59,7 +59,6 @@ class ForwardRedditPosts:
                 await self.telegram_uploader.send_document_message(
                     document=media_file_by_post_id[post.id],
                     caption=post.title,
-                    file_name="Image",
                 )
                 state.last_post_time = post.created_at
         finally:

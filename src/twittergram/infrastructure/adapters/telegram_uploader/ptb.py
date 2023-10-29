@@ -143,7 +143,7 @@ class PtbTelegramUploader(TelegramUploader):
             async with aiofiles.open(document.path, "rb") as fd:
                 input_file = telegram.InputFile(
                     await fd.read(),
-                    filename=file_name,
+                    filename=file_name or document.path.name,
                 )
                 await _auto_retry(
                     lambda: bot.send_document(
