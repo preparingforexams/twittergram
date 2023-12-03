@@ -7,5 +7,7 @@ class NaiveHtmlSanitizer(HtmlSanitizer):
             raw.replace("<br />", "\n")
             .replace("<p>", "\n\n")
             .replace("</p>", "")
+            .replace("<span>", "")
+            .replace("</span>", "")
             .strip()
         )
