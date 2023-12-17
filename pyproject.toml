@@ -17,7 +17,7 @@ priority = "explicit"
 # Version is constrained by asyncpraw
 aiofiles = "*"
 asyncpraw = "^7.7.1"
-bs-config = { version = "1.0.0", extras = ["dotenv"], source = "internal" }
+bs-config = { version = "1.0.1", extras = ["dotenv"], source = "internal" }
 bs-state = { version = "0.1.0", extras = ["file", "kubernetes"], source = "internal" }
 certifi = "2023.11.17"
 click = "^8.1.3"
