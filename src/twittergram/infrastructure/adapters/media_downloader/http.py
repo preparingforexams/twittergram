@@ -61,7 +61,8 @@ class HttpMediaDownloader(MediaDownloader):
                         case status_code if 400 <= status_code < 500:
                             _LOG.error(
                                 "Received status code %d for URL %s. Skipping.",
-                                response.status, medium.url,
+                                response.status,
+                                medium.url,
                             )
                         case status_code if 500 <= status_code < 600:
                             raise IoException(
