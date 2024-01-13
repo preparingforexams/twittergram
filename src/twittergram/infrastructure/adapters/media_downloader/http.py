@@ -9,6 +9,7 @@ import aiohttp
 import certifi
 from aiofiles.os import makedirs
 
+from twittergram.application.exceptions.io import IoException
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
 from twittergram.application.ports import MediaDownloader
 from twittergram.domain.model import MediaType, Medium
@@ -42,19 +43,31 @@ class HttpMediaDownloader(MediaDownloader):
             # TODO: we could utilize asyncio more here, but meh
             for medium in media:
                 async with session.get(medium.url) as response:
-                    if response.status == 200:
-                        mime_type = response.content_type
-                        extension = mimetypes.guess_extension(mime_type) or ""
-                        path = directory / f"{medium.id}.{extension}"
+                    match response.status:
+                        case 200:
+                            mime_type = response.content_type
+                            extension = mimetypes.guess_extension(mime_type) or ""
+                            path = directory / f"{medium.id}.{extension}"
 
-                        async with aiofiles.open(path, "wb") as f:
-                            await f.write(await response.read())
+                            async with aiofiles.open(path, "wb") as f:
+                                await f.write(await response.read())
 
-                        media_file = MediaFile(
-                            medium=medium,
-                            path=path,
-                            mime_type=mime_type,
-                        )
-                        result.append(media_file)
+                            media_file = MediaFile(
+                                medium=medium,
+                                path=path,
+                                mime_type=mime_type,
+                            )
+                            result.append(media_file)
+                        case status_code if 400 <= status_code < 500:
+                            _LOG.error(
+                                "Received status code %d for URL %s. Skipping.",
+                                response.status, medium.url,
+                            )
+                        case status_code if 500 <= status_code < 600:
+                            raise IoException(
+                                "Received server error %d for URL %s",
+                                status_code,
+                                medium.url,
+                            )
 
         return result
