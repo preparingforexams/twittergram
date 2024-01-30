@@ -37,7 +37,7 @@ tweepy = { extras = ["async"], version = "^4.10.1" }
 black = "^24.0.0"
 mypy = "^1.4.0"
 pytest = "^8.0.0"
-ruff = "0.1.14"
+ruff = "0.1.15"
 types-aiofiles = "^22.1.0"
 types-Deprecated = "^1.2.9"
 types-requests = "^2.31.0.1"
