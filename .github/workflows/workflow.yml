@@ -46,7 +46,7 @@ jobs:
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
-      - uses: WyriHaximus/github-action-helm3@v3
+      - uses: WyriHaximus/github-action-helm3@v4
         with:
           exec: helm upgrade twittergram . --install --namespace=twittergram --atomic
           kubeconfig: '${{ secrets.KUBECONFIG_RAW }}'
