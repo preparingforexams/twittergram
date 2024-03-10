@@ -24,6 +24,7 @@ jobs:
       - test
     uses: BlindfoldedSurgery/actions-container/.github/workflows/build-image-docker.yml@v3
     with:
+      platform: linux/arm64
       push-image: ${{ github.ref_name == github.event.repository.default_branch }}
 
   deploy:
@@ -48,8 +49,8 @@ jobs:
           TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
       - uses: WyriHaximus/github-action-helm3@v4
         with:
-          exec: helm upgrade twittergram . --install --namespace=twittergram --atomic
-          kubeconfig: '${{ secrets.KUBECONFIG_RAW }}'
+          exec: helm upgrade twittergram . --install --namespace=funnelgram --atomic
+          kubeconfig: '${{ secrets.BORN_KUBECONFIG_RAW }}'
 
   clean:
     concurrency: cleanup
