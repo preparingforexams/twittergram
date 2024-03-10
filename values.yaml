@@ -17,5 +17,3 @@ sentry:
   dsn: ${SENTRY_DSN}
 telegram:
   apiKey: ${TELEGRAM_TOKEN}
-twitter:
-  apiKey: ${TWITTER_TOKEN}

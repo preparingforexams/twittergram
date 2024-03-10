@@ -17,7 +17,6 @@ from twittergram.infrastructure.adapters import (
     media_downloader,
     reddit_reader,
     telegram_uploader,
-    twitter_reader,
     xcode_release_reader,
 )
 from twittergram.infrastructure.repos import state_repo
@@ -162,7 +161,7 @@ class PortsModule(Module):
         return telegram_uploader.PtbTelegramUploader(self.config.telegram)
 
     @provider
-    def provide_twitter_downloader(self) -> ports.MediaDownloader:
+    def provide_media_downloader(self) -> ports.MediaDownloader:
         download_directory = self.config.download.download_directory
 
         if not download_directory:
@@ -171,13 +170,6 @@ class PortsModule(Module):
         return media_downloader.HttpMediaDownloader(
             Path(download_directory),
         )
-
-    @provider
-    def provide_twitter_reader(self) -> ports.TwitterReader:
-        config = self.config.twitter
-        if not config:
-            raise ValueError("Missing Twitter config")
-        return twitter_reader.TweepyTwitterReader(config)
 
     @provider
     def provide_xcode_release_reader(self) -> ports.XcodeReleaseReader:
