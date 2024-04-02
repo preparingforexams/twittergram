@@ -23,7 +23,7 @@ class HttpMediaDownloader(MediaDownloader):
     @staticmethod
     async def _session() -> AsyncClient:
         return AsyncClient(
-            timeout=60,
+            timeout=120,
         )
 
     async def download(self, media: list[Medium]) -> list[MediaFile]:
