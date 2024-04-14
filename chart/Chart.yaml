@@ -1,6 +1,4 @@
 apiVersion: v2
-name: twittergram
-
+name: funnelgram
 type: application
-
 version: 0.1.0

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: debug
 spec:
-  replicas: 0
+  replicas: {{ if .Values.debug }}1{{ else }}0{{ end }}
   strategy:
     type: Recreate
   selector:
@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: 2
       containers:
         - name: app
-          image: {{ .Values.image.app }}
+          image: {{ .Values.image.app }}:{{ .Values.appVersion }}
           command: [ "tini", "--" ]
           args:
             - sleep

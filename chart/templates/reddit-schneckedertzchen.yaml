@@ -1,14 +1,15 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: mail-flutter
+  name: reddit-schneckedertzchen
 spec:
-  schedule: "0 9,20 * * *"
-  startingDeadlineSeconds: {{ .Values.cron.defaultStartDeadlineSeconds }}
+  schedule: "*/20 * * * *"
+  startingDeadlineSeconds: 900
   timeZone: {{ .Values.cron.defaultTimezone }}
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
+  suspend: {{ .Values.debug | not }}
   jobTemplate:
     spec:
       template:
@@ -17,22 +18,26 @@ spec:
           serviceAccountName: {{ .Release.Name }}
           containers:
             - name: app
-              image: {{ .Values.image.app }}
-              args: [ forward-mails ]
+              image: {{ .Values.image.app }}:{{ .Values.appVersion }}
+              args: [ forward-reddit-posts ]
               env:
                 - name: STATE_CONFIG_MAP_NAME_SUFFIX
-                  value: flutter
+                  value: schnecke
                 - name: TELEGRAM_TARGET_CHAT_ID
-                  value: "-1001893015795"
-                - name: MAIL_MAILBOX_NAME
-                  value: Flutter Announcements
+                  value: "-1002055910690"
+                - name: REDDIT_SOURCE_USERNAME
+                  value: schneckedertzchen
+                - name: REDDIT_SUBREDDIT_FILTER
+                  value: DeutscheComics
               envFrom:
                 - configMapRef:
                     name: base
+                - configMapRef:
+                    name: reddit
                 - secretRef:
                     name: base
                 - secretRef:
-                    name: mail
+                    name: reddit
               resources:
                 requests:
                   cpu: 100m
