@@ -9,7 +9,7 @@ spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 5
-  suspend: {{ .Values.debug | not }}
+  suspend: {{ .Values.debug }}
   jobTemplate:
     spec:
       template:
