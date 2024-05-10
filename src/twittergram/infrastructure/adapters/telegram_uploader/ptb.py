@@ -53,7 +53,7 @@ class PtbTelegramUploader(TelegramUploader):
                     caption=caption,
                     disable_notification=True,
                     parse_mode=ParseMode.HTML if use_html else None,
-                    **TIMEOUTS,
+                    **TIMEOUTS,  # type: ignore[arg-type]
                 )
             )
             return max(message.photo, key=lambda p: p.file_size or 0)
@@ -75,7 +75,7 @@ class PtbTelegramUploader(TelegramUploader):
                     caption=caption,
                     disable_notification=True,
                     parse_mode=ParseMode.HTML if use_html else None,
-                    **TIMEOUTS,
+                    **TIMEOUTS,  # type: ignore[arg-type]
                 )
             )
             return cast(telegram.Video, message.video)
@@ -125,7 +125,7 @@ class PtbTelegramUploader(TelegramUploader):
                     disable_web_page_preview=True,
                     text=text,
                     parse_mode=ParseMode.HTML if use_html else None,
-                    **TIMEOUTS,
+                    **TIMEOUTS,  # type: ignore[arg-type]
                 )
             )
 
@@ -152,7 +152,7 @@ class PtbTelegramUploader(TelegramUploader):
                         caption=caption,
                         disable_notification=disable_notification,
                         parse_mode=ParseMode.HTML if use_html else None,
-                        **TIMEOUTS,
+                        **TIMEOUTS,  # type: ignore[arg-type]
                     )
                 )
 
@@ -183,7 +183,7 @@ class PtbTelegramUploader(TelegramUploader):
                             disable_notification=True,
                             disable_web_page_preview=True,
                             parse_mode=ParseMode.HTML if use_html else None,
-                            **TIMEOUTS,
+                            **TIMEOUTS,  # type: ignore[arg-type]
                         )
                     )
                 await _auto_retry(
@@ -191,6 +191,6 @@ class PtbTelegramUploader(TelegramUploader):
                         chat_id,
                         items,
                         disable_notification=True,
-                        **TIMEOUTS,
+                        **TIMEOUTS,  # type: ignore[arg-type]
                     )
                 )
