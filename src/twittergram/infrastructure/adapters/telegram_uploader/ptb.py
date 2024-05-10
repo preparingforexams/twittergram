@@ -56,7 +56,7 @@ class PtbTelegramUploader(TelegramUploader):
                     **TIMEOUTS,
                 )
             )
-            return max(message.photo, key=lambda p: p.file_size)
+            return max(message.photo, key=lambda p: p.file_size or 0)
 
     async def _send_video(
         self,
