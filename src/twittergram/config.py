@@ -1,7 +1,10 @@
+import logging
 from dataclasses import dataclass
 from typing import Self
 
 from bs_config import Env
+
+_LOG = logging.getLogger(__name__)
 
 
 @dataclass
@@ -14,6 +17,31 @@ class SentryConfig:
         return cls(
             dsn=env.get_string("SENTRY_DSN"),
             release=env.get_string("APP_VERSION", default="debug"),
+        )
+
+
+@dataclass
+class BlueskyConfig:
+    user: str
+    password: str
+    author_id: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> Self | None:
+        scoped = env.scoped("BLUESKY_")
+
+        try:
+            user = scoped.get_string("USER", required=True)
+            password = scoped.get_string("PASSWORD", required=True)
+            author_id = scoped.get_string("AUTHOR_ID", required=True)
+        except ValueError as e:
+            _LOG.debug("Bluesky config not complete: %s", e)
+            return None
+
+        return cls(
+            user=user,
+            password=password,
+            author_id=author_id,
         )
 
 
@@ -189,6 +217,7 @@ class TwitterConfig:
 
 @dataclass
 class Config:
+    bluesky: BlueskyConfig | None
     download: DownloadConfig
     mail: MailConfig | None
     mastodon: MastodonConfig | None
@@ -202,6 +231,7 @@ class Config:
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
+            bluesky=BlueskyConfig.from_env(env),
             download=DownloadConfig.from_env(env),
             mail=MailConfig.from_env(env),
             mastodon=MastodonConfig.from_env(env),

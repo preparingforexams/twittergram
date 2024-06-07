@@ -32,6 +32,12 @@ def _run_command(command: Coroutine[Any, Any, Any]) -> None:
 
 @main.command
 @click.pass_obj
+def forward_bluesky_posts(app: Application) -> None:
+    _run_command(app.forward_bluesky_posts())
+
+
+@main.command
+@click.pass_obj
 def forward_mails(app: Application) -> None:
     _run_command(app.forward_mails())
 

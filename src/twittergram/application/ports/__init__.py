@@ -1,5 +1,6 @@
 # mypy: implicit-reexport
 
+from .bluesky_reader import BlueskyReader
 from .html_sanitizer import HtmlSanitizer
 from .mail_reader import MailReader
 from .mastodon_reader import MastodonReader

@@ -62,6 +62,14 @@ check_untyped_defs = true
 disallow_untyped_defs = false
 
 [[tool.mypy.overrides]]
+module = "atproto.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "atproto_client.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
 module = "google.cloud.*"
 ignore_missing_imports = true
 

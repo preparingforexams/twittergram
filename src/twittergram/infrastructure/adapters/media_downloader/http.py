@@ -24,6 +24,7 @@ class HttpMediaDownloader(MediaDownloader):
     async def _session() -> AsyncClient:
         return AsyncClient(
             timeout=120,
+            follow_redirects=True,
         )
 
     async def download(self, media: list[Medium]) -> list[MediaFile]:
