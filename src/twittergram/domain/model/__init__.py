@@ -12,6 +12,5 @@ from .state import (
     XcodeState,
 )
 from .toot import Toot
-from .tweet import Tweet, TweetAttachments
 from .url import URL
 from .xcode import XcodeRelease
