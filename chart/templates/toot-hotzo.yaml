@@ -24,7 +24,7 @@ spec:
                 - name: STATE_CONFIG_MAP_NAME_SUFFIX
                   value: hotzo
                 - name: TELEGRAM_TARGET_CHAT_ID
-                  value: "-1001604595097"
+                  value: "133399998"
                 - name: MASTODON_SOURCE_ACCOUNT
                   value: "@elhotzo@mastodon.social"
               envFrom:
