@@ -1405,24 +1405,29 @@ files = [
 ]
 
 [[package]]
-name = "python-telegram-bot-raw"
+name = "python-telegram-bot"
 version = "21.3"
 description = "We have made you a wrapper you can't refuse"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "python-telegram-bot-raw-21.3.tar.gz", hash = "sha256:000245c101c56a7d7e3b1cd6b0a75a120838979e24c0e75ddfdc28234d09eac6"},
-    {file = "python_telegram_bot_raw-21.3-py3-none-any.whl", hash = "sha256:ff4b3f3992f121ebfec46b52a51c72d38db2942483a7e150c5d8573445a0fefc"},
+    {file = "python-telegram-bot-21.3.tar.gz", hash = "sha256:1be3c8b6f2b7354418109daa3f23c522e82ed22e7fc904346bee0c7b4aab52ae"},
+    {file = "python_telegram_bot-21.3-py3-none-any.whl", hash = "sha256:8f575e6da903edd1e78967b5b481455ee6b27f2804d2384029177eab165f2e93"},
 ]
 
 [package.dependencies]
 httpx = ">=0.27,<1.0"
 
 [package.extras]
-all = ["cryptography (>=39.0.1)", "httpx[http2]", "httpx[socks]"]
+all = ["APScheduler (>=3.10.4,<3.11.0)", "aiolimiter (>=1.1.0,<1.2.0)", "cachetools (>=5.3.3,<5.4.0)", "cryptography (>=39.0.1)", "httpx[http2]", "httpx[socks]", "pytz (>=2018.6)", "tornado (>=6.4,<7.0)"]
+callback-data = ["cachetools (>=5.3.3,<5.4.0)"]
+ext = ["APScheduler (>=3.10.4,<3.11.0)", "aiolimiter (>=1.1.0,<1.2.0)", "cachetools (>=5.3.3,<5.4.0)", "pytz (>=2018.6)", "tornado (>=6.4,<7.0)"]
 http2 = ["httpx[http2]"]
+job-queue = ["APScheduler (>=3.10.4,<3.11.0)", "pytz (>=2018.6)"]
 passport = ["cryptography (>=39.0.1)"]
+rate-limiter = ["aiolimiter (>=1.1.0,<1.2.0)"]
 socks = ["httpx[socks]"]
+webhooks = ["tornado (>=6.4,<7.0)"]
 
 [[package]]
 name = "pyyaml"
@@ -1926,4 +1931,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.12"
-content-hash = "84d23e400ee2ba0c02fcb5537a5bc3ec84fcdb3208cc6ea0939ff3e4acb81693"
+content-hash = "d6e96603497e7e583d5b90a377a08bb56624df0a63b6e35056d3030d660028bf"
