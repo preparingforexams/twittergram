@@ -74,7 +74,8 @@ class AtprotoBlueskyReader(BlueskyReader):
                     if isinstance(record.embed, ImageEmbed):
                         images = [
                             self._create_image_medium(
-                                did=did, cid=image.image.cid.encode(),
+                                did=did,
+                                cid=image.image.cid.encode(),
                             )
                             for image in record.embed.images
                         ]
