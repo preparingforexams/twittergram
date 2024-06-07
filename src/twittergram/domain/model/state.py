@@ -12,6 +12,18 @@ class State(BaseModel, abc.ABC):
         pass
 
 
+class BlueskyState(State):
+    session: str | None
+    last_post_id: str | None
+
+    @classmethod
+    def initial(cls) -> Self:
+        return cls(
+            session=None,
+            last_post_id=None,
+        )
+
+
 class MailState(State):
     mailbox_id: str | None
     mailbox_state: str | None
@@ -35,14 +47,6 @@ class RedditState(State):
     @classmethod
     def initial(cls) -> Self:
         return cls(last_post_time=None)
-
-
-class TwitterState(State):
-    last_tweet_id: int | None
-
-    @classmethod
-    def initial(cls) -> Self:
-        return cls(last_tweet_id=None)
 
 
 class XcodeState(State):

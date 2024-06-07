@@ -1,14 +1,15 @@
 # mypy: implicit-reexport
 
+from .bluesky import BlueskyPost
 from .mail import Mail
 from .media import MediaType, Medium
 from .reddit import RedditPost
 from .state import (
+    BlueskyState,
     MailState,
     MastodonState,
     RedditState,
     State,
-    TwitterState,
     XcodeState,
 )
 from .toot import Toot

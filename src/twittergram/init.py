@@ -11,6 +11,7 @@ from twittergram.application import Application, ports, repos
 from twittergram.config import Config, ConfigMapStateConfig, RedditConfig, SentryConfig
 from twittergram.domain.model import State
 from twittergram.infrastructure.adapters import (
+    bluesky_reader,
     html_sanitizer,
     mail_reader,
     mastodon_reader,
@@ -124,6 +125,15 @@ class ReposModule(Module):
 class PortsModule(Module):
     def __init__(self, config: Config) -> None:
         self.config = config
+
+    @provider
+    def provide_bluesky_reader(self) -> ports.BlueskyReader:
+        config = self.config.bluesky
+
+        if not config:
+            raise ValueError("Missing Bluesky config")
+
+        return bluesky_reader.AtprotoBlueskyReader(config)
 
     @provider
     def provide_mail_reader(self) -> ports.MailReader:

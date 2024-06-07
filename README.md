@@ -19,6 +19,7 @@ forwards them to a Telegram chat.
 The following message sources are supported:
 
 - ~~A Twitter account's timeline~~ ([see below](#twitter))
+- A Bluesky account's timeline ([see below](#bluesky))
 - A Mastodon account's timeline ([see below](#mastodon))
 - A mailbox/folder in an email account with [JMAP protocol](https://jmap.io/) support
   ([see below](#email))
@@ -101,6 +102,24 @@ required for Twitter.
 |:------------------------:|:-------------------------------:|--------------------------------------------------------------------------------|
 | `TWITTER_SOURCE_ACCOUNT` |            `elhotzo`            | The username of a (public) Twitter account whose messages you want to forward. |
 |     `TWITTER_TOKEN`      | `AAAAAAAAAAAAAAAAAAAAAPvo[...]` | The Twitter API Bearer token you've obtained as described above.               |
+
+### Bluesky
+
+To forward Bluesky posts, first you'll have to register on an instance. If you want to slightly
+restrict the app's permissions, you can create an app password in the settings.
+
+The app won't forward replies and reposts.
+
+#### Bluesky Configuration Options
+
+The following configuration options (in addition to [the ones above](#required-configuration)) are
+required for Bluesky.
+
+|         Key         |     Example Value     | Description                                                        |
+|:-------------------:|:---------------------:|--------------------------------------------------------------------|
+| `BLUESKY_AUTHOR_ID` | `elhotzo.bsky.social` | The username of a Bluesky account whose posts you want to forward. |
+|   `BLUESKY_USER`    |  `mail@example.com`   | Your Bluesky username to log in.                                   |
+| `BLUESKY_PASSWORD`  |       `hunter2`       | Your Bluesky password (or app password) to log in.                 |
 
 ### Mastodon
 

@@ -8,6 +8,10 @@ class Application:
         self._injector = injector
 
     @property
+    def forward_bluesky_posts(self) -> use_cases.ForwardBlueskyPosts:
+        return self._injector.get(use_cases.ForwardBlueskyPosts)
+
+    @property
     def forward_mails(self) -> use_cases.ForwardMails:
         return self._injector.get(use_cases.ForwardMails)
 
