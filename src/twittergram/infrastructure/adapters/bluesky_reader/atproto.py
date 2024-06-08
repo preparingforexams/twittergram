@@ -40,7 +40,8 @@ class AtprotoBlueskyReader(BlueskyReader):
                 await client.login(session_string=session)
             except BadRequestError as e:
                 if e.response.content.error == "ExpiredToken":
-                    _LOG.warning("Bluesky session expired", exc_info=e)
+                    _LOG.warning("Bluesky session expired")
+                    client = AsyncClient()
                     session_expired = True
                 else:
                     raise IoException("Unexpected error during session login") from e
