@@ -5,9 +5,10 @@ from typing import AsyncIterable, cast
 
 import pendulum
 from atproto import AsyncClient
-from atproto.exceptions import UnauthorizedError
+from atproto.exceptions import BadRequestError
 from atproto_client.models.app.bsky.embed.images import Main as ImageEmbed
 
+from twittergram.application.exceptions.io import IoException
 from twittergram.application.ports import BlueskyReader
 from twittergram.config import BlueskyConfig
 from twittergram.domain.model import URL, BlueskyPost, MediaType, Medium
@@ -37,9 +38,12 @@ class AtprotoBlueskyReader(BlueskyReader):
         if session is not None:
             try:
                 await client.login(session_string=session)
-            except UnauthorizedError as e:
-                _LOG.error("Bluesky session expired", exc_info=e)
-                session_expired = True
+            except BadRequestError as e:
+                if e.response.content.error == "ExpiredToken":
+                    _LOG.warning("Bluesky session expired", exc_info=e)
+                    session_expired = True
+                else:
+                    raise IoException("Unexpected error during session login") from e
 
         if session is None or session_expired:
             await client.login(login=self.config.user, password=self.config.password)
