@@ -34,24 +34,25 @@ class AtprotoBlueskyReader(BlueskyReader):
         client = AsyncClient()
         session = self.session
 
-        session_expired = False
         if session is not None:
             try:
                 await client.login(session_string=session)
             except BadRequestError as e:
                 if e.response.content.error == "ExpiredToken":
                     _LOG.warning("Bluesky session expired")
+                    self.session = session = None
                     client = AsyncClient()
-                    session_expired = True
                 else:
                     raise IoException("Unexpected error during session login") from e
 
-        if session is None or session_expired:
+        if session is None:
             await client.login(login=self.config.user, password=self.config.password)
+            self.session = client.export_session_string()
 
         try:
             yield client
         finally:
+            _LOG.info("Exporting session")
             self.session = client.export_session_string()
 
     async def list_posts(self) -> AsyncIterable[BlueskyPost]:
