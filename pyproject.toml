@@ -17,7 +17,7 @@ priority = "explicit"
 # Version is constrained by asyncpraw
 aiofiles = "*"
 asyncpraw = "^7.7.1"
-atproto = "0.0.48"
+atproto = "0.0.49"
 bs-config = { version = "1.0.2", extras = ["dotenv"], source = "internal" }
 bs-state = { version = "0.2.1", extras = ["file", "kubernetes"], source = "internal" }
 click = "^8.1.3"
