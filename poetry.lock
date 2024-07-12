@@ -941,13 +941,13 @@ dev = ["black (==24.3.0)", "build (==1.0.3)", "check-manifest (==0.49)", "click 
 
 [[package]]
 name = "jmapc"
-version = "0.2.21"
+version = "0.2.22"
 description = "JMAP client library for Python"
 optional = false
-python-versions = ">=3.8,<4.0"
+python-versions = "<4.0,>=3.8"
 files = [
-    {file = "jmapc-0.2.21-py3-none-any.whl", hash = "sha256:0e1d7c0fe5c8c0303c2ade5aed9eccd07a602567173e2de05f46872ed8005d50"},
-    {file = "jmapc-0.2.21.tar.gz", hash = "sha256:042bb76afa2fbe512c022e2394a6408822392a2755596623d86b398d5daf7ba5"},
+    {file = "jmapc-0.2.22-py3-none-any.whl", hash = "sha256:7d9b868671bf6aadd27212876f32a1a3947de4f89a9941c7f211525e2e5647d7"},
+    {file = "jmapc-0.2.22.tar.gz", hash = "sha256:57a4f2b65f9fc1b9a41b2bf5d7d5fb29a876bdf7233f39e67f197ee263f94b58"},
 ]
 
 [package.dependencies]
@@ -1759,13 +1759,13 @@ files = [
 
 [[package]]
 name = "sentry-sdk"
-version = "2.7.1"
+version = "2.9.0"
 description = "Python client for Sentry (https://sentry.io)"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "sentry_sdk-2.7.1-py2.py3-none-any.whl", hash = "sha256:ef1b3d54eb715825657cd4bb3cb42bb4dc85087bac14c56b0fd8c21abd968c9a"},
-    {file = "sentry_sdk-2.7.1.tar.gz", hash = "sha256:25006c7e68b75aaa5e6b9c6a420ece22e8d7daec4b7a906ffd3a8607b67c037b"},
+    {file = "sentry_sdk-2.9.0-py2.py3-none-any.whl", hash = "sha256:0bea5fa8b564cc0d09f2e6f55893e8f70286048b0ffb3a341d5b695d1af0e6ee"},
+    {file = "sentry_sdk-2.9.0.tar.gz", hash = "sha256:4c85bad74df9767976afb3eeddc33e0e153300e887d637775a753a35ef99bee6"},
 ]
 
 [package.dependencies]
@@ -1867,13 +1867,13 @@ files = [
 
 [[package]]
 name = "types-requests"
-version = "2.32.0.20240622"
+version = "2.32.0.20240712"
 description = "Typing stubs for requests"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "types-requests-2.32.0.20240622.tar.gz", hash = "sha256:ed5e8a412fcc39159d6319385c009d642845f250c63902718f605cd90faade31"},
-    {file = "types_requests-2.32.0.20240622-py3-none-any.whl", hash = "sha256:97bac6b54b5bd4cf91d407e62f0932a74821bc2211f22116d9ee1dd643826caf"},
+    {file = "types-requests-2.32.0.20240712.tar.gz", hash = "sha256:90c079ff05e549f6bf50e02e910210b98b8ff1ebdd18e19c873cd237737c1358"},
+    {file = "types_requests-2.32.0.20240712-py3-none-any.whl", hash = "sha256:f754283e152c752e46e70942fa2a146b5bc70393522257bb85bd1ef7e019dcc3"},
 ]
 
 [package.dependencies]
