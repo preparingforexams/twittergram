@@ -257,13 +257,13 @@ test = ["mock (==4.*)", "pytest (==7.*)", "pytest-asyncio (==0.18.*)", "pytest-v
 
 [[package]]
 name = "atproto"
-version = "0.0.51"
+version = "0.0.52"
 description = "The AT Protocol SDK"
 optional = false
 python-versions = "<3.13,>=3.8"
 files = [
-    {file = "atproto-0.0.51-py3-none-any.whl", hash = "sha256:c953ab7916fb49e4b6a6a0a7c79d3285454069d33827414b0b6cd5254bb426b5"},
-    {file = "atproto-0.0.51.tar.gz", hash = "sha256:62d316a84a4cbf2329491ff65f6f6e0faa13f28475623c2b569ba87310ac4efa"},
+    {file = "atproto-0.0.52-py3-none-any.whl", hash = "sha256:61a01f38b06109a94eff9c84552deb7b0b97a9dc114acb4f3d8c7afc87fe59a1"},
+    {file = "atproto-0.0.52.tar.gz", hash = "sha256:e5f19fc3f6fe369dfe8179695fca7978d6864492985e60a52d6243dd5fb5d5e5"},
 ]
 
 [package.dependencies]
@@ -274,7 +274,7 @@ httpx = ">=0.25.0,<0.27.0"
 libipld = ">=1.1.0,<2"
 pydantic = ">=2.7,<3"
 typing-extensions = ">=4.8.0,<5"
-websockets = ">=12,<13"
+websockets = ">=12,<14"
 
 [[package]]
 name = "attrs"
@@ -2263,4 +2263,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.12"
-content-hash = "ff8ac388cf3e91b872a6d09390123909712d8aa3569c5ae15c2b90aed1e40a25"
+content-hash = "d6efcd4131dbd750e361051072e82bff015f628e44bb9d005a225d99703634c4"
