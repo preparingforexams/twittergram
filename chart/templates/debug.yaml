@@ -27,6 +27,8 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
+            limits:
+              ephemeral-storage: 4Gi
           env:
             - name: TELEGRAM_TARGET_CHAT_ID
               value: "133399998"
