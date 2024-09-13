@@ -1,3 +1,6 @@
+[project]
+requires-python = "==3.12.*"
+
 [tool.poetry]
 name = "twittergram"
 description = "Sends telegrams"
