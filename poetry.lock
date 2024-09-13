@@ -257,13 +257,13 @@ test = ["mock (==4.*)", "pytest (==7.*)", "pytest-asyncio (==0.18.*)", "pytest-v
 
 [[package]]
 name = "atproto"
-version = "0.0.53"
+version = "0.0.54"
 description = "The AT Protocol SDK"
 optional = false
 python-versions = "<3.13,>=3.8"
 files = [
-    {file = "atproto-0.0.53-py3-none-any.whl", hash = "sha256:125e4e11a81d85b58d0c39d8dbb6599fb1249eca32a9c73c41b782f90e0a58a4"},
-    {file = "atproto-0.0.53.tar.gz", hash = "sha256:6756f6a2e1da305c8c77cddb9960d68fab7daa6d25dfadb7c38abbeb5118e426"},
+    {file = "atproto-0.0.54-py3-none-any.whl", hash = "sha256:8d2e046a9938eab8674bfa997f26105e29af756a348280d7c0f2e7ad98b7421c"},
+    {file = "atproto-0.0.54.tar.gz", hash = "sha256:7414c0eb814059d876e8d206749fbf999e7c74f297aef6671d9700d82c9070ba"},
 ]
 
 [package.dependencies]
@@ -2280,4 +2280,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.12"
-content-hash = "074f606d9015646889bac783a520f198b59313e660d78a79b432db6df5472999"
+content-hash = "8eafcc1e5c7766b838ffce791c58e938105e106163b967a3e9d366f7da1203c9"
