@@ -1,6 +1,6 @@
 from asyncio import Lock
 from collections.abc import Awaitable, Callable
-from typing import Any, TypeAlias, cast
+from typing import Any, cast
 
 from bs_state import StateStorage
 
@@ -8,7 +8,7 @@ from twittergram.application.repos import StateRepo
 from twittergram.application.repos.state import T
 from twittergram.domain.model import State
 
-StorageLoader: TypeAlias = Callable[[State], Awaitable[StateStorage[State]]]
+type StorageLoader = Callable[[State], Awaitable[StateStorage[State]]]
 
 
 class BsStateRepo(StateRepo):
