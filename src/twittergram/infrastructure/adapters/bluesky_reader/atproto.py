@@ -1,7 +1,8 @@
 import logging
+from collections.abc import AsyncIterable
 from contextlib import asynccontextmanager
 from datetime import datetime
-from typing import AsyncIterable, cast
+from typing import cast
 
 import pendulum
 from atproto import AsyncClient

@@ -1,7 +1,8 @@
 import asyncio
 import logging
+from collections.abc import Awaitable, Callable
 from pathlib import Path
-from typing import Awaitable, Callable, TypeVar, cast
+from typing import TypeVar, cast
 
 import aiofiles
 import telegram

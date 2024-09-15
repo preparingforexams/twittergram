@@ -1,6 +1,6 @@
 import logging
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 import sentry_sdk
 from bs_config import Env

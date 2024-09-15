@@ -1,5 +1,5 @@
-from datetime import datetime, timezone
-from typing import AsyncIterable
+from collections.abc import AsyncIterable
+from datetime import UTC, datetime
 
 import asyncpraw
 
@@ -29,7 +29,7 @@ class PrawRedditReader(RedditReader):
                 await subreddit.load()
                 created_at = datetime.fromtimestamp(
                     submission.created_utc,
-                    timezone.utc,
+                    UTC,
                 )
                 yield RedditPost(
                     id=submission.id,

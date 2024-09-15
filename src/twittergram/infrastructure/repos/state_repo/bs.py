@@ -1,5 +1,6 @@
 from asyncio import Lock
-from typing import Any, Awaitable, Callable, TypeAlias, cast
+from collections.abc import Awaitable, Callable
+from typing import Any, TypeAlias, cast
 
 from bs_state import StateStorage
 

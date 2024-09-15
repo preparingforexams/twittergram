@@ -1,5 +1,6 @@
+from collections.abc import AsyncIterable
 from datetime import date
-from typing import Any, AsyncIterable, cast
+from typing import Any, cast
 
 from httpx import AsyncClient, RequestError
 

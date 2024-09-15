@@ -1,6 +1,7 @@
 import asyncio
 import logging
-from typing import AsyncIterable, Iterable, cast
+from collections.abc import AsyncIterable, Iterable
+from typing import cast
 
 from mastodon import Mastodon
 

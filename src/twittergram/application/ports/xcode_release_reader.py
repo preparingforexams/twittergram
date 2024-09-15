@@ -1,5 +1,5 @@
 import abc
-from typing import AsyncIterable
+from collections.abc import AsyncIterable
 
 from twittergram.domain.model import XcodeRelease
 
