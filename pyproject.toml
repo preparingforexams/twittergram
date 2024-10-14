@@ -32,7 +32,7 @@ mastodon-py = "^1.8.0"
 more-itertools = "^10.0.0"
 pendulum = "^3.0.0"
 pydantic = "^2.4.2"
-python = "~3.12"
+python = "~3.13"
 # Dicated by atproto because of a common tight httpx constraint.
 python-telegram-bot = "*"
 sentry-sdk = "^2.0.0"
