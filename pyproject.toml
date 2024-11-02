@@ -52,7 +52,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
 plugins = ["pydantic.mypy"]
-enable_incomplete_feature = ["NewGenericSyntax"]
 
 strict = true
 warn_unused_ignores = true
