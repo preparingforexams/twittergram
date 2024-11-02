@@ -15,12 +15,14 @@ class State(BaseModel, abc.ABC):
 class BlueskyState(State):
     session: str | None
     last_post_id: str | None
+    last_post_time: datetime | None = None
 
     @classmethod
     def initial(cls) -> Self:
         return cls(
             session=None,
             last_post_id=None,
+            last_post_time=None,
         )
 
 

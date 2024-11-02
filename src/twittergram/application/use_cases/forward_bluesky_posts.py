@@ -1,5 +1,6 @@
 import logging
 from dataclasses import dataclass
+from datetime import datetime
 
 from injector import inject
 
@@ -25,7 +26,7 @@ class ForwardBlueskyPosts:
                 self.reader.restore_session(session)
 
             _LOG.info("Reading posts")
-            posts = await self._read_posts(state.last_post_id)
+            posts = await self._read_posts(state.last_post_id, state.last_post_time)
 
             if not posts:
                 _LOG.info("No posts found")
@@ -63,11 +64,22 @@ class ForwardBlueskyPosts:
         else:
             _LOG.warning("Dropping post with neither image nor text")
         state.last_post_id = post.id
+        state.last_post_time = post.created_at
 
-    async def _read_posts(self, until_id: str | None) -> list[BlueskyPost]:
+    async def _read_posts(
+        self,
+        until_id: str | None,
+        until_time: datetime | None,
+    ) -> list[BlueskyPost]:
         posts: list[BlueskyPost] = []
         async for post in self.reader.list_posts():
             if post.id == until_id:
+                break
+
+            if until_time and post.created_at < until_time:
+                _LOG.info(
+                    "Last post probably deleted, found post with older creation time"
+                )
                 break
 
             posts.append(post)
