@@ -2,9 +2,7 @@ import logging
 from collections.abc import AsyncIterable
 from contextlib import asynccontextmanager
 from datetime import datetime
-from typing import cast
 
-import pendulum
 from atproto import AsyncClient
 from atproto.exceptions import BadRequestError
 from atproto_client.models.app.bsky.embed.images import Main as ImageEmbed
@@ -77,7 +75,8 @@ class AtprotoBlueskyReader(BlueskyReader):
                     record = post_view.record
 
                     text = record.text or None
-                    created_at = cast(datetime, pendulum.parse(record.created_at))
+
+                    created_at = datetime.fromisoformat(record.created_at)
                     if isinstance(record.embed, ImageEmbed):
                         images = [
                             self._create_image_medium(
