@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: bluesky-advent
 spec:
-  schedule: {{ .Values.cron.defaultSchedule }}
+  schedule: "0,30 7-22 * * *"
   startingDeadlineSeconds: {{ .Values.cron.defaultStartDeadlineSeconds }}
   timeZone: {{ .Values.cron.defaultTimezone }}
   concurrencyPolicy: Forbid
