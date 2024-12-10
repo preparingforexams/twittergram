@@ -28,7 +28,7 @@ The following message sources are supported:
 
 ## Usage
 
-The app requires Python 3.12 and [Poetry](https://python-poetry.org/) 1.3.0+.
+The app requires Python 3.13 and [Poetry](https://python-poetry.org/) 1.3.0+.
 
 Install dependencies:
 
