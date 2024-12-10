@@ -1,6 +1,6 @@
 # mypy: implicit-reexport
 
-from .bluesky import BlueskyPost
+from .bluesky import BlueskyPost, NamedUrl
 from .mail import Mail
 from .media import MediaType, Medium
 from .reddit import RedditPost

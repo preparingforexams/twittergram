@@ -57,10 +57,25 @@ class ForwardBlueskyPosts:
         else:
             media_files = []
         _LOG.info("Sending message")
+
+        is_html = False
+        text = post.text
+
+        if (url := post.url) is not None:
+            is_html = True
+            text = f"{text}\n\n{url.html_formatted()}"
+
         if media_files:
-            await self.uploader.send_image_message(media_files, post.text)
-        elif text := post.text:
-            await self.uploader.send_text_message(text)
+            await self.uploader.send_image_message(
+                media_files,
+                text,
+                use_html=is_html,
+            )
+        elif text:
+            await self.uploader.send_text_message(
+                text,
+                use_html=is_html,
+            )
         else:
             _LOG.warning("Dropping post with neither image nor text")
         state.last_post_id = post.id

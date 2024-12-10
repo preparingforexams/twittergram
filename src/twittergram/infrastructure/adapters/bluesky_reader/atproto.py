@@ -2,15 +2,17 @@ import logging
 from collections.abc import AsyncIterable
 from contextlib import asynccontextmanager
 from datetime import datetime
+from typing import Any
 
 from atproto import AsyncClient
 from atproto.exceptions import BadRequestError
+from atproto_client.models.app.bsky.embed.external import Main as ExternalEmbed
 from atproto_client.models.app.bsky.embed.images import Main as ImageEmbed
 
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.ports import BlueskyReader
 from twittergram.config import BlueskyConfig
-from twittergram.domain.model import URL, BlueskyPost, MediaType, Medium
+from twittergram.domain.model import URL, BlueskyPost, MediaType, Medium, NamedUrl
 
 _LOG = logging.getLogger(__name__)
 
@@ -77,29 +79,44 @@ class AtprotoBlueskyReader(BlueskyReader):
                     text = record.text or None
 
                     created_at = datetime.fromisoformat(record.created_at)
-                    if isinstance(record.embed, ImageEmbed):
-                        images = [
-                            self._create_image_medium(
-                                did=did,
-                                cid=image.image.cid.encode(),
-                            )
-                            for image in record.embed.images
-                        ]
-
-                    else:
-                        images = []
 
                     post = BlueskyPost(
                         created_at=created_at,
                         id=post_view.cid,
                         text=text,
-                        images=images,
+                        images=self._extract_images(did, record.embed),
+                        url=self._extract_url(record.embed),
                     )
 
                     yield post
 
-    def _create_image_medium(self, did: str, cid: str) -> Medium:
-        url = self.BLOB_URL.copy_set_param("cid", cid).copy_set_param("did", did)
+    @classmethod
+    def _extract_images(cls, did: str, embed: Any) -> list[Medium]:
+        if isinstance(embed, ImageEmbed):
+            return [
+                cls._create_image_medium(
+                    did=did,
+                    cid=image.image.cid.encode(),
+                )
+                for image in embed.images
+            ]
+
+        return []
+
+    @staticmethod
+    def _extract_url(embed: Any) -> NamedUrl | None:
+        if isinstance(embed, ExternalEmbed):
+            external = embed.external
+            return NamedUrl(
+                title=external.title,
+                url=external.uri,
+            )
+
+        return None
+
+    @classmethod
+    def _create_image_medium(cls, did: str, cid: str) -> Medium:
+        url = cls.BLOB_URL.copy_set_param("cid", cid).copy_set_param("did", did)
         return Medium(
             url=str(url),
             id=cid,
