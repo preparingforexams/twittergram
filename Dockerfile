@@ -4,8 +4,8 @@ RUN apt-get update -qq \
     && apt-get install -yq --no-install-recommends tini  \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
-RUN groupadd --system --gid 500 app
-RUN useradd --system --uid 500 --gid app --create-home --home-dir /app app
+RUN groupadd --system --gid 500 app \
+  && useradd --system --uid 500 --gid app --create-home --home-dir /app app
 
 USER app
 WORKDIR /app
