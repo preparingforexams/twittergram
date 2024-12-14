@@ -115,3 +115,7 @@ async def _transfer_state(
         sys.exit(1)
 
     await target_storage.store_state(old_state)
+
+
+if __name__ == "__main__":
+    main()
