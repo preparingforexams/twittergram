@@ -211,14 +211,14 @@ dotenv = [
 
 [[package]]
 name = "bs-state"
-version = "0.3.1"
+version = "0.3.2"
 source = { registry = "https://pypi.bjoernpetersen.net/" }
 dependencies = [
     { name = "pydantic" },
 ]
-sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_state-0.3.1.tar.gz", hash = "sha256:482698fd4a8adc9cb5d07fd9b98a6d66d4ad6d489213a48dd00fa7daae97c5bd" }
+sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_state-0.3.2.tar.gz", hash = "sha256:e417df5f851f913cd3c8a710597659d5a3daabee5bea5acb7c2947de2d9cb9d3" }
 wheels = [
-    { url = "https://pypi.bjoernpetersen.net/packages/bs_state-0.3.1-py3-none-any.whl", hash = "sha256:0473f69af417c2e328d72a374d28e397e80a4aa776013f649346dac025cb40c0" },
+    { url = "https://pypi.bjoernpetersen.net/packages/bs_state-0.3.2-py3-none-any.whl", hash = "sha256:9da9af18fd8c849268c15de60760ca74c232823590cecc03cd3b01602d3b2ae2" },
 ]
 
 [package.optional-dependencies]
@@ -493,7 +493,7 @@ wheels = [
 
 [[package]]
 name = "kubernetes-asyncio"
-version = "31.1.1"
+version = "32.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -503,9 +503,9 @@ dependencies = [
     { name = "six" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/14/50/7a80c0ddcb65be04d0ddcbf6a4f80a12ae71f1cac131d79223647b50fb47/kubernetes_asyncio-31.1.1.tar.gz", hash = "sha256:393bb60a2740d482651d474956296b341348c3e4f883b171740e5a4bf105a87b", size = 962760 }
+sdist = { url = "https://files.pythonhosted.org/packages/c5/5f/b90d537f7f7f05bd2038a3084f63148748b176d93e20abdef987d0025f16/kubernetes_asyncio-32.0.0.tar.gz", hash = "sha256:77f28a026aff8a40fd34a7ebad9f3813dcb7e549c7240275fc4bfbff0a6b49d0", size = 1025641 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9c/54/0c4b1d75923a70622313f499f69c76f23b307d4582dd5d03b82898f9ae6c/kubernetes_asyncio-31.1.1-py3-none-any.whl", hash = "sha256:d5e441674fde5dd8d0366cb6a204d7fbaef8d0dce7ca7a34c0791af0d13b6ff1", size = 1902743 },
+    { url = "https://files.pythonhosted.org/packages/d6/d0/046ab1a8edad497d134432565fc7710fc3134eeb2f08ec147a08d1509f06/kubernetes_asyncio-32.0.0-py3-none-any.whl", hash = "sha256:f9baa8f73c182948e063bb9448d8e614f73df4aae52d28f173a3a1c2b77fbfb4", size = 1972671 },
 ]
 
 [[package]]
@@ -912,7 +912,7 @@ requires-dist = [
     { name = "asyncpraw", specifier = ">=7,<8" },
     { name = "atproto", specifier = "==0.0.56" },
     { name = "bs-config", extras = ["dotenv"], specifier = "==1.1.1", index = "https://pypi.bjoernpetersen.net/" },
-    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==0.3.1", index = "https://pypi.bjoernpetersen.net/" },
+    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==0.3.2", index = "https://pypi.bjoernpetersen.net/" },
     { name = "click", specifier = ">=8,<9" },
     { name = "deprecated", specifier = ">=1,<2" },
     { name = "httpx" },
