@@ -41,8 +41,10 @@ spec:
                 {{- end }}
                 - secretRef:
                     name: base
+                {{- if ($spec.hasSecret | default true) }}
                 - secretRef:
                     name: {{ $type }}
+                {{- end }}
               resources:
                 requests:
                   cpu: 100m

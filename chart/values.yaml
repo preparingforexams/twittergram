@@ -53,6 +53,7 @@ cron:
     xcode:
       useCase: forward-xcode
       hasConfigMap: false
+      hasSecret: false
       configs:
         - id: xcode
           schedule: "0 7,12 * * *"
