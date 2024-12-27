@@ -42,7 +42,7 @@ cron:
         env:
           REDDIT_SOURCE_USERNAME: schneckedertzchen
           REDDIT_SUBREDDIT_FILTER: DeutscheComics
-    toot:
+    mastodon:
       useCase: forward-toots
       hasConfigMap: true
       configs:
