@@ -37,7 +37,7 @@ spec:
                     name: base
                 {{- if $spec.hasConfigMap }}
                 - configMapRef:
-                    name: ${{ $type }}
+                    name: {{ $type }}
                 {{- end }}
                 - secretRef:
                     name: base
