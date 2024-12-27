@@ -8,6 +8,7 @@ cron:
     bluesky:
       useCase: forward-bluesky-posts
       hasConfigMap: false
+      hasSecret: true
       configs:
       - id: hotzo
         targetChat: "-1001604595097"
@@ -21,6 +22,7 @@ cron:
     mail:
       useCase: forward-mails
       hasConfigMap: false
+      hasSecret: true
       configs:
       - id: dart
         schedule: "0 9,20 * * *"
@@ -35,6 +37,7 @@ cron:
     reddit:
       useCase: forward-reddit-posts
       hasConfigMap: true
+      hasSecret: true
       configs:
       - id: schnecke
         schedule: "*/20 * * * *"
@@ -45,6 +48,7 @@ cron:
     mastodon:
       useCase: forward-toots
       hasConfigMap: true
+      hasSecret: true
       configs:
         - id: hotzo
           targetChat: "133399998"

@@ -45,7 +45,7 @@ spec:
                 {{- end }}
                 - secretRef:
                     name: base
-                {{- if ( $spec.hasSecret | default true) }}
+                {{- if $spec.hasSecret }}
                 - secretRef:
                     name: {{ $type }}
                 {{- end }}
