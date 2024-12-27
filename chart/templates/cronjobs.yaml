@@ -49,6 +49,10 @@ spec:
                 - secretRef:
                     name: {{ $type }}
                 {{- end }}
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop: [ ALL ]
               resources:
                 requests:
                   cpu: 100m
