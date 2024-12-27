@@ -6,7 +6,7 @@ kind: CronJob
 metadata:
   name: {{ $type }}-{{ .id }}
 spec:
-  schedule: {{ .schedule | default $.Values.cron.defaultSchedule }}
+  schedule: {{ .schedule | default $.Values.cron.defaultSchedule | quote }}
   startingDeadlineSeconds: {{ $.Values.cron.defaultStartDeadlineSeconds }}
   timeZone: {{ $.Values.cron.defaultTimezone }}
   concurrencyPolicy: Forbid
