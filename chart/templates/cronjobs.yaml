@@ -39,13 +39,13 @@ spec:
               envFrom:
                 - configMapRef:
                     name: base
-                {{- if $spec.hasConfigMap }}
+                {{- if .hasConfigMap }}
                 - configMapRef:
                     name: {{ $type }}
                 {{- end }}
                 - secretRef:
                     name: base
-                {{- if ($spec.hasSecret | default true) }}
+                {{- if ( .hasSecret | default true) }}
                 - secretRef:
                     name: {{ $type }}
                 {{- end }}
