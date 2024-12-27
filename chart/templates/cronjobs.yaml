@@ -1,0 +1,53 @@
+{{- range $type, $spec := .Values.cron.instances }}
+{{- range $spec.configs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $type }}-{{ .id }}
+spec:
+  schedule: {{ .schedule | default $.Values.cron.defaultSchedule }}
+  startingDeadlineSeconds: {{ $.Values.cron.defaultStartDeadlineSeconds }}
+  timeZone: {{ $.Values.cron.defaultTimezone }}
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 2
+  suspend: {{ $.Values.debug }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          serviceAccountName: {{ $.Release.Name }}
+          containers:
+            - name: app
+              image: {{ $.Values.image.app }}:{{ $.Values.appVersion }}
+              args: [ {{ $spec.useCase }} ]
+              env:
+                - name: STATE_CONFIG_MAP_NAME_SUFFIX
+                  value: {{ .id }}
+                - name: TELEGRAM_TARGET_CHAT_ID
+                  value: {{ .targetChat | quote }}
+                {{- range $key, $value := .env }}
+                - name: {{ $key }}
+                  value: {{ $value | quote }}
+                {{- end }}
+              envFrom:
+                - configMapRef:
+                    name: base
+                {{- if $spec.hasConfigMap }}
+                - configMapRef:
+                    name: ${{ $type }}
+                {{- end }}
+                - secretRef:
+                    name: base
+                - secretRef:
+                    name: {{ $type }}
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  ephemeral-storage: 512Mi
+{{- end }}
+{{- end }}
