@@ -4,6 +4,7 @@ metadata:
   name: debug
 spec:
   replicas: {{ if .Values.debug }}1{{ else }}0{{ end }}
+  revisionHistoryLimit: 0
   strategy:
     type: Recreate
   selector:
