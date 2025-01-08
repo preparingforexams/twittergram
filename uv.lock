@@ -98,15 +98,15 @@ wheels = [
 
 [[package]]
 name = "anyio"
-version = "4.7.0"
+version = "4.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "idna" },
     { name = "sniffio" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f6/40/318e58f669b1a9e00f5c4453910682e2d9dd594334539c7b7817dabb765f/anyio-4.7.0.tar.gz", hash = "sha256:2f834749c602966b7d456a7567cafcb309f96482b5081d14ac93ccd457f9dd48", size = 177076 }
+sdist = { url = "https://files.pythonhosted.org/packages/a3/73/199a98fc2dae33535d6b8e8e6ec01f8c1d76c9adb096c6b7d64823038cde/anyio-4.8.0.tar.gz", hash = "sha256:1d9fe889df5212298c0c0723fa20479d1b94883a2df44bd3897aa91083316f7a", size = 181126 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a0/7a/4daaf3b6c08ad7ceffea4634ec206faeff697526421c20f07628c7372156/anyio-4.7.0-py3-none-any.whl", hash = "sha256:ea60c3723ab42ba6fff7e8ccb0488c898ec538ff4df1f1d5e642c3601d07e352", size = 93052 },
+    { url = "https://files.pythonhosted.org/packages/46/eb/e7f063ad1fec6b3178a3cd82d1a3c4de82cccf283fc42746168188e1cdd5/anyio-4.8.0-py3-none-any.whl", hash = "sha256:b5011f270ab5eb0abf13385f851315585cc37ef330dd88e27ec3d34d651fd47a", size = 96041 },
 ]
 
 [[package]]
@@ -529,14 +529,14 @@ wheels = [
 
 [[package]]
 name = "marshmallow"
-version = "3.23.3"
+version = "3.24.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "packaging" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fd/c0/d674c9de69227beafa41e1601b0c48b8b51060212abc231d4332e4b1e794/marshmallow-3.23.3.tar.gz", hash = "sha256:d586c8685ebdb80bf754e1f96e3f305aaf30951f1fc69175b977453633467e76", size = 175606 }
+sdist = { url = "https://files.pythonhosted.org/packages/3b/1f/52fa79445669322ee42fdd11b591c2e9c8dbab33eaf7059ca881b349ae09/marshmallow-3.24.2.tar.gz", hash = "sha256:0822c3701de396b51d3f8ac97319aea5493998ba4e7d0e4c05f6fce7777bf3a2", size = 176520 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/af/82/d8c37cc92948ce11e5d8d71602bbac7ac4257f9e1f918fd91b1ddac4ec97/marshmallow-3.23.3-py3-none-any.whl", hash = "sha256:20c0f8c613f68bcb45b2a0d3282e2f172575560170bf220d67aafb42717910e4", size = 48911 },
+    { url = "https://files.pythonhosted.org/packages/67/40/7802bb90b1ecbb284ae613da2cfde9ce0177b77d76cbb276acf976296aa8/marshmallow-3.24.2-py3-none-any.whl", hash = "sha256:bf3c56db473bb160e5191f1c5e32e3fc8bfb58998eb2b35d6747de023e31f9e7", size = 49333 },
 ]
 
 [[package]]
