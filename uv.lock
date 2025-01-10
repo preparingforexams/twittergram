@@ -231,11 +231,13 @@ kubernetes = [
 
 [[package]]
 name = "caio"
-version = "0.9.17"
+version = "0.9.19"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/88/cf/59b868909a85ad9eca985ad5bbeb3c0a8cd435e50ae12def770d16911753/caio-0.9.17.tar.gz", hash = "sha256:8f30511526814d961aeef389ea6885273abe6c655f1e08abbadb95d12fdd9b4f", size = 25001 }
+sdist = { url = "https://files.pythonhosted.org/packages/a1/66/92b1673783cd54581b8ae03562e1a65bffbcd032ffcdfe1381a839ab3ee7/caio-0.9.19.tar.gz", hash = "sha256:bdcb529330730c4c364b79789620f33bafad8c2c854c1205ecc2d16511c0b690", size = 26780 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/58/72/3f4895adb1d23b0ac1d8afc748405a2ad3c77d8d0f23b05a64ff583c11e5/caio-0.9.17-py3-none-any.whl", hash = "sha256:c55d4dc6b3a36f93237ecd6360e1c131c3808bc47d4191a130148a99b80bb311", size = 19062 },
+    { url = "https://files.pythonhosted.org/packages/70/6c/57b5df10f8871073a47103e33670f60ee30b2531b0e3f4e94f5244d65ced/caio-0.9.19-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:865282c9146ca5377ccf31ba93307915c9c55ed7e67ce0217a80cac85725d94b", size = 42480 },
+    { url = "https://files.pythonhosted.org/packages/3e/87/90aed8e14dac03b61ec68d81fc07da53efaa8e2b50a328ff6b7c85e121d6/caio-0.9.19-cp313-cp313-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_34_x86_64.whl", hash = "sha256:02dc711c1d00c8f542844ab411b863be5fe471dac5b7c202b9589ded86fde4c3", size = 81555 },
+    { url = "https://files.pythonhosted.org/packages/82/fe/a707fdb25db93531fa8545cf9e9ea3f202508e9b967481e05f602ea40e78/caio-0.9.19-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.manylinux_2_34_aarch64.whl", hash = "sha256:8222af4feb0d2983633c4ef616055157780d50c7a47b519e38a845078b115c55", size = 81355 },
 ]
 
 [[package]]
@@ -529,14 +531,14 @@ wheels = [
 
 [[package]]
 name = "marshmallow"
-version = "3.24.2"
+version = "3.25.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "packaging" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3b/1f/52fa79445669322ee42fdd11b591c2e9c8dbab33eaf7059ca881b349ae09/marshmallow-3.24.2.tar.gz", hash = "sha256:0822c3701de396b51d3f8ac97319aea5493998ba4e7d0e4c05f6fce7777bf3a2", size = 176520 }
+sdist = { url = "https://files.pythonhosted.org/packages/bd/5c/cbfa41491d6c83b36471f2a2f75602349d20a8f88afd94f83c1e68bbc298/marshmallow-3.25.0.tar.gz", hash = "sha256:5ba94a4eb68894ad6761a505eb225daf7e5cb7b4c32af62d4a45e9d42665bc31", size = 176751 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/67/40/7802bb90b1ecbb284ae613da2cfde9ce0177b77d76cbb276acf976296aa8/marshmallow-3.24.2-py3-none-any.whl", hash = "sha256:bf3c56db473bb160e5191f1c5e32e3fc8bfb58998eb2b35d6747de023e31f9e7", size = 49333 },
+    { url = "https://files.pythonhosted.org/packages/76/26/b347619b719d4c048e038929769f8f6b28c6d930149b40d950bbdde31d48/marshmallow-3.25.0-py3-none-any.whl", hash = "sha256:50894cd57c6b097a6c6ed2bf216af47d10146990a54db52d03e32edb0448c905", size = 49480 },
 ]
 
 [[package]]
@@ -672,16 +674,16 @@ wheels = [
 
 [[package]]
 name = "pydantic"
-version = "2.10.4"
+version = "2.10.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "annotated-types" },
     { name = "pydantic-core" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/70/7e/fb60e6fee04d0ef8f15e4e01ff187a196fa976eb0f0ab524af4599e5754c/pydantic-2.10.4.tar.gz", hash = "sha256:82f12e9723da6de4fe2ba888b5971157b3be7ad914267dea8f05f82b28254f06", size = 762094 }
+sdist = { url = "https://files.pythonhosted.org/packages/6a/c7/ca334c2ef6f2e046b1144fe4bb2a5da8a4c574e7f2ebf7e16b34a6a2fa92/pydantic-2.10.5.tar.gz", hash = "sha256:278b38dbbaec562011d659ee05f63346951b3a248a6f3642e1bc68894ea2b4ff", size = 761287 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f3/26/3e1bbe954fde7ee22a6e7d31582c642aad9e84ffe4b5fb61e63b87cd326f/pydantic-2.10.4-py3-none-any.whl", hash = "sha256:597e135ea68be3a37552fb524bc7d0d66dcf93d395acd93a00682f1efcb8ee3d", size = 431765 },
+    { url = "https://files.pythonhosted.org/packages/58/26/82663c79010b28eddf29dcdd0ea723439535fa917fce5905885c0e9ba562/pydantic-2.10.5-py3-none-any.whl", hash = "sha256:4dd4e322dbe55472cb7ca7e73f4b63574eecccf2835ffa2af9021ce113c83c53", size = 431426 },
 ]
 
 [[package]]
