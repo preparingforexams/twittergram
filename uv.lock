@@ -367,14 +367,14 @@ wheels = [
 
 [[package]]
 name = "deprecated"
-version = "1.2.16"
+version = "1.2.17"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/36/a5/eaedf9a5c49155e4bba35f225f366e68de079e04827fc291569c9d2e399d/deprecated-1.2.16.tar.gz", hash = "sha256:6ec624c168290715d56c6af7c1c1066ea5c732bd56427b1651db75ede923aa38", size = 2977231 }
+sdist = { url = "https://files.pythonhosted.org/packages/2f/20/caa25c084ebad492360bf28ba5cb74f27b50fc6f3df965fd0add2b5b5993/deprecated-1.2.17.tar.gz", hash = "sha256:0114a10f0bbb750b90b2c2296c90cf7e9eaeb0abb5cf06c80de2c60138de0a82", size = 2928237 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/d3/1f4353238a2ee4bc234c5b68fd7c9bf4d756f57d597496e1f2e5598d6198/Deprecated-1.2.16-py2.py3-none-any.whl", hash = "sha256:4c8e429ada6573698ba723f9c4ea53006e990042a45db938e412f1f9d4b9ffd9", size = 9163 },
+    { url = "https://files.pythonhosted.org/packages/46/90/89be9a665bf63d3baaba6f34d9a514655abb42be2cc129f31c96df2cef51/Deprecated-1.2.17-py2.py3-none-any.whl", hash = "sha256:69cdc0a751671183f569495e2efb14baee4344b0236342eec29f1fde25d61818", size = 9140 },
 ]
 
 [[package]]
