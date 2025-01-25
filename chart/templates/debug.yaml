@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: debug
 spec:
-  replicas: {{ if .Values.debug }}1{{ else }}0{{ end }}
+  replicas: {{ if (and .Values.debug (not .Values.isEnabled)) }}1{{ else }}0{{ end }}
   revisionHistoryLimit: 0
   strategy:
     type: Recreate

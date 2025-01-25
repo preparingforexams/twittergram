@@ -12,7 +12,7 @@ spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 2
-  suspend: {{ $.Values.debug }}
+  suspend: {{ $.Values.debug or (not $.Values.isEnabled) }}
   jobTemplate:
     spec:
       template:

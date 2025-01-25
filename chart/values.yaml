@@ -1,4 +1,5 @@
 debug: false
+isEnabled: true
 appVersion: latest
 cron:
   defaultSchedule: "0 7,12,18-21 * * *"
