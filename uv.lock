@@ -140,7 +140,7 @@ wheels = [
 
 [[package]]
 name = "atproto"
-version = "0.0.57"
+version = "0.0.58"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -152,9 +152,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/01/22/09385195b1f08ea24ea002a026fb150ae5b7b43b89ab02c37824c266ab81/atproto-0.0.57.tar.gz", hash = "sha256:3a88c19310dcd452e5fd3138d2d54f728acbd58f09b1ebc757f4f268e76bbaa1", size = 175555 }
+sdist = { url = "https://files.pythonhosted.org/packages/ce/15/03e8b8f9d53296905379df20b6abd2b530bb5cfe119421957118d690e009/atproto-0.0.58.tar.gz", hash = "sha256:908135065411577502fbbbacd055c270e34beeec8d7ec0e672a090970a081b70", size = 176589 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6f/6d/192e7991b1048700576caeba1832c6d814ab4e0c1cfa5e8ed955b6545235/atproto-0.0.57-py3-none-any.whl", hash = "sha256:dab20db649f72a9c3a1957bb7bf367eff77f05cb716a83c0814a3020800ca0e1", size = 350032 },
+    { url = "https://files.pythonhosted.org/packages/26/01/e48a9c2a509566779d8ee026e02f4db64cdbac57588e5a103491ffe06527/atproto-0.0.58-py3-none-any.whl", hash = "sha256:4fd281b9a1f408f794d6995b2ca57bb85f06cdf1206c4346b61e7e22fbd0ab56", size = 351053 },
 ]
 
 [[package]]
@@ -911,7 +911,7 @@ dev = [
 requires-dist = [
     { name = "aiofiles" },
     { name = "asyncpraw", specifier = ">=7,<8" },
-    { name = "atproto", specifier = "==0.0.57" },
+    { name = "atproto", specifier = "==0.0.58" },
     { name = "bs-config", extras = ["dotenv"], specifier = "==1.1.1", index = "https://pypi.bjoernpetersen.net/" },
     { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==0.3.2", index = "https://pypi.bjoernpetersen.net/" },
     { name = "click", specifier = ">=8,<9" },
