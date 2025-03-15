@@ -24,7 +24,7 @@ dependencies = [
     "mastodon-py >=1, <2",
     "more-itertools >=10, <11",
     "pydantic ==2.10.*",
-    "python-telegram-bot ==21.11.1",
+    "python-telegram-bot ==22.0",
     "sentry-sdk >=2, <3",
 ]
 
