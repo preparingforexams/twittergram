@@ -1,9 +1,9 @@
 import asyncio
 import logging
 from collections.abc import AsyncIterable, Iterable
-from typing import cast
 
 from mastodon import Mastodon
+from mastodon import return_types as mastotypes
 
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.ports import MastodonReader
@@ -32,13 +32,16 @@ class MastodonPyMastodonReader(MastodonReader):
         if account is None:
             raise IoException(f"Could not look up user {account_name}")
 
-        return cast(int, account["id"])
+        return int(account.id)
 
     async def lookup_user_id(self) -> int:
         loop = asyncio.get_running_loop()
         return await loop.run_in_executor(None, self._lookup_user_id)
 
-    def _parse_media(self, media: list[dict[str, str | int]]) -> list[Medium]:
+    def _parse_media(
+        self,
+        media: list[mastotypes.MediaAttachment],
+    ) -> list[Medium]:
         result: list[Medium] = []
 
         for m in media:
@@ -49,10 +52,10 @@ class MastodonPyMastodonReader(MastodonReader):
         return result
 
     @staticmethod
-    def _parse_medium(m: dict[str, str | int]) -> Medium | None:
+    def _parse_medium(m: mastotypes.MediaAttachment) -> Medium | None:
         media_type: MediaType
 
-        match m["type"]:
+        match m.type:
             case "image":
                 media_type = MediaType.PHOTO
             case "video":
@@ -64,8 +67,8 @@ class MastodonPyMastodonReader(MastodonReader):
                 return None
 
         return Medium(
-            id=str(["id"]),
-            url=cast(str, m["url"]),
+            id=str(m.id),
+            url=m.url,
             type=media_type,
         )
 
@@ -85,11 +88,11 @@ class MastodonPyMastodonReader(MastodonReader):
         )
         for status in statuses:
             yield Toot(
-                id=status["id"],
-                url=status["url"],
-                content=status["content"],
-                created_at=status["created_at"],
-                media_attachments=self._parse_media(status["media_attachments"]),
+                id=int(status.id),
+                url=status.url,
+                content=status.content,
+                created_at=status.created_at,
+                media_attachments=self._parse_media(status.media_attachments),
             )
 
     async def list_toots(
