@@ -34,8 +34,7 @@ class BlueskyConfig:
             user = scoped.get_string("USER", required=True)
             password = scoped.get_string("PASSWORD", required=True)
             author_id = scoped.get_string("AUTHOR_ID", required=True)
-        except ValueError as e:
-            _LOG.debug("Bluesky config not complete: %s", e)
+        except ValueError:
             return None
 
         return cls(
