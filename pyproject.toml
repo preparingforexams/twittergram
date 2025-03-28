@@ -21,7 +21,7 @@ dependencies = [
     "httpx",
     "injector ==0.22.*",
     "jmapc ==0.2.*",
-    "mastodon-py >=1, <2",
+    "mastodon-py >=2, <3",
     "more-itertools >=10, <11",
     "pydantic ==2.11.*",
     "python-telegram-bot ==22.0",
