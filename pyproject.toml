@@ -25,6 +25,7 @@ dependencies = [
     "more-itertools >=10, <11",
     "pydantic ==2.11.*",
     "python-telegram-bot ==22.0",
+    "rss-parser ==2.1.0",
     "sentry-sdk >=2, <3",
 ]
 

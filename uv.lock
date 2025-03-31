@@ -851,6 +851,19 @@ wheels = [
 ]
 
 [[package]]
+name = "rss-parser"
+version = "2.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "xmltodict" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/72/f1/8853d9808f68b4a34a316977f0082906b32e8a2313b6fb3935155fb055a1/rss_parser-2.1.0.tar.gz", hash = "sha256:4a1eb0f69442b9b8f3b8343c053c3a772c8e9a5c8a6a969edadc03800f30b47e", size = 25511 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/66/43fb6a0a1b3be3974e03b3d1182c066cddb6efedd7b3b23609597f962631/rss_parser-2.1.0-py3-none-any.whl", hash = "sha256:193b76f3292657faf85dd11dfe823b9007551fb7722d4363316870e32aff5ced", size = 29816 },
+]
+
+[[package]]
 name = "ruff"
 version = "0.11.2"
 source = { registry = "https://pypi.org/simple" }
@@ -935,6 +948,7 @@ dependencies = [
     { name = "more-itertools" },
     { name = "pydantic" },
     { name = "python-telegram-bot" },
+    { name = "rss-parser" },
     { name = "sentry-sdk" },
 ]
 
@@ -964,6 +978,7 @@ requires-dist = [
     { name = "more-itertools", specifier = ">=10,<11" },
     { name = "pydantic", specifier = "==2.11.*" },
     { name = "python-telegram-bot", specifier = "==22.0" },
+    { name = "rss-parser", specifier = "==2.1.0" },
     { name = "sentry-sdk", specifier = ">=2,<3" },
 ]
 
@@ -1111,6 +1126,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/6a/e1/0122853035b40b3f333bbb25f1939fc1045e21dd518f7f0922b60c156f7c/wrapt-1.17.2-cp313-cp313t-win32.whl", hash = "sha256:13e6afb7fe71fe7485a4550a8844cc9ffbe263c0f1a1eea569bc7091d4898555", size = 37986 },
     { url = "https://files.pythonhosted.org/packages/09/5e/1655cf481e079c1f22d0cabdd4e51733679932718dc23bf2db175f329b76/wrapt-1.17.2-cp313-cp313t-win_amd64.whl", hash = "sha256:eaf675418ed6b3b31c7a989fd007fa7c3be66ce14e5c3b27336383604c9da85c", size = 40750 },
     { url = "https://files.pythonhosted.org/packages/2d/82/f56956041adef78f849db6b289b282e72b55ab8045a75abad81898c28d19/wrapt-1.17.2-py3-none-any.whl", hash = "sha256:b18f2d1533a71f069c7f82d524a52599053d4c7166e9dd374ae2136b7f40f7c8", size = 23594 },
+]
+
+[[package]]
+name = "xmltodict"
+version = "0.13.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/39/0d/40df5be1e684bbaecdb9d1e0e40d5d482465de6b00cbb92b84ee5d243c7f/xmltodict-0.13.0.tar.gz", hash = "sha256:341595a488e3e01a85a9d8911d8912fd922ede5fecc4dce437eb4b6c8d037e56", size = 33813 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/94/db/fd0326e331726f07ff7f40675cd86aa804bfd2e5016c727fa761c934990e/xmltodict-0.13.0-py2.py3-none-any.whl", hash = "sha256:aa89e8fd76320154a40d19a0df04a4695fb9dc5ba977cbb68ab3e4eb225e7852", size = 9971 },
 ]
 
 [[package]]
