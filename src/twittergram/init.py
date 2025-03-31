@@ -9,7 +9,13 @@ from injector import Injector, Module, provider
 
 from twittergram.application import Application, ports, repos
 from twittergram.application.model import State
-from twittergram.config import Config, ConfigMapStateConfig, RedditConfig, SentryConfig
+from twittergram.config import (
+    Config,
+    ConfigMapStateConfig,
+    RedditConfig,
+    RssConfig,
+    SentryConfig,
+)
 from twittergram.infrastructure.adapters import (
     bluesky_reader,
     html_sanitizer,
@@ -17,6 +23,7 @@ from twittergram.infrastructure.adapters import (
     mastodon_reader,
     media_downloader,
     reddit_reader,
+    rss_reader,
     telegram_uploader,
     xcode_release_reader,
 )
@@ -165,6 +172,10 @@ class PortsModule(Module):
     @provider
     def provide_reddit_reader(self, config: RedditConfig) -> ports.RedditReader:
         return reddit_reader.PrawRedditReader(config)
+
+    @provider
+    def provide_rss_reader(self, config: RssConfig) -> ports.RssReader:
+        return rss_reader.RssParserRssReader(config)
 
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
