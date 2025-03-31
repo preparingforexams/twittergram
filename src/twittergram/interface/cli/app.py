@@ -10,7 +10,7 @@ import click
 from injector import inject
 
 from twittergram.application import Application, repos
-from twittergram.domain.model import state
+from twittergram.application.model import state
 from twittergram.init import initialize
 
 _LOG = logging.getLogger(__name__)

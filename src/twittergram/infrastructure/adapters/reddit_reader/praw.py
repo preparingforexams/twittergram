@@ -3,9 +3,9 @@ from datetime import UTC, datetime
 
 import asyncpraw
 
+from twittergram.application.model import URL, RedditPost
 from twittergram.application.ports import RedditReader
 from twittergram.config import RedditConfig
-from twittergram.domain.model import URL, RedditPost
 
 
 class PrawRedditReader(RedditReader):

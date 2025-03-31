@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 
 
 class MediaType(Enum):
@@ -13,3 +14,10 @@ class Medium:
     type: MediaType
     id: str
     url: str
+
+
+@dataclass(frozen=True)
+class MediaFile:
+    medium: Medium
+    path: Path
+    mime_type: str

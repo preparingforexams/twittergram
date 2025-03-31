@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from injector import inject
 
 from twittergram.application import ports, repos
+from twittergram.application.model import MediaType, Medium, RedditPost, RedditState
 from twittergram.config import RedditConfig
-from twittergram.domain.model import MediaType, Medium, RedditPost, RedditState
 
 _LOG = logging.getLogger(__name__)
 

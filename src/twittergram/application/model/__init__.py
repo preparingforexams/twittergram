@@ -2,7 +2,7 @@
 
 from .bluesky import BlueskyPost, NamedUrl
 from .mail import Mail
-from .media import MediaType, Medium
+from .media import MediaFile, MediaType, Medium
 from .reddit import RedditPost
 from .state import (
     BlueskyState,

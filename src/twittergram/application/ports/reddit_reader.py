@@ -1,7 +1,7 @@
 import abc
 from collections.abc import AsyncIterable
 
-from twittergram.domain.model import RedditPost
+from twittergram.application.model import RedditPost
 
 
 class RedditReader(abc.ABC):

@@ -9,10 +9,9 @@ import telegram
 from telegram.constants import ParseMode
 from telegram.error import RetryAfter
 
+from twittergram.application.model import MediaFile, MediaType
 from twittergram.application.ports import TelegramUploader
 from twittergram.config import TelegramConfig
-from twittergram.domain.model import MediaType
-from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)
 T = TypeVar("T")

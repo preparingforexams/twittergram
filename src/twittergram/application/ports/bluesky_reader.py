@@ -1,7 +1,7 @@
 import abc
 from collections.abc import AsyncIterable
 
-from twittergram.domain.model import BlueskyPost
+from twittergram.application.model import BlueskyPost
 
 
 class BlueskyReader(abc.ABC):

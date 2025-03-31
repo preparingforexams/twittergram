@@ -1,6 +1,6 @@
 import abc
 
-from twittergram.domain.model.mail import Mail
+from twittergram.application.model.mail import Mail
 
 
 class MailReader(abc.ABC):

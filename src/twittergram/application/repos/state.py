@@ -1,7 +1,7 @@
 import abc
 from typing import TypeVar
 
-from twittergram.domain.model import State
+from twittergram.application.model import State
 
 T = TypeVar("T", bound=State)
 

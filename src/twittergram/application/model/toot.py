@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from twittergram.domain.model.media import Medium
+from twittergram.application.model.media import Medium
 
 
 @dataclass(frozen=True)

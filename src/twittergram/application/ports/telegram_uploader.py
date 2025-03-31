@@ -1,6 +1,6 @@
 import abc
 
-from twittergram.domain.value_objects import MediaFile
+from twittergram.application.model import MediaFile
 
 
 class TelegramUploader(abc.ABC):

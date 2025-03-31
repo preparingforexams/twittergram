@@ -1,8 +1,7 @@
 import abc
 import logging
 
-from twittergram.domain.model import Medium
-from twittergram.domain.value_objects import MediaFile
+from twittergram.application.model import MediaFile, Medium
 
 _LOG = logging.getLogger(__name__)
 
