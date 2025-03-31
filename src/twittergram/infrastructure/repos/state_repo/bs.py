@@ -4,9 +4,9 @@ from typing import Any, cast
 
 from bs_state import StateStorage
 
+from twittergram.application.model import State
 from twittergram.application.repos import StateRepo
 from twittergram.application.repos.state import T
-from twittergram.domain.model import State
 
 type StorageLoader = Callable[[State], Awaitable[StateStorage[State]]]
 

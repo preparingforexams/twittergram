@@ -1,7 +1,7 @@
 import abc
 from collections.abc import AsyncIterable
 
-from twittergram.domain.model import XcodeRelease
+from twittergram.application.model import XcodeRelease
 
 
 class XcodeReleaseReader(abc.ABC):

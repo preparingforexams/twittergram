@@ -1,7 +1,7 @@
 import abc
 from collections.abc import AsyncIterable
 
-from twittergram.domain.model import Toot
+from twittergram.application.model import Toot
 
 
 class MastodonReader(abc.ABC):

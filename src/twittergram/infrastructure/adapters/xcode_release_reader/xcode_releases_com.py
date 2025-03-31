@@ -5,8 +5,8 @@ from typing import Any, cast
 from httpx import AsyncClient, RequestError
 
 from twittergram.application.exceptions.io import IoException
+from twittergram.application.model import URL, XcodeRelease
 from twittergram.application.ports import XcodeReleaseReader
-from twittergram.domain.model import URL, XcodeRelease
 
 
 class XcrXcodeReleaseReader(XcodeReleaseReader):

@@ -10,9 +10,9 @@ from atproto_client.models.app.bsky.embed.external import Main as ExternalEmbed
 from atproto_client.models.app.bsky.embed.images import Main as ImageEmbed
 
 from twittergram.application.exceptions.io import IoException
+from twittergram.application.model import URL, BlueskyPost, MediaType, Medium, NamedUrl
 from twittergram.application.ports import BlueskyReader
 from twittergram.config import BlueskyConfig
-from twittergram.domain.model import URL, BlueskyPost, MediaType, Medium, NamedUrl
 
 _LOG = logging.getLogger(__name__)
 

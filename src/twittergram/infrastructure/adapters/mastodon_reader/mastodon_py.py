@@ -6,9 +6,9 @@ from mastodon import Mastodon
 from mastodon import return_types as mastotypes
 
 from twittergram.application.exceptions.io import IoException
+from twittergram.application.model import MediaType, Medium, Toot
 from twittergram.application.ports import MastodonReader
 from twittergram.config import MastodonConfig
-from twittergram.domain.model import MediaType, Medium, Toot
 
 _LOG = logging.getLogger(__name__)
 

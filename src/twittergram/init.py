@@ -8,8 +8,8 @@ from bs_state import StateStorage
 from injector import Injector, Module, provider
 
 from twittergram.application import Application, ports, repos
+from twittergram.application.model import State
 from twittergram.config import Config, ConfigMapStateConfig, RedditConfig, SentryConfig
-from twittergram.domain.model import State
 from twittergram.infrastructure.adapters import (
     bluesky_reader,
     html_sanitizer,

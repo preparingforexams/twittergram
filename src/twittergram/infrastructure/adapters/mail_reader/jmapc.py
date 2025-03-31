@@ -25,9 +25,9 @@ from jmapc.methods import (
 )
 
 from twittergram.application.exceptions.io import IoException
+from twittergram.application.model import Mail
 from twittergram.application.ports import MailReader
 from twittergram.config import MailConfig
-from twittergram.domain.model import Mail
 
 _LOG = logging.getLogger(__name__)
 

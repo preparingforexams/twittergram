@@ -9,9 +9,8 @@ from httpx import AsyncClient
 
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
+from twittergram.application.model import MediaFile, MediaType, Medium
 from twittergram.application.ports import MediaDownloader
-from twittergram.domain.model import MediaType, Medium
-from twittergram.domain.value_objects import MediaFile
 
 _LOG = logging.getLogger(__name__)
 

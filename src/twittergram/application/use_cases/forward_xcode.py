@@ -3,9 +3,8 @@ from dataclasses import dataclass
 
 from injector import inject
 
-from twittergram.application import ports, repos
-from twittergram.domain import model
-from twittergram.domain.model import XcodeState
+from twittergram.application import model, ports, repos
+from twittergram.application.model import XcodeState
 
 _LOG = logging.getLogger(__name__)
 

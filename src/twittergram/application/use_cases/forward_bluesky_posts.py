@@ -5,7 +5,7 @@ from datetime import datetime
 from injector import inject
 
 from twittergram.application import ports, repos
-from twittergram.domain.model import BlueskyPost, BlueskyState
+from twittergram.application.model import BlueskyPost, BlueskyState
 
 _LOG = logging.getLogger(__name__)
 
