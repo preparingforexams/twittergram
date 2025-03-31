@@ -20,6 +20,10 @@ class Application:
         return self._injector.get(use_cases.ForwardRedditPosts)
 
     @property
+    def forward_rss_feed(self) -> use_cases.ForwardRssFeed:
+        return self._injector.get(use_cases.ForwardRssFeed)
+
+    @property
     def forward_toots(self) -> use_cases.ForwardToots:
         return self._injector.get(use_cases.ForwardToots)
 

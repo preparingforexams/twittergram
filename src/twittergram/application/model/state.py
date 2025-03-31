@@ -51,6 +51,15 @@ class RedditState(State):
         return cls(last_post_time=None)
 
 
+class RssState(State):
+    last_item_id: str | None
+    last_item_time: datetime | None = None
+
+    @classmethod
+    def initial(cls) -> Self:
+        return cls(last_item_id=None, last_item_time=None)
+
+
 class XcodeState(State):
     last_release_build: str | None
 

@@ -144,6 +144,21 @@ class RedditConfig:
         )
 
 
+@dataclass(frozen=True, kw_only=True)
+class RssConfig:
+    feed_url: str
+
+    @classmethod
+    def from_env(cls, env: Env) -> Self | None:
+        env = env.scoped("RSS_")
+        try:
+            return cls(
+                feed_url=env.get_string("FEED_URL", required=True),
+            )
+        except ValueError:
+            return None
+
+
 @dataclass
 class ConfigMapStateConfig:
     namespace: str
@@ -221,6 +236,7 @@ class Config:
     mail: MailConfig | None
     mastodon: MastodonConfig | None
     reddit: RedditConfig | None
+    rss: RssConfig | None
     sanitizer: HtmlSanitizerConfig
     sentry: SentryConfig
     state: StateConfig
@@ -235,6 +251,7 @@ class Config:
             mail=MailConfig.from_env(env),
             mastodon=MastodonConfig.from_env(env),
             reddit=RedditConfig.from_env(env),
+            rss=RssConfig.from_env(env),
             sanitizer=HtmlSanitizerConfig.from_env(env),
             sentry=SentryConfig.from_env(env),
             state=StateConfig.from_env(env),

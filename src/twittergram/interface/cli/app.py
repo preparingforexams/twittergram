@@ -51,6 +51,12 @@ def forward_reddit_posts(app: Application) -> None:
 
 @main.command
 @click.pass_obj
+def forward_rss_feed(app: Application) -> None:
+    _run_command(app.forward_rss_feed())
+
+
+@main.command
+@click.pass_obj
 def forward_toots(app: Application) -> None:
     _run_command(app.forward_toots())
 
