@@ -15,6 +15,7 @@ spec:
   suspend: {{ or $.Values.debug (not $.Values.isEnabled) }}
   jobTemplate:
     spec:
+      backoffLimit: 1
       template:
         spec:
           securityContext:
