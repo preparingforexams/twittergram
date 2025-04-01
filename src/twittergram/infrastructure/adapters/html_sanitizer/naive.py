@@ -13,10 +13,9 @@ class NaiveHtmlSanitizer(HtmlSanitizer):
             .replace("<p>", "\n\n")
             .replace("</p>", "")
             .replace("</span>", "")
-            .strip()
         )
 
         simple_sanitized = self.IMG.sub("", simple_sanitized)
         simple_sanitized = self.SPAN.sub("", simple_sanitized)
 
-        return simple_sanitized
+        return simple_sanitized.strip()
