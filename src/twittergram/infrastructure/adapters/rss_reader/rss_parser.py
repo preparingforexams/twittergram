@@ -36,14 +36,14 @@ class RssParserRssReader(RssReader):
             raw_pub_date = cast(str, cast(Tag[str], item.pub_date).content)
             pub_date = validate_dt_or_str(raw_pub_date)
 
-            synopsis: str | None = None
-            if synopsis_tag := item.synopsis:
-                synopsis = cast(str, synopsis_tag.content)
+            description: str | None = None
+            if description_tag := item.description:
+                description = cast(str, description_tag.content)
 
             yield RssItem(
                 id=cast(str, cast(Tag[str], item.guid).content),
                 title=cast(str, item.title.content),
-                synopsis=synopsis,
+                synopsis=description,
                 published_at=pub_date,
                 links=[link.content for link in item.links],
             )
