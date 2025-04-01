@@ -3,6 +3,8 @@ from typing import cast
 
 import httpx
 from rss_parser import RSSParser
+from rss_parser.models.rss import RSS
+from rss_parser.models.rss.channel import Channel
 from rss_parser.models.rss.item import Item as ParserRssItem
 from rss_parser.models.types.date import validate_dt_or_str
 from rss_parser.models.types.tag import Tag
@@ -27,9 +29,10 @@ class RssParserRssReader(RssReader):
         if not response.is_success:
             raise IoException(f"Got unsuccessful response {response.status_code}")
 
-        feed = RSSParser.parse(response.text)
-        for item in feed.channel.items:
-            assert isinstance(item, ParserRssItem)
+        feed = cast(RSS, RSSParser.parse(response.text, schema=RSS))
+        channel = cast(Channel, feed.channel.content)
+        for item_tag in cast(list[Tag[ParserRssItem]], channel.items):
+            item = cast(ParserRssItem, item_tag.content)
             raw_pub_date = cast(str, cast(Tag[str], item.pub_date).content)
             pub_date = validate_dt_or_str(raw_pub_date)
 
