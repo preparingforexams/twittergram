@@ -46,6 +46,16 @@ cron:
         env:
           REDDIT_SOURCE_USERNAME: schneckedertzchen
           REDDIT_SUBREDDIT_FILTER: DeutscheComics
+    rss:
+      useCase: forward-rss-feed
+      hasConfigMap: false
+      hasSecret: false
+      configs:
+        - id: scaleway
+          schedule: "23 */2 * * *"
+          targetChat: "-1002673102174"
+          env:
+            RSS_FEED_URL: https://www.scaleway.com/en/docs/changelog/rss.xml
     mastodon:
       useCase: forward-toots
       hasConfigMap: true
