@@ -4,6 +4,7 @@ from twittergram.application.ports import HtmlSanitizer
 
 
 class NaiveHtmlSanitizer(HtmlSanitizer):
+    IMG = re.compile(r"<img[^>]*>")
     SPAN = re.compile(r"<span[^>]*>")
 
     async def sanitize(self, raw: str) -> str:
@@ -15,4 +16,7 @@ class NaiveHtmlSanitizer(HtmlSanitizer):
             .strip()
         )
 
-        return self.SPAN.sub("", simple_sanitized)
+        simple_sanitized = self.IMG.sub("", simple_sanitized)
+        simple_sanitized = self.SPAN.sub("", simple_sanitized)
+
+        return simple_sanitized
