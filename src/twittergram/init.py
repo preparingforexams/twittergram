@@ -13,7 +13,6 @@ from twittergram.config import (
     Config,
     ConfigMapStateConfig,
     RedditConfig,
-    RssConfig,
     SentryConfig,
 )
 from twittergram.infrastructure.adapters import (
@@ -174,8 +173,11 @@ class PortsModule(Module):
         return reddit_reader.PrawRedditReader(config)
 
     @provider
-    def provide_rss_reader(self, config: RssConfig) -> ports.RssReader:
-        return rss_reader.RssParserRssReader(config)
+    def provide_rss_reader(self) -> ports.RssReader:
+        if rss_config := self.config.rss:
+            return rss_reader.RssParserRssReader(rss_config)
+
+        raise ValueError("RSS config is missing")
 
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
