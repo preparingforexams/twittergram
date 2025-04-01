@@ -24,6 +24,7 @@ The following message sources are supported:
 - A mailbox/folder in an email account with [JMAP protocol](https://jmap.io/) support
   ([see below](#email))
 - A Reddit user's submissions in a specific subreddit ([see below](#reddit))
+- An RSS feed ([see below](#rss))
 - Notifications about new Xcode releases ([see below](#xcode-releases))
 
 ## Usage
@@ -173,6 +174,16 @@ verification steps (at time of writing, October 2023).
 | `REDDIT_SOURCE_USERNAME`  |     `sellyourcomputer`     | (**required**) The username of the user you want to forward posts/submissions from.     |
 | `REDDIT_SUBREDDIT_FILTER` |    `extrafabulousomics`    | (optional) Only forward the post if the user submitted it to this subreddit.            |
 |    `REDDIT_USER_AGENT`    |       `twittergram`        | (optional) The user agent string to use when calling Reddit. Defaults to `twittergram`. |
+
+### RSS
+
+Twittergram can forward items of an RSS feed.
+
+#### RSS Configuration Options
+
+|      Key       |         Example Value         | Description                                  |
+|:--------------:|:-----------------------------:|----------------------------------------------|
+| `RSS_FEED_URL` | `https://example.com/rss.xml` | (**required**) The URL for the RSS feed XML. |
 
 ### Xcode Releases
 
