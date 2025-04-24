@@ -31,10 +31,15 @@ cron:
         env:
           MAIL_MAILBOX_NAME: Dart News
       - id: flutter
-        schedule: "0 9,20 * * *"
+        schedule: "10 9,20 * * *"
         targetChat: "-1001893015795"
         env:
           MAIL_MAILBOX_NAME: Flutter Announcements
+      - id: kubernetes
+        schedule: " 20,20 * * *"
+        targetChat: "-1002512762866"
+        env:
+          MAIL_MAILBOX_NAME: Kubernetes Announcements
     reddit:
       useCase: forward-reddit-posts
       hasConfigMap: true
