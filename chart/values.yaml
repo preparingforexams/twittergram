@@ -36,7 +36,7 @@ cron:
         env:
           MAIL_MAILBOX_NAME: Flutter Announcements
       - id: kubernetes
-        schedule: " 20,20 * * *"
+        schedule: " 20 9,20 * * *"
         targetChat: "-1002512762866"
         env:
           MAIL_MAILBOX_NAME: Kubernetes Announcements
