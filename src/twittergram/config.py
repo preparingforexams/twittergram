@@ -31,7 +31,7 @@ class BlueskyConfig:
         scoped = env.scoped("BLUESKY_")
 
         try:
-            user = scoped.get_string("USER", required=True)
+            user = scoped.get_string("USERNAME", required=True)
             password = scoped.get_string("PASSWORD", required=True)
             author_id = scoped.get_string("AUTHOR_ID", required=True)
         except ValueError:
