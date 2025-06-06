@@ -27,6 +27,7 @@ dependencies = [
     "python-telegram-bot ==22.1",
     "rss-parser ==2.1.0",
     "sentry-sdk >=2, <3",
+    "uvloop ==0.21.*",
 ]
 
 [dependency-groups]
