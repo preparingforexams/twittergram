@@ -1,6 +1,14 @@
-from injector import Injector
+from dataclasses import dataclass
 
-from twittergram.application import use_cases
+from injector import Injector, inject
+
+from twittergram.application import repos, use_cases
+
+
+@inject
+@dataclass
+class _StateAccess:
+    repo: repos.StateRepo
 
 
 class Application:
@@ -30,3 +38,7 @@ class Application:
     @property
     def forward_xcode(self) -> use_cases.ForwardXcode:
         return self._injector.get(use_cases.ForwardXcode)
+
+    async def close(self) -> None:
+        state_access = self._injector.get(_StateAccess)
+        await state_access.repo.close()
