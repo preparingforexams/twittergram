@@ -2,7 +2,7 @@ import asyncio
 import logging
 from collections.abc import Awaitable, Callable
 from pathlib import Path
-from typing import TypeVar, cast
+from typing import cast
 
 import aiofiles
 import telegram
@@ -14,10 +14,9 @@ from twittergram.application.ports import TelegramUploader
 from twittergram.config import TelegramConfig
 
 _LOG = logging.getLogger(__name__)
-T = TypeVar("T")
 
 
-async def _auto_retry(func: Callable[[], Awaitable[T]]) -> T:
+async def _auto_retry[T](func: Callable[[], Awaitable[T]]) -> T:
     try:
         return await func()
     except RetryAfter as e:
