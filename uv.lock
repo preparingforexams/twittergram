@@ -201,7 +201,7 @@ wheels = [
 [[package]]
 name = "bs-config"
 version = "1.1.1"
-source = { registry = "https://pypi.bjoernpetersen.net/" }
+source = { registry = "https://pypi.bjoernpetersen.net/simple" }
 sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_config-1.1.1.tar.gz", hash = "sha256:4aa495f29a9456af762d8375d4138270bf538a50b52128659646c7359f487e6f" }
 wheels = [
     { url = "https://pypi.bjoernpetersen.net/packages/bs_config-1.1.1-py3-none-any.whl", hash = "sha256:00d480c9d3f2f0494a54f2d1da860dfedd4204119dde41db63c630baa4fd57b9" },
@@ -215,7 +215,7 @@ dotenv = [
 [[package]]
 name = "bs-state"
 version = "2.2.0"
-source = { registry = "https://pypi.bjoernpetersen.net/" }
+source = { registry = "https://pypi.bjoernpetersen.net/simple" }
 dependencies = [
     { name = "pydantic" },
 ]
@@ -1010,8 +1010,8 @@ requires-dist = [
     { name = "aiofiles" },
     { name = "asyncpraw", specifier = ">=7,<8" },
     { name = "atproto", specifier = "==0.0.61" },
-    { name = "bs-config", extras = ["dotenv"], specifier = "==1.1.1", index = "https://pypi.bjoernpetersen.net/" },
-    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==2.2.0", index = "https://pypi.bjoernpetersen.net/" },
+    { name = "bs-config", extras = ["dotenv"], specifier = "==1.1.1", index = "https://pypi.bjoernpetersen.net/simple" },
+    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==2.2.0", index = "https://pypi.bjoernpetersen.net/simple" },
     { name = "click", specifier = ">=8,<9" },
     { name = "deprecated", specifier = ">=1,<2" },
     { name = "httpx" },
