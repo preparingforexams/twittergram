@@ -214,14 +214,14 @@ dotenv = [
 
 [[package]]
 name = "bs-state"
-version = "2.2.0"
+version = "2.2.1"
 source = { registry = "https://pypi.bjoernpetersen.net/simple" }
 dependencies = [
     { name = "pydantic" },
 ]
-sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_state-2.2.0.tar.gz", hash = "sha256:eb9324150d360960ff082d301b6341114b3cac6ef799c455b3eb90757b2d8b80" }
+sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_state-2.2.1.tar.gz", hash = "sha256:9bac1466eda0b78b1171bb0d475374ee1a68ddea0e4be001d3de423e8a897a28" }
 wheels = [
-    { url = "https://pypi.bjoernpetersen.net/packages/bs_state-2.2.0-py3-none-any.whl", hash = "sha256:bac7859f9b726ba7e863aaa255e9febb57c0d8af8d5cd5cd9b632725f6555e1a" },
+    { url = "https://pypi.bjoernpetersen.net/packages/bs_state-2.2.1-py3-none-any.whl", hash = "sha256:ce25f3cbe5642a97cb41252db52d9fad4ed98ab02eb1efc3dc070aba4326ad6a" },
 ]
 
 [package.optional-dependencies]
@@ -1011,7 +1011,7 @@ requires-dist = [
     { name = "asyncpraw", specifier = ">=7,<8" },
     { name = "atproto", specifier = "==0.0.61" },
     { name = "bs-config", extras = ["dotenv"], specifier = "==1.1.1", index = "https://pypi.bjoernpetersen.net/simple" },
-    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==2.2.0", index = "https://pypi.bjoernpetersen.net/simple" },
+    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==2.2.1", index = "https://pypi.bjoernpetersen.net/simple" },
     { name = "click", specifier = ">=8,<9" },
     { name = "deprecated", specifier = ">=1,<2" },
     { name = "httpx" },
