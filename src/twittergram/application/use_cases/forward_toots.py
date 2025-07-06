@@ -1,11 +1,11 @@
+import asyncio
 import logging
 from dataclasses import dataclass
 
 from injector import inject
 
 from twittergram.application import ports, repos
-from twittergram.application.exceptions.media import UnsupportedMediaTypeException
-from twittergram.application.model import MastodonState, MediaFile, Toot
+from twittergram.application.model import MastodonState, MediaFile, Medium, Toot
 
 _LOG = logging.getLogger(__name__)
 
@@ -13,11 +13,32 @@ _LOG = logging.getLogger(__name__)
 @inject
 @dataclass
 class ForwardToots:
-    downloader: ports.MediaDownloader
+    downloader: list[ports.MediaDownloader]
     sanitizer: ports.HtmlSanitizer
     reader: ports.MastodonReader
     state_repo: repos.StateRepo
     uploader: ports.TelegramUploader
+
+    async def _download_media(self, media: list[Medium]) -> list[MediaFile]:
+        tasks = []
+        async with asyncio.TaskGroup() as tg:
+            for medium in media:
+                for downloader in self.downloader:
+                    if not downloader.is_supported(medium):
+                        continue
+
+                    task = tg.create_task(downloader.download(medium))
+                    tasks.append(task)
+                    break
+                else:
+                    _LOG.warning("No downloader supports %s", medium)
+
+        result = []
+
+        for task in tasks:
+            result.extend(task.result())
+
+        return result
 
     async def __call__(self) -> None:
         _LOG.debug("Looking up user ID for Mastodon source account")
@@ -44,22 +65,14 @@ class ForwardToots:
         # Reverse reverse chronological
         toots.reverse()
 
-        media_by_toot_id: dict[int, list[MediaFile] | None] = {}
+        media_by_toot_id: dict[int, list[MediaFile]] = {}
 
         _LOG.info("Found %d new toots, downloading media now", len(toots))
 
         for toot in toots:
             media = toot.media_attachments
-            if media:
-                try:
-                    files = await self.downloader.download(media)
-                except UnsupportedMediaTypeException as e:
-                    _LOG.warning("Could not download medium", exc_info=e)
-                    media_by_toot_id[toot.id] = None
-                else:
-                    media_by_toot_id[toot.id] = files
-            else:
-                media_by_toot_id[toot.id] = []
+            media_files = await self._download_media(media)
+            media_by_toot_id[toot.id] = media_files
 
         _LOG.info("Forwarding toots")
         try:
@@ -78,7 +91,7 @@ class ForwardToots:
                             use_html=True,
                         )
                     else:
-                        _LOG.info("Dropping toot %d with None media files", toot.id)
+                        _LOG.info("Dropping toot %d with no media files", toot.id)
                 elif sanitized_text:
                     await self.uploader.send_text_message(
                         sanitized_text,

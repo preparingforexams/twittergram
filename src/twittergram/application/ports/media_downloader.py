@@ -8,5 +8,9 @@ _LOG = logging.getLogger(__name__)
 
 class MediaDownloader(abc.ABC):
     @abc.abstractmethod
-    async def download(self, media: list[Medium]) -> list[MediaFile]:
+    async def is_supported(self, medium: Medium) -> bool:
+        pass
+
+    @abc.abstractmethod
+    async def download(self, medium: Medium) -> list[MediaFile]:
         pass

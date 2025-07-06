@@ -4,7 +4,13 @@ from dataclasses import dataclass
 from injector import inject
 
 from twittergram.application import ports, repos
-from twittergram.application.model import MediaType, Medium, RedditPost, RedditState
+from twittergram.application.model import (
+    MediaFile,
+    MediaType,
+    Medium,
+    RedditPost,
+    RedditState,
+)
 from twittergram.config import RedditConfig
 
 _LOG = logging.getLogger(__name__)
@@ -14,7 +20,7 @@ _LOG = logging.getLogger(__name__)
 @dataclass
 class ForwardRedditPosts:
     config: RedditConfig
-    media_downloader: ports.MediaDownloader
+    media_downloader: list[ports.MediaDownloader]
     reddit_reader: ports.RedditReader
     state_repo: repos.StateRepo
     telegram_uploader: ports.TelegramUploader
@@ -45,21 +51,27 @@ class ForwardRedditPosts:
         posts.reverse()
 
         _LOG.info("Downloading media")
-        media = [
-            Medium(type=MediaType.PHOTO, id=post.id, url=str(post.url))
-            for post in posts
-        ]
-        media_files = await self.media_downloader.download(media)
+        media_files_by_post_id: dict[str, list[MediaFile]] = {}
+        for post in posts:
+            medium = Medium(type=MediaType.PHOTO, id=post.id, url=str(post.url))
+            for downloader in self.media_downloader:
+                if not downloader.is_supported(medium):
+                    continue
 
-        media_file_by_post_id = {file.medium.id: file for file in media_files}
+                media_files = await downloader.download(medium)
+                media_files_by_post_id[post.id] = media_files
+                break
+            else:
+                _LOG.warning("No downloader supports %s", medium)
+                media_files_by_post_id[post.id] = []
 
         _LOG.info("Forwarding %d posts", len(posts))
         try:
             for post in posts:
-                media_file = media_file_by_post_id.get(post.id)
-                if media_file is not None:
-                    await self.telegram_uploader.send_document_message(
-                        document=media_file,
+                media_files = media_files_by_post_id[post.id]
+                if media_files:
+                    await self.telegram_uploader.send_documents_message(
+                        documents=media_files,
                         caption=post.title,
                     )
                 state.last_post_time = post.created_at
