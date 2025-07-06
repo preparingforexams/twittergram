@@ -898,15 +898,15 @@ wheels = [
 
 [[package]]
 name = "rss-parser"
-version = "2.1.0"
+version = "2.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
     { name = "xmltodict" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/72/f1/8853d9808f68b4a34a316977f0082906b32e8a2313b6fb3935155fb055a1/rss_parser-2.1.0.tar.gz", hash = "sha256:4a1eb0f69442b9b8f3b8343c053c3a772c8e9a5c8a6a969edadc03800f30b47e", size = 25511, upload-time = "2024-09-26T10:58:59.582Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/43/98/2166329e8a6e5a76f7749533c20f0574ef81b3e170a09266ed4b06a11c8a/rss_parser-2.1.1.tar.gz", hash = "sha256:8a927d9582b2687a0946370d7957b29d87ad5e722141c36dee4f0df889c54479", size = 24769, upload-time = "2025-07-06T20:04:37.984Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d1/66/43fb6a0a1b3be3974e03b3d1182c066cddb6efedd7b3b23609597f962631/rss_parser-2.1.0-py3-none-any.whl", hash = "sha256:193b76f3292657faf85dd11dfe823b9007551fb7722d4363316870e32aff5ced", size = 29816, upload-time = "2024-09-26T10:58:58.059Z" },
+    { url = "https://files.pythonhosted.org/packages/72/7e/fbec67da2beba016a55c8cd58ab28807ef442368cd970e2eb05e7ce4408d/rss_parser-2.1.1-py3-none-any.whl", hash = "sha256:9f604f492828ce36da38f740d250baee443107ccee5507ca5b71f52bb885d2e9", size = 29853, upload-time = "2025-07-06T20:04:36.725Z" },
 ]
 
 [[package]]
@@ -1025,7 +1025,7 @@ requires-dist = [
     { name = "more-itertools", specifier = ">=10,<11" },
     { name = "pydantic", specifier = "==2.11.*" },
     { name = "python-telegram-bot", specifier = "==22.2" },
-    { name = "rss-parser", specifier = "==2.1.0" },
+    { name = "rss-parser", specifier = "==2.1.1" },
     { name = "sentry-sdk", specifier = ">=2,<3" },
     { name = "uvloop", specifier = "==0.21.*" },
 ]
