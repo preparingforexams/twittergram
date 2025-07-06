@@ -5,7 +5,7 @@ from pathlib import Path
 
 import aiofiles
 from aiofiles.os import makedirs
-from httpx import AsyncClient
+from httpx import AsyncClient, URL
 
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
@@ -25,6 +25,17 @@ class HttpMediaDownloader(MediaDownloader):
             timeout=120,
             follow_redirects=True,
         )
+
+    async def is_supported(self, medium: Medium) -> bool:
+        if not  medium.type == MediaType.PHOTO:
+            return False
+
+        url = URL( medium.url )
+        if url.host == "www.reddit.com" and url.path.startswith("/gallery/"):
+            return False
+
+        return True
+
 
     async def download(self, media: list[Medium]) -> list[MediaFile]:
         for medium in media:
