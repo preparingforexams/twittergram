@@ -4,6 +4,8 @@ metadata:
   name: base
 data:
   DOWNLOAD_DIR: "/tmp/twittergram"
+  # What a silly way to do opt-ins to breaking changes
+  PTB_TIMEDELTA: "true"
   TELEGRAM_UPLOAD_CHAT_ID: "1259947317"
   STATE_TYPE: "configmap"
   STATE_CONFIG_MAP_NAMESPACE: "{{ .Release.Namespace }}"
