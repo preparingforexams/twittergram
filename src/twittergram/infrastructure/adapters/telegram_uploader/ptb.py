@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from collections.abc import Awaitable, Callable
+from datetime import timedelta
 from pathlib import Path
 from typing import cast
 
@@ -24,7 +25,8 @@ async def _auto_retry[T](func: Callable[[], Awaitable[T]]) -> T:
             "Received RetryAfter exception, waiting for %d seconds",
             e.retry_after,
         )
-        await asyncio.sleep(e.retry_after)
+        retry_after = cast(timedelta, e.retry_after)
+        await asyncio.sleep(retry_after.total_seconds())
 
     return await func()
 
