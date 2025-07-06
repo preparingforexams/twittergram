@@ -13,9 +13,9 @@ class TelegramUploader(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def send_document_message(
+    async def send_documents_message(
         self,
-        document: MediaFile,
+        documents: list[MediaFile],
         *,
         caption: str | None,
         use_html: bool = False,

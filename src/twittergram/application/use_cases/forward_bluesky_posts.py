@@ -1,11 +1,13 @@
+import asyncio
 import logging
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import datetime
 
 from injector import inject
 
 from twittergram.application import ports, repos
-from twittergram.application.model import BlueskyPost, BlueskyState
+from twittergram.application.model import BlueskyPost, BlueskyState, MediaFile, Medium
 
 _LOG = logging.getLogger(__name__)
 
@@ -13,7 +15,7 @@ _LOG = logging.getLogger(__name__)
 @inject
 @dataclass
 class ForwardBlueskyPosts:
-    downloader: ports.MediaDownloader
+    downloader: list[ports.MediaDownloader]
     sanitizer: ports.HtmlSanitizer
     reader: ports.BlueskyReader
     state_repo: repos.StateRepo
@@ -53,7 +55,7 @@ class ForwardBlueskyPosts:
         )
         if post.images:
             _LOG.info("Downloading images")
-            media_files = await self.downloader.download(post.images)
+            media_files = await self._download_images(post.images)
         else:
             media_files = []
         _LOG.info("Sending message")
@@ -103,3 +105,24 @@ class ForwardBlueskyPosts:
                 break
 
         return posts
+
+    async def _download_images(self, images: Iterable[Medium]) -> list[MediaFile]:
+        tasks = []
+        async with asyncio.TaskGroup() as tg:
+            for image in images:
+                for downloader in self.downloader:
+                    if not downloader.is_supported(image):
+                        continue
+
+                    task = tg.create_task(downloader.download(image))
+                    tasks.append(task)
+                    break
+                else:
+                    _LOG.warning("No downloader supports %s", image)
+
+        result = []
+
+        for task in tasks:
+            result.extend(task.result())
+
+        return result

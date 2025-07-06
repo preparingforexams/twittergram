@@ -439,6 +439,18 @@ wheels = [
 ]
 
 [[package]]
+name = "gallery-dl"
+version = "1.29.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a6/3e/e9c024254ff37553d02601205db34fdb854c9b556ee669679702807a50be/gallery_dl-1.29.7.tar.gz", hash = "sha256:5fabac1ca7279420bb3ebff5bff8cee80478f48ffb314a42f4ed580f122c0117", size = 554092, upload-time = "2025-05-23T09:18:13.122Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c1/2e/3942147c2000a03021033124e8e634ac3f4b9e881f6adb0ba184051fd7f2/gallery_dl-1.29.7-py3-none-any.whl", hash = "sha256:63ff7aaed0a2f5013fa9a344f516f92802eaeaa653d0df72a14fa0b5c36e966b", size = 689041, upload-time = "2025-05-23T09:18:09.843Z" },
+]
+
+[[package]]
 name = "h11"
 version = "0.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -987,6 +999,7 @@ dependencies = [
     { name = "bs-state", extra = ["file", "kubernetes"] },
     { name = "click" },
     { name = "deprecated" },
+    { name = "gallery-dl" },
     { name = "httpx" },
     { name = "injector" },
     { name = "jmapc" },
@@ -1018,6 +1031,7 @@ requires-dist = [
     { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==2.2.1", index = "https://pypi.bjoernpetersen.net/simple" },
     { name = "click", specifier = ">=8,<9" },
     { name = "deprecated", specifier = ">=1,<2" },
+    { name = "gallery-dl", specifier = "==1.29.7" },
     { name = "httpx" },
     { name = "injector", specifier = "==0.22.*" },
     { name = "jmapc", specifier = "==0.2.*" },

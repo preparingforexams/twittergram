@@ -5,7 +5,7 @@ from pathlib import Path
 import sentry_sdk
 from bs_config import Env
 from bs_state import StateStorage
-from injector import Injector, Module, provider
+from injector import Injector, Module, multiprovider, provider
 
 from twittergram.application import Application, ports, repos
 from twittergram.application.model import State
@@ -183,16 +183,21 @@ class PortsModule(Module):
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
         return telegram_uploader.PtbTelegramUploader(self.config.telegram)
 
-    @provider
-    def provide_media_downloader(self) -> ports.MediaDownloader:
+    @multiprovider
+    def provide_media_downloader(self) -> list[ports.MediaDownloader]:
         download_directory = self.config.download.download_directory
 
         if not download_directory:
             raise ValueError("Missing download directory")
 
-        return media_downloader.HttpMediaDownloader(
-            Path(download_directory),
-        )
+        return [
+            media_downloader.GalleryDlMediaDownloader(
+                Path(download_directory),
+            ),
+            media_downloader.HttpMediaDownloader(
+                Path(download_directory),
+            ),
+        ]
 
     @provider
     def provide_xcode_release_reader(self) -> ports.XcodeReleaseReader:

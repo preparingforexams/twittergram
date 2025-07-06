@@ -7,6 +7,7 @@ from typing import cast
 
 import aiofiles
 import telegram
+from telegram import InputMediaDocument
 from telegram.constants import ParseMode
 from telegram.error import RetryAfter
 
@@ -125,26 +126,45 @@ class PtbTelegramUploader(TelegramUploader):
                 )
             )
 
-    async def send_document_message(
+    async def send_documents_message(
         self,
-        document: MediaFile,
+        documents: list[MediaFile],
         *,
         caption: str | None,
         use_html: bool = False,
         file_name: str | None = None,
         disable_notification: bool = False,
     ) -> None:
+        if not documents:
+            raise ValueError("No input documents")
+
         chat_id = self.config.target_chat
         async with telegram.Bot(token=self.config.token) as bot:
-            async with aiofiles.open(document.path, "rb") as fd:
-                input_file = telegram.InputFile(
-                    await fd.read(),
-                    filename=file_name or document.path.name,
-                )
+            input_files = []
+            for document in documents:
+                async with aiofiles.open(document.path, "rb") as fd:
+                    input_file = telegram.InputFile(
+                        await fd.read(),
+                        filename=file_name or document.path.name,
+                    )
+                    input_files.append(input_file)
+
+            if len(input_files) == 1:
                 await _auto_retry(
                     lambda: bot.send_document(
                         chat_id=chat_id,
                         document=input_file,
+                        caption=caption,
+                        disable_notification=disable_notification,
+                        parse_mode=ParseMode.HTML if use_html else None,
+                    )
+                )
+            else:
+                media = [InputMediaDocument(input_file) for input_file in input_files]
+                await _auto_retry(
+                    lambda: bot.send_media_group(
+                        chat_id=chat_id,
+                        media=media,
                         caption=caption,
                         disable_notification=disable_notification,
                         parse_mode=ParseMode.HTML if use_html else None,
