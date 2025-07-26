@@ -55,7 +55,7 @@ class ForwardRedditPosts:
         for post in posts:
             medium = Medium(type=MediaType.PHOTO, id=post.id, url=str(post.url))
             for downloader in self.media_downloader:
-                if not downloader.is_supported(medium):
+                if not await downloader.is_supported(medium):
                     continue
 
                 media_files = await downloader.download(medium)
