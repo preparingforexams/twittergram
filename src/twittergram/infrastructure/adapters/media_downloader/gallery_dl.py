@@ -26,6 +26,8 @@ class GalleryDlMediaDownloader(MediaDownloader):
         return False
 
     async def download(self, medium: Medium) -> list[MediaFile]:
+        if not await self.is_supported(medium):
+            raise ValueError("Unsupported medium")
         download_dir = self.directory / medium.id
         gallery = await subprocess.create_subprocess_exec(
             "gallery-dl",
