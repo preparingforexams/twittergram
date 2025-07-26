@@ -111,7 +111,7 @@ class ForwardBlueskyPosts:
         async with asyncio.TaskGroup() as tg:
             for image in images:
                 for downloader in self.downloader:
-                    if not downloader.is_supported(image):
+                    if not await downloader.is_supported(image):
                         continue
 
                     task = tg.create_task(downloader.download(image))
