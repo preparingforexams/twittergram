@@ -24,7 +24,7 @@ class ForwardToots:
         async with asyncio.TaskGroup() as tg:
             for medium in media:
                 for downloader in self.downloader:
-                    if not downloader.is_supported(medium):
+                    if not await downloader.is_supported(medium):
                         continue
 
                     task = tg.create_task(downloader.download(medium))
