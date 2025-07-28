@@ -165,12 +165,23 @@ class PtbTelegramUploader(TelegramUploader):
                     )
                 )
             else:
-                media = [InputMediaDocument(input_file) for input_file in input_files]
+                media = []
+                for index, input_file in enumerate(input_files):
+                    if index == len(input_files) - 1:
+                        doc_caption = caption
+                    else:
+                        doc_caption = None
+
+                    doc = InputMediaDocument(
+                        input_file,
+                        caption=doc_caption,
+                    )
+                    media.append(doc)
+
                 await _auto_retry(
                     lambda: bot.send_media_group(
                         chat_id=chat_id,
                         media=media,
-                        caption=caption,
                         disable_notification=disable_notification,
                         parse_mode=ParseMode.HTML if use_html else None,
                     )
