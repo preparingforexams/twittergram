@@ -141,6 +141,7 @@ class PtbTelegramUploader(TelegramUploader):
         chat_id = self.config.target_chat
         async with telegram.Bot(token=self.config.token) as bot:
             input_files = []
+            is_multi_doc = len(documents) > 1
             for document in documents:
                 async with aiofiles.open(document.path, "rb") as fd:
                     file_bytes = await fd.read()
@@ -150,10 +151,11 @@ class PtbTelegramUploader(TelegramUploader):
                     input_file = telegram.InputFile(
                         file_bytes,
                         filename=file_name or document.path.name,
+                        attach=is_multi_doc,
                     )
                     input_files.append(input_file)
 
-            if len(input_files) == 1:
+            if not is_multi_doc:
                 await _auto_retry(
                     lambda: bot.send_document(
                         chat_id=chat_id,
