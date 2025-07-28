@@ -143,8 +143,12 @@ class PtbTelegramUploader(TelegramUploader):
             input_files = []
             for document in documents:
                 async with aiofiles.open(document.path, "rb") as fd:
+                    file_bytes = await fd.read()
+                    _LOG.info(
+                        "Document %s has %d bytes", document.path, len(file_bytes)
+                    )
                     input_file = telegram.InputFile(
-                        await fd.read(),
+                        file_bytes,
                         filename=file_name or document.path.name,
                     )
                     input_files.append(input_file)
