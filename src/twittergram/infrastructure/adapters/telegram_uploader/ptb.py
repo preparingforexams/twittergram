@@ -132,7 +132,6 @@ class PtbTelegramUploader(TelegramUploader):
         *,
         caption: str | None,
         use_html: bool = False,
-        file_name: str | None = None,
         disable_notification: bool = False,
     ) -> None:
         if not documents:
@@ -150,7 +149,7 @@ class PtbTelegramUploader(TelegramUploader):
                     )
                     input_file = telegram.InputFile(
                         file_bytes,
-                        filename=file_name or document.path.name,
+                        filename=document.path.name,
                         attach=is_multi_doc,
                     )
                     input_files.append(input_file)

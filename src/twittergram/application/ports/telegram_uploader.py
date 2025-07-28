@@ -19,7 +19,6 @@ class TelegramUploader(abc.ABC):
         *,
         caption: str | None,
         use_html: bool = False,
-        file_name: str | None = None,
         disable_notification: bool = False,
     ) -> None:
         pass
