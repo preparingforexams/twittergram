@@ -13,6 +13,7 @@ from twittergram.config import (
     Config,
     ConfigMapStateConfig,
     RedditConfig,
+    RssConfig,
     SentryConfig,
 )
 from twittergram.infrastructure.adapters import (
@@ -59,6 +60,13 @@ class ConfigsModule(Module):
         config = self.config.reddit
         if config is None:
             raise ValueError("Missing Reddit config")
+        return config
+
+    @provider
+    def provide_rss_config(self) -> RssConfig:
+        config = self.config.rss
+        if config is None:
+            raise ValueError("Missing RSS config")
         return config
 
 

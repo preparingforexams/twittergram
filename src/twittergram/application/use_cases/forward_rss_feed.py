@@ -1,11 +1,14 @@
 import logging
+from collections.abc import Sequence
 from dataclasses import dataclass
+from datetime import datetime
 from io import StringIO
 
 from injector import inject
 
 from twittergram.application import ports, repos
 from twittergram.application.model import RssItem, RssState
+from twittergram.config import RssConfig
 
 _LOG = logging.getLogger(__name__)
 
@@ -13,6 +16,7 @@ _LOG = logging.getLogger(__name__)
 @inject
 @dataclass
 class ForwardRssFeed:
+    config: RssConfig
     reader: ports.RssReader
     sanitizer: ports.HtmlSanitizer
     state_repo: repos.StateRepo
@@ -28,24 +32,21 @@ class ForwardRssFeed:
         _LOG.info("Reading RSS items")
         items: list[RssItem] = []
         async for item in self.reader.list_items():
-            if item.id == last_item_id:
-                break
-
-            if last_item_time is not None and item.published_at < last_item_time:
-                _LOG.debug("Stopping collection because older item was encountered")
-                break
-
             items.append(item)
-            if not last_item_time and len(items) == 10:
-                _LOG.debug("Stopping item collection due to missing stop ID")
-                break
+
+        # Reverse reverse chronological
+        if self.config.is_reverse_chronological:
+            items.reverse()
+
+        items = self._filter_items(
+            items,
+            last_item_id=last_item_id,
+            last_item_time=last_item_time,
+        )
 
         if not items:
             _LOG.info("No items found")
             return
-
-        # Reverse reverse chronological
-        items.reverse()
 
         _LOG.info("Forwarding items")
         try:
@@ -71,3 +72,27 @@ class ForwardRssFeed:
         finally:
             _LOG.debug("Storing state")
             await self.state_repo.store_state(state)
+
+    @staticmethod
+    def _filter_items(
+        items: Sequence[RssItem],
+        *,
+        last_item_id: str | None,
+        last_item_time: datetime | None,
+    ) -> list[RssItem]:
+        result = []
+
+        for item in reversed(items):
+            if item.id == last_item_id:
+                break
+
+            if last_item_time is not None and item.published_at < last_item_time:
+                _LOG.debug("Stopping collection because older item was encountered")
+                break
+
+            result.append(item)
+            if not last_item_time and len(result) == 10:
+                _LOG.debug("Stopping item collection due to missing stop ID")
+                break
+
+        return result

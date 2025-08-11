@@ -66,6 +66,7 @@ cron:
           targetChat: "133399998"
           env:
             RSS_FEED_URL: https://signal.org/blog/rss.xml
+            RSS_REVERSE_CHRONOLOGICAL: "true"
     mastodon:
       useCase: forward-toots
       hasConfigMap: true

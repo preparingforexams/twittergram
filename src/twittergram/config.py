@@ -146,6 +146,7 @@ class RedditConfig:
 
 @dataclass(frozen=True, kw_only=True)
 class RssConfig:
+    is_reverse_chronological: bool
     feed_url: str
 
     @classmethod
@@ -154,6 +155,10 @@ class RssConfig:
         try:
             return cls(
                 feed_url=env.get_string("FEED_URL", required=True),
+                is_reverse_chronological=env.get_bool(
+                    "REVERSE_CHRONOLOGICAL",
+                    default=False,
+                ),
             )
         except ValueError:
             return None
