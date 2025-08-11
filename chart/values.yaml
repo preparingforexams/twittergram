@@ -61,15 +61,16 @@ cron:
           targetChat: "-1002673102174"
           env:
             RSS_FEED_URL: https://www.scaleway.com/en/docs/changelog/rss.xml
+        - id: signal
+          schedule: "42 14 * * *"
+          targetChat: "133399998"
+          env:
+            RSS_FEED_URL: https://signal.org/blog/rss.xml
     mastodon:
       useCase: forward-toots
       hasConfigMap: true
       hasSecret: true
-      configs:
-        - id: hotzo
-          targetChat: "133399998"
-          env:
-            MASTODON_SOURCE_ACCOUNT: "@elhotzo@mastodon.social"
+      configs: []
     xcode:
       useCase: forward-xcode
       hasConfigMap: false
