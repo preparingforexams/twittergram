@@ -23,8 +23,6 @@ class ForwardRssFeed:
     uploader: ports.TelegramUploader
 
     async def __call__(self) -> None:
-        _LOG.info("Not implemented")
-
         state = await self.state_repo.load_state(RssState)
         last_item_id = state.last_item_id
         last_item_time = state.last_item_time
@@ -34,9 +32,17 @@ class ForwardRssFeed:
         async for item in self.reader.list_items():
             items.append(item)
 
-        # Reverse reverse chronological
-        if self.config.is_reverse_chronological:
-            items.reverse()
+        match self.config.order:
+            case "chronological":
+                # Nothing to do
+                pass
+            case "reverse_chronological":
+                # Reverse reverse chronological
+                items.reverse()
+            case None:
+                items.sort(key=lambda i: i.published_at)
+            case other:
+                raise ValueError(f"Unknown order type: {other}")
 
         items = self._filter_items(
             items,
