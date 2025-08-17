@@ -13,7 +13,7 @@ dependencies = [
     # Version constrained by asyncpraw
     "aiofiles",
     "asyncpraw >=7, <8",
-    "atproto ==0.0.61",
+    "atproto ==0.0.62",
     "bs-config [dotenv] ==1.1.1",
     "bs-state [file,kubernetes] ==2.2.2",
     "click >=8, <9",
