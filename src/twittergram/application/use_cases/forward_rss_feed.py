@@ -101,4 +101,5 @@ class ForwardRssFeed:
                 _LOG.info("Stopping item collection due to missing stop ID")
                 break
 
+        result.reverse()
         return result

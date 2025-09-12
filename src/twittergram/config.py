@@ -155,9 +155,7 @@ class RssConfig:
         try:
             return cls(
                 feed_url=env.get_string("FEED_URL", required=True),
-                order=env.get_string(
-                    "ORDER",
-                ),
+                order=env.get_string(                    "ORDER"                ),
             )
         except ValueError:
             return None
