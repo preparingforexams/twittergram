@@ -93,12 +93,12 @@ class ForwardRssFeed:
                 break
 
             if last_item_time is not None and item.published_at < last_item_time:
-                _LOG.debug("Stopping collection because older item was encountered")
+                _LOG.info("Stopping collection because older item was encountered")
                 break
 
             result.append(item)
             if not last_item_time and len(result) == 10:
-                _LOG.debug("Stopping item collection due to missing stop ID")
+                _LOG.info("Stopping item collection due to missing stop ID")
                 break
 
         return result
