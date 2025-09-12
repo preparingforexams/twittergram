@@ -17,6 +17,12 @@ class NaiveHtmlSanitizer(HtmlSanitizer):
             .replace("</ul>", "")
             .replace("<li>", "- ")
             .replace("</li>", "")
+            .replace("<h1>", "<b>")
+            .replace("</h1>", "</b>")
+            .replace("<h2>", "<b>")
+            .replace("</h2>", "</b>")
+            .replace("<h3>", "<b>")
+            .replace("</h3>", "</b>")
         )
 
         simple_sanitized = self.IMG.sub("", simple_sanitized)
