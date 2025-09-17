@@ -14,7 +14,7 @@ dependencies = [
     "aiofiles",
     "asyncpraw >=7, <8",
     "atproto ==0.0.62",
-    "bs-config [dotenv] ==1.1.1",
+    "bs-config [dotenv] ==1.1.2",
     "bs-state [file,kubernetes] ==2.2.2",
     "click >=8, <9",
     "Deprecated >=1, <2",
