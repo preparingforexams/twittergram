@@ -28,7 +28,7 @@ class NaiveHtmlSanitizer(HtmlSanitizer):
         message_type = match.group("type")
 
         emoji = self._choose_emoji(message_type)
-        return f"\n{emoji}: "
+        return f"\n{emoji * 3}"
 
     async def sanitize(self, raw: str) -> str:
         simple_sanitized = (
