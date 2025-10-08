@@ -24,7 +24,7 @@ dependencies = [
     "jmapc ==0.2.*",
     "mastodon-py >=2, <3",
     "more-itertools >=10, <11",
-    "pydantic ==2.11.*",
+    "pydantic ==2.12.*",
     "python-telegram-bot ==22.5",
     "rss-parser ==2.1.1",
     "sentry-sdk >=2, <3",
