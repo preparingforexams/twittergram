@@ -11,7 +11,7 @@ classifiers = [
 
 dependencies = [
     # Version constrained by asyncpraw
-    "aiofiles",
+    "aiofiles >=24, <25",
     "asyncpraw >=7, <8",
     "atproto ==0.0.62",
     "bs-config [dotenv] ==1.1.2",
@@ -34,10 +34,10 @@ dependencies = [
 [dependency-groups]
 dev = [
     "mypy ==1.18.*",
-    "pytest >=8.0.0, <9.0.0",
+    "pytest >=8, <9",
     "ruff ==0.14.0",
-    "types-aiofiles >=24.1.0.0, <24.2.0",
-    "types-Deprecated >=1.0.0, <2.0.0",
+    "types-aiofiles >=24, <25",
+    "types-Deprecated >=1, <2",
     "types-requests >=2.31, <3",
 ]
 
