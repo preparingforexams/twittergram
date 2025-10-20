@@ -12,7 +12,7 @@ class NaiveHtmlSanitizer(HtmlSanitizer):
     MESSAGE = re.compile(r"<[Mm]essage( type=\"(?P<type>\w+)\")?>")
     TR = re.compile(r"<tr[^>]*>")
     TD = re.compile(r"<td[^>]*>")
-    TH = re.compile(r"<thead[^>]*>")
+    TH = re.compile(r"<th[^>]*>")
 
     @staticmethod
     def _choose_emoji(message_type: str | None) -> str:
