@@ -10,6 +10,8 @@ class NaiveHtmlSanitizer(HtmlSanitizer):
     IMG = re.compile(r"<img[^>]*>")
     SPAN = re.compile(r"<span[^>]*>")
     MESSAGE = re.compile(r"<[Mm]essage( type=\"(?P<type>\w+)\")?>")
+    TR = re.compile(r"<tr[^>]*>")
+    TD = re.compile(r"<td[^>]*>")
 
     @staticmethod
     def _choose_emoji(message_type: str | None) -> str:
@@ -47,8 +49,14 @@ class NaiveHtmlSanitizer(HtmlSanitizer):
             .replace("<h3>", "<b>")
             .replace("</h3>", "</b>")
             .replace("</Message>", "\n")
+            .replace("<table>", "")
+            .replace("</table>", "")
+            .replace("</td>", "")
+            .replace("</tr>", "")
         )
 
+        simple_sanitized = self.TD.sub("- ", simple_sanitized)
+        simple_sanitized = self.TR.sub("", simple_sanitized)
         simple_sanitized = self.IMG.sub("", simple_sanitized)
         simple_sanitized = self.SPAN.sub("", simple_sanitized)
         simple_sanitized = self.MESSAGE.sub(
