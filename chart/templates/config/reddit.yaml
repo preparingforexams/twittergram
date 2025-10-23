@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: reddit
 data:
-  REDDIT_CLIENT_ID: "{{ .Values.reddit.clientId }}"
+  REDDIT__CLIENT_ID: "{{ .Values.reddit.clientId }}"

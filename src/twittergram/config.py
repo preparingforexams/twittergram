@@ -15,8 +15,8 @@ class SentryConfig:
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
-            dsn=env.get_string("SENTRY_DSN"),
-            release=env.get_string("APP_VERSION", default="debug"),
+            dsn=env.get_string("sentry-dsn"),
+            release=env.get_string("app-version", default="debug"),
         )
 
 
@@ -28,12 +28,10 @@ class BlueskyConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        scoped = env.scoped("BLUESKY_")
-
         try:
-            user = scoped.get_string("USERNAME", required=True)
-            password = scoped.get_string("PASSWORD", required=True)
-            author_id = scoped.get_string("AUTHOR_ID", required=True)
+            user = env.get_string("username", required=True)
+            password = env.get_string("password", required=True)
+            author_id = env.get_string("author-id", required=True)
         except ValueError:
             return None
 
@@ -51,7 +49,7 @@ class DownloadConfig:
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
-            download_directory=env.get_string("DOWNLOAD_DIR"),
+            download_directory=env.get_string("download-dir"),
         )
 
 
@@ -63,16 +61,15 @@ class MailConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        env = env.scoped("MAIL_")
-        mailbox_name = env.get_string("MAILBOX_NAME")
-        token = env.get_string("TOKEN")
+        mailbox_name = env.get_string("mailbox-name")
+        token = env.get_string("token")
 
         if not (mailbox_name and token):
             return None
 
         return cls(
             api_host=env.get_string(
-                "API_HOST",
+                "api-host",
                 default="api.fastmail.com",
             ),
             mailbox_name=mailbox_name,
@@ -87,7 +84,10 @@ class HtmlSanitizerConfig:
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
-            type=env.get_string("HTML_SANITIZER_TYPE", default="naive"),
+            type=env.get_string(
+                "html-sanitizer-type",
+                default="naive",
+            ),
         )
 
 
@@ -100,16 +100,15 @@ class MastodonConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        env = env.scoped("MASTODON_")
-        client_id = env.get_string("CLIENT_ID")
-        client_secret = env.get_string("CLIENT_SECRET")
-        source_account = env.get_string("SOURCE_ACCOUNT")
+        client_id = env.get_string("client-id")
+        client_secret = env.get_string("client-secret")
+        source_account = env.get_string("source-account")
         if not (client_id and client_secret and source_account):
             return None
 
         return cls(
             api_base_url=env.get_string(
-                "API_BASE_URL",
+                "api-base-url",
                 default="https://mastodon.social",
             ),
             client_id=client_id,
@@ -128,9 +127,8 @@ class RedditConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        env = env.scoped("REDDIT_")
-        client_id = env.get_string("CLIENT_ID")
-        client_secret = env.get_string("CLIENT_SECRET")
+        client_id = env.get_string("client-id")
+        client_secret = env.get_string("client-secret")
 
         if not (client_id and client_secret):
             return None
@@ -138,9 +136,9 @@ class RedditConfig:
         return cls(
             client_id=client_id,
             client_secret=client_secret,
-            user_agent=env.get_string("USER_AGENT", default="twittergram"),
-            source_username=env.get_string("SOURCE_USERNAME", required=True),
-            subreddit_filter=env.get_string("SUBREDDIT_FILTER"),
+            user_agent=env.get_string("user-agent", default="twittergram"),
+            source_username=env.get_string("source-username", required=True),
+            subreddit_filter=env.get_string("subreddit-filter"),
         )
 
 
@@ -151,11 +149,10 @@ class RssConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        env = env.scoped("RSS_")
         try:
             return cls(
-                feed_url=env.get_string("FEED_URL", required=True),
-                order=env.get_string("ORDER"),
+                feed_url=env.get_string("feed-url", required=True),
+                order=env.get_string("order"),
             )
         except ValueError:
             return None
@@ -169,12 +166,11 @@ class ConfigMapStateConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        env = env.scoped("STATE_CONFIG_MAP_")
         try:
             return cls(
-                namespace=env.get_string("NAMESPACE", required=True),
-                name_prefix=env.get_string("NAME_PREFIX", required=True),
-                name_suffix=env.get_string("NAME_SUFFIX"),
+                namespace=env.get_string("namespace", required=True),
+                name_prefix=env.get_string("name-prefix", required=True),
+                name_suffix=env.get_string("name-suffix"),
             )
         except ValueError:
             return None
@@ -189,9 +185,9 @@ class StateConfig:
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
-            type=env.get_string("STATE_TYPE", default="file"),
-            config_map=ConfigMapStateConfig.from_env(env),
-            state_file=env.get_string("STATE_FILE_PATH"),
+            type=env.get_string("type", default="file"),
+            config_map=ConfigMapStateConfig.from_env(env / "config-map"),
+            state_file=env.get_string("file-path"),
         )
 
 
@@ -203,31 +199,10 @@ class TelegramConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self:
-        env = env.scoped("TELEGRAM_")
         return cls(
-            target_chat=env.get_int("TARGET_CHAT_ID", required=True),
-            token=env.get_string("TOKEN", required=True),
-            upload_chat=env.get_int("UPLOAD_CHAT_ID", required=True),
-        )
-
-
-@dataclass
-class TwitterConfig:
-    source_account: str
-    token: str
-
-    @classmethod
-    def from_env(cls, env: Env) -> Self | None:
-        env = env.scoped("TWITTER_")
-        source_account = env.get_string("SOURCE_ACCOUNT")
-        token = env.get_string("TOKEN")
-
-        if not (source_account and token):
-            return None
-
-        return cls(
-            source_account=source_account,
-            token=token,
+            target_chat=env.get_int("target-chat-id", required=True),
+            token=env.get_string("token", required=True),
+            upload_chat=env.get_int("upload-chat-id", required=True),
         )
 
 
@@ -243,20 +218,18 @@ class Config:
     sentry: SentryConfig
     state: StateConfig
     telegram: TelegramConfig
-    twitter: TwitterConfig | None
 
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
-            bluesky=BlueskyConfig.from_env(env),
+            bluesky=BlueskyConfig.from_env(env / "bluesky"),
             download=DownloadConfig.from_env(env),
-            mail=MailConfig.from_env(env),
-            mastodon=MastodonConfig.from_env(env),
-            reddit=RedditConfig.from_env(env),
-            rss=RssConfig.from_env(env),
+            mail=MailConfig.from_env(env / "mail"),
+            mastodon=MastodonConfig.from_env(env / "mastodon"),
+            reddit=RedditConfig.from_env(env / "reddit"),
+            rss=RssConfig.from_env(env / "rss"),
             sanitizer=HtmlSanitizerConfig.from_env(env),
             sentry=SentryConfig.from_env(env),
-            state=StateConfig.from_env(env),
-            telegram=TelegramConfig.from_env(env),
-            twitter=TwitterConfig.from_env(env),
+            state=StateConfig.from_env(env / "state"),
+            telegram=TelegramConfig.from_env(env / "telegram"),
         )

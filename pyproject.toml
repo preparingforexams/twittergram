@@ -3,10 +3,13 @@ requires-python = "==3.13.*"
 name = "twittergram"
 description = "Sends telegrams"
 version = "1.0.0"
-authors = [{ name = "BlindfoldedSurgery", email = "team@blindfolded.surgery" }]
+authors = [{ name = "Björn Petersen", email = "git@bjoernpetersen.net" }]
+license = "MIT"
+license-files = [
+    "LICENSE",
+]
 classifiers = [
     "Private :: Do Not Upload",
-    "License :: OSI Approved :: MIT License",
 ]
 
 dependencies = [
@@ -14,7 +17,7 @@ dependencies = [
     "aiofiles >=25, <26",
     "asyncpraw >=7, <8",
     "atproto ==0.0.63",
-    "bs-config [dotenv] ==1.2.0",
+    "bs-config [dotenv] ==3.0.0",
     "bs-state [file,kubernetes] ==2.3.1",
     "click >=8, <9",
     "Deprecated >=1, <2",

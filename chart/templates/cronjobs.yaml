@@ -29,9 +29,9 @@ spec:
               image: {{ $.Values.image.app }}:{{ $.Values.appVersion }}
               args: [ {{ $spec.useCase }} ]
               env:
-                - name: STATE_CONFIG_MAP_NAME_SUFFIX
+                - name: STATE__CONFIG_MAP__NAME_SUFFIX
                   value: {{ .id }}
-                - name: TELEGRAM_TARGET_CHAT_ID
+                - name: TELEGRAM__TARGET_CHAT_ID
                   value: {{ .targetChat | quote }}
                 {{- range $key, $value := .env }}
                 - name: {{ $key }}

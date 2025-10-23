@@ -14,12 +14,12 @@ cron:
       - id: hotzo
         targetChat: "-1001604595097"
         env:
-          BLUESKY_AUTHOR_ID: "elhotzo.bsky.social"
+          BLUESKY__AUTHOR_ID: "elhotzo.bsky.social"
       - id: probahn
         schedule: "0,30 7-22 * * *"
         targetChat: "-1002474524986"
         env:
-          BLUESKY_AUTHOR_ID: "pro-bahn.de"
+          BLUESKY__AUTHOR_ID: "pro-bahn.de"
     mail:
       useCase: forward-mails
       hasConfigMap: false
@@ -34,8 +34,8 @@ cron:
         schedule: "*/20 * * * *"
         targetChat: "-1002055910690"
         env:
-          REDDIT_SOURCE_USERNAME: schneckedertzchen
-          REDDIT_SUBREDDIT_FILTER: DeutscheComics
+          REDDIT__SOURCE_USERNAME: schneckedertzchen
+          REDDIT__SUBREDDIT_FILTER: DeutscheComics
     rss:
       useCase: forward-rss-feed
       hasConfigMap: false
@@ -45,13 +45,13 @@ cron:
           schedule: "23 */2 * * *"
           targetChat: "-1002673102174"
           env:
-            RSS_FEED_URL: https://www.scaleway.com/en/docs/changelog/rss.xml
+            RSS__FEED_URL: https://www.scaleway.com/en/docs/changelog/rss.xml
         - id: signal
           schedule: "42 14 * * *"
           targetChat: "133399998"
           env:
-            RSS_FEED_URL: https://signal.org/blog/rss.xml
-            RSS_ORDER: "reverse_chronological"
+            RSS__FEED_URL: https://signal.org/blog/rss.xml
+            RSS__ORDER: "reverse_chronological"
     mastodon:
       useCase: forward-toots
       hasConfigMap: true

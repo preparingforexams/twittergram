@@ -39,7 +39,7 @@ spec:
             limits:
               ephemeral-storage: 4Gi
           env:
-            - name: TELEGRAM_TARGET_CHAT_ID
+            - name: TELEGRAM__TARGET_CHAT_ID
               value: "133399998"
           envFrom:
             - configMapRef:
