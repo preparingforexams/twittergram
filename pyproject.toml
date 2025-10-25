@@ -18,7 +18,7 @@ dependencies = [
     "asyncpraw >=7, <8",
     "atproto ==0.0.63",
     "bs-config [dotenv] ==3.2.1",
-    "bs-state [file,kubernetes] ==2.3.2",
+    "bs-state [file,kubernetes] ==2.4.0",
     "click >=8, <9",
     "Deprecated >=1, <2",
     "gallery-dl ==1.30.10",
