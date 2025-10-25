@@ -14,4 +14,5 @@ from twittergram.config import RssConfig, RssOrder
 def test_rss_config(value, order):
     env = Env.load_from_dict({"FEED_URL": "https://example.org", "ORDER": value})
     config = RssConfig.from_env(env)
+    assert config
     assert config.order == order
