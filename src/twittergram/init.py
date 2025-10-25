@@ -199,12 +199,8 @@ class PortsModule(Module):
             raise ValueError("Missing download directory")
 
         return [
-            media_downloader.GalleryDlMediaDownloader(
-                Path(download_directory),
-            ),
-            media_downloader.HttpMediaDownloader(
-                Path(download_directory),
-            ),
+            media_downloader.GalleryDlMediaDownloader(download_directory),
+            media_downloader.HttpMediaDownloader(download_directory),
         ]
 
     @provider

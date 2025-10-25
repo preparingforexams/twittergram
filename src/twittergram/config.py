@@ -1,5 +1,7 @@
 import logging
 from dataclasses import dataclass
+from enum import Enum
+from pathlib import Path
 from typing import Self
 
 from bs_config import Env
@@ -44,12 +46,12 @@ class BlueskyConfig:
 
 @dataclass
 class DownloadConfig:
-    download_directory: str | None
+    download_directory: Path | None
 
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
-            download_directory=env.get_string("download-dir"),
+            download_directory=env.get_string("download-dir", transform=Path),
         )
 
 
@@ -142,9 +144,14 @@ class RedditConfig:
         )
 
 
+class RssOrder(str, Enum):
+    CHRONOLOGICAL = "chronological"
+    REVERSE_CHRONOLOGICAL = "reverse_chronological"
+
+
 @dataclass(frozen=True, kw_only=True)
 class RssConfig:
-    order: str | None
+    order: RssOrder | None
     feed_url: str
 
     @classmethod
@@ -152,7 +159,7 @@ class RssConfig:
         try:
             return cls(
                 feed_url=env.get_string("feed-url", required=True),
-                order=env.get_string("order"),
+                order=env.get_string("order", transform=RssOrder),
             )
         except ValueError:
             return None

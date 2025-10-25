@@ -8,7 +8,7 @@ from injector import inject
 
 from twittergram.application import ports, repos
 from twittergram.application.model import RssItem, RssState
-from twittergram.config import RssConfig
+from twittergram.config import RssConfig, RssOrder
 
 _LOG = logging.getLogger(__name__)
 
@@ -33,16 +33,14 @@ class ForwardRssFeed:
             items.append(item)
 
         match self.config.order:
-            case "chronological":
+            case RssOrder.CHRONOLOGICAL:
                 # Nothing to do
                 pass
-            case "reverse_chronological":
+            case RssOrder.REVERSE_CHRONOLOGICAL:
                 # Reverse reverse chronological
                 items.reverse()
             case None:
                 items.sort(key=lambda i: i.published_at)
-            case other:
-                raise ValueError(f"Unknown order type: {other}")
 
         items = self._filter_items(
             items,
