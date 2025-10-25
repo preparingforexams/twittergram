@@ -9,7 +9,7 @@ from bs_config import Env
 _LOG = logging.getLogger(__name__)
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class SentryConfig:
     dsn: str | None
     release: str
@@ -22,7 +22,7 @@ class SentryConfig:
         )
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class BlueskyConfig:
     user: str
     password: str
@@ -44,7 +44,7 @@ class BlueskyConfig:
         )
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class DownloadConfig:
     download_directory: Path | None
 
@@ -55,7 +55,7 @@ class DownloadConfig:
         )
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class MailConfig:
     api_host: str
     mailbox_name: str
@@ -79,7 +79,7 @@ class MailConfig:
         )
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class HtmlSanitizerConfig:
     type: str
 
@@ -93,7 +93,7 @@ class HtmlSanitizerConfig:
         )
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class MastodonConfig:
     api_base_url: str
     client_id: str
@@ -119,7 +119,7 @@ class MastodonConfig:
         )
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class RedditConfig:
     client_id: str
     client_secret: str
@@ -165,7 +165,7 @@ class RssConfig:
             return None
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class ConfigMapStateConfig:
     namespace: str
     name_prefix: str
@@ -183,7 +183,7 @@ class ConfigMapStateConfig:
             return None
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class StateConfig:
     type: str
     config_map: ConfigMapStateConfig | None
@@ -198,7 +198,7 @@ class StateConfig:
         )
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class TelegramConfig:
     target_chat: int
     token: str
@@ -213,7 +213,7 @@ class TelegramConfig:
         )
 
 
-@dataclass
+@dataclass(frozen=True, kw_only=True)
 class Config:
     bluesky: BlueskyConfig | None
     download: DownloadConfig
