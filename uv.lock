@@ -214,15 +214,15 @@ dotenv = [
 
 [[package]]
 name = "bs-state"
-version = "2.3.1"
+version = "2.3.2"
 source = { registry = "https://pypi.bjoernpetersen.net/simple" }
 dependencies = [
     { name = "opentelemetry-api" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_state-2.3.1.tar.gz", hash = "sha256:b0d3378bf7e31bde2e2758c1c67929556aa97ef75e44394198a4b31115835697" }
+sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_state-2.3.2.tar.gz", hash = "sha256:d28e4adae2eb38fbe2e6642d749288516e4718e3d9e8633455bf018cb26d1357" }
 wheels = [
-    { url = "https://pypi.bjoernpetersen.net/packages/bs_state-2.3.1-py3-none-any.whl", hash = "sha256:fe6b95342e0bace58de4bfb7515c80a039817b6bd281e0d6ee5e25b5d1bf72f3" },
+    { url = "https://pypi.bjoernpetersen.net/packages/bs_state-2.3.2-py3-none-any.whl", hash = "sha256:fae444161cdacf90bed261c7db438dfa2deddc45f1ec64138ddd47d47bf751c3" },
 ]
 
 [package.optional-dependencies]
@@ -1058,7 +1058,7 @@ requires-dist = [
     { name = "asyncpraw", specifier = ">=7,<8" },
     { name = "atproto", specifier = "==0.0.63" },
     { name = "bs-config", extras = ["dotenv"], specifier = "==3.1.0", index = "https://pypi.bjoernpetersen.net/simple" },
-    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==2.3.1", index = "https://pypi.bjoernpetersen.net/simple" },
+    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==2.3.2", index = "https://pypi.bjoernpetersen.net/simple" },
     { name = "click", specifier = ">=8,<9" },
     { name = "deprecated", specifier = ">=1,<2" },
     { name = "gallery-dl", specifier = "==1.30.10" },
