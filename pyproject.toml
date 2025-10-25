@@ -20,7 +20,6 @@ dependencies = [
     "bs-config [dotenv] ==3.2.1",
     "bs-state [file,kubernetes] ==2.4.0",
     "click >=8, <9",
-    "Deprecated >=1, <2",
     "gallery-dl ==1.30.10",
     "httpx",
     "injector ==0.22.*",
@@ -40,7 +39,6 @@ dev = [
     "pytest >=8, <9",
     "ruff ==0.14.2",
     "types-aiofiles >=25, <26",
-    "types-Deprecated >=1, <2",
     "types-requests >=2.31, <3",
 ]
 
