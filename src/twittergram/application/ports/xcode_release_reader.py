@@ -1,7 +1,10 @@
 import abc
-from collections.abc import AsyncIterable
+from typing import TYPE_CHECKING
 
-from twittergram.application.model import XcodeRelease
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterable
+
+    from twittergram.application.model import XcodeRelease
 
 
 class XcodeReleaseReader(abc.ABC):

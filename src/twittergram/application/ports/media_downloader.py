@@ -1,7 +1,9 @@
 import abc
 import logging
+from typing import TYPE_CHECKING
 
-from twittergram.application.model import MediaFile, Medium
+if TYPE_CHECKING:
+    from twittergram.application.model import MediaFile, Medium
 
 _LOG = logging.getLogger(__name__)
 

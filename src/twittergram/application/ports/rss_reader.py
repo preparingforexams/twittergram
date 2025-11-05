@@ -1,7 +1,10 @@
 import abc
-from collections.abc import AsyncIterable
+from typing import TYPE_CHECKING
 
-from twittergram.application.model import RssItem
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterable
+
+    from twittergram.application.model import RssItem
 
 
 class RssReader(abc.ABC):

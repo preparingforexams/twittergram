@@ -1,7 +1,10 @@
 import abc
-from collections.abc import AsyncIterable
+from typing import TYPE_CHECKING
 
-from twittergram.application.model import BlueskyPost
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterable
+
+    from twittergram.application.model import BlueskyPost
 
 
 class BlueskyReader(abc.ABC):

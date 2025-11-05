@@ -2,9 +2,10 @@ import logging
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
-from bs_config import Env
+if TYPE_CHECKING:
+    from bs_config import Env
 
 _LOG = logging.getLogger(__name__)
 

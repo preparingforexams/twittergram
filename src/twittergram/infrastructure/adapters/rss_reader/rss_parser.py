@@ -1,5 +1,4 @@
-from collections.abc import AsyncIterable
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import httpx
 from rss_parser import RSSParser
@@ -12,7 +11,11 @@ from rss_parser.models.types.tag import Tag
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.model import RssItem
 from twittergram.application.ports import RssReader
-from twittergram.config import RssConfig
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterable
+
+    from twittergram.config import RssConfig
 
 
 class RssParserRssReader(RssReader):

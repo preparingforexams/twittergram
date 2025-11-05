@@ -1,7 +1,7 @@
 import logging
 import mimetypes
 import uuid
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import aiofiles
 from aiofiles.os import makedirs
@@ -11,6 +11,9 @@ from twittergram.application.exceptions.io import IoException
 from twittergram.application.exceptions.media import UnsupportedMediaTypeException
 from twittergram.application.model import MediaFile, MediaType, Medium
 from twittergram.application.ports import MediaDownloader
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 _LOG = logging.getLogger(__name__)
 
