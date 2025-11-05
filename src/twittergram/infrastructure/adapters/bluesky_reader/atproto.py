@@ -1,8 +1,7 @@
 import logging
-from collections.abc import AsyncIterable
 from contextlib import asynccontextmanager
 from datetime import datetime
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from atproto import AsyncClient
 from atproto.exceptions import BadRequestError
@@ -12,7 +11,11 @@ from atproto_client.models.app.bsky.embed.images import Main as ImageEmbed
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.model import URL, BlueskyPost, MediaType, Medium, NamedUrl
 from twittergram.application.ports import BlueskyReader
-from twittergram.config import BlueskyConfig
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterable
+
+    from twittergram.config import BlueskyConfig
 
 _LOG = logging.getLogger(__name__)
 

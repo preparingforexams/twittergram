@@ -1,13 +1,16 @@
 import logging
 import sys
-from collections.abc import Coroutine
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import click
 import uvloop
 
-from twittergram.application import Application
 from twittergram.init import initialize
+
+if TYPE_CHECKING:
+    from collections.abc import Coroutine
+
+    from twittergram.application import Application
 
 _LOG = logging.getLogger(__name__)
 

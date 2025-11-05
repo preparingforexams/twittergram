@@ -1,9 +1,9 @@
 import logging
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from injector import inject
 
-from twittergram.application import ports, repos
 from twittergram.application.model import (
     MediaFile,
     MediaType,
@@ -11,7 +11,10 @@ from twittergram.application.model import (
     RedditPost,
     RedditState,
 )
-from twittergram.config import RedditConfig
+
+if TYPE_CHECKING:
+    from twittergram.application import ports, repos
+    from twittergram.config import RedditConfig
 
 _LOG = logging.getLogger(__name__)
 

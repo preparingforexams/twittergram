@@ -1,7 +1,10 @@
 from dataclasses import dataclass
-from datetime import datetime
+from typing import TYPE_CHECKING
 
-from twittergram.application.model.media import Medium
+if TYPE_CHECKING:
+    from datetime import datetime
+
+    from twittergram.application.model.media import Medium
 
 
 @dataclass(frozen=True, kw_only=True)

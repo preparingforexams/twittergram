@@ -1,14 +1,18 @@
 import logging
-from collections.abc import Sequence
 from dataclasses import dataclass
-from datetime import datetime
 from io import StringIO
+from typing import TYPE_CHECKING
 
 from injector import inject
 
-from twittergram.application import ports, repos
 from twittergram.application.model import RssItem, RssState
 from twittergram.config import RssConfig, RssOrder
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+    from datetime import datetime
+
+    from twittergram.application import ports, repos
 
 _LOG = logging.getLogger(__name__)
 

@@ -1,9 +1,7 @@
 import asyncio
 import logging
-from collections.abc import Awaitable, Callable
 from datetime import timedelta
-from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import aiofiles
 import telegram
@@ -13,7 +11,12 @@ from telegram.error import RetryAfter
 
 from twittergram.application.model import MediaFile, MediaType
 from twittergram.application.ports import TelegramUploader
-from twittergram.config import TelegramConfig
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+    from pathlib import Path
+
+    from twittergram.config import TelegramConfig
 
 _LOG = logging.getLogger(__name__)
 

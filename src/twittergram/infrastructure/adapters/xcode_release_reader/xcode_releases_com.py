@@ -1,12 +1,14 @@
-from collections.abc import AsyncIterable
 from datetime import date
-from typing import Any, cast
+from typing import TYPE_CHECKING, Any, cast
 
 from httpx import AsyncClient, RequestError
 
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.model import URL, XcodeRelease
 from twittergram.application.ports import XcodeReleaseReader
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterable
 
 
 class XcrXcodeReleaseReader(XcodeReleaseReader):
