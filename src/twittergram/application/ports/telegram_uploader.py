@@ -1,8 +1,6 @@
 import abc
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from twittergram.application.model import MediaFile
+from twittergram.application.model import MediaFile
 
 
 class TelegramUploader(abc.ABC):

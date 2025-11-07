@@ -1,15 +1,11 @@
+from collections.abc import AsyncIterable
 from datetime import UTC, datetime
-from typing import TYPE_CHECKING
 
 import asyncpraw
 
 from twittergram.application.model import URL, RedditPost
 from twittergram.application.ports import RedditReader
-
-if TYPE_CHECKING:
-    from collections.abc import AsyncIterable
-
-    from twittergram.config import RedditConfig
+from twittergram.config import RedditConfig
 
 
 class PrawRedditReader(RedditReader):

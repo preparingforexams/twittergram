@@ -1,17 +1,13 @@
 import asyncio
 import logging
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from datetime import datetime
 
 from injector import inject
 
+from twittergram.application import ports, repos
 from twittergram.application.model import BlueskyPost, BlueskyState, MediaFile, Medium
-
-if TYPE_CHECKING:
-    from collections.abc import Iterable
-    from datetime import datetime
-
-    from twittergram.application import ports, repos
 
 _LOG = logging.getLogger(__name__)
 

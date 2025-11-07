@@ -1,12 +1,14 @@
 import logging
+from collections.abc import Iterable
 from pathlib import Path
-from typing import TYPE_CHECKING
 
 import sentry_sdk
 from bs_config import Env
+from bs_state import StateStorage
 from injector import Injector, Module, multiprovider, provider
 
 from twittergram.application import Application, ports, repos
+from twittergram.application.model import State
 from twittergram.config import (
     Config,
     ConfigMapStateConfig,
@@ -26,13 +28,6 @@ from twittergram.infrastructure.adapters import (
     xcode_release_reader,
 )
 from twittergram.infrastructure.repos import state_repo
-
-if TYPE_CHECKING:
-    from collections.abc import Iterable
-
-    from bs_state import StateStorage
-
-    from twittergram.application.model import State
 
 _LOG = logging.getLogger(__name__)
 

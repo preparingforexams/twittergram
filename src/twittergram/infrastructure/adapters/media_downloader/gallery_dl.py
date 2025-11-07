@@ -1,15 +1,12 @@
 import logging
 import mimetypes
 from asyncio import subprocess
-from typing import TYPE_CHECKING
+from pathlib import Path
 
 from httpx import URL
 
 from twittergram.application.model import MediaFile, MediaType, Medium
 from twittergram.application.ports import MediaDownloader
-
-if TYPE_CHECKING:
-    from pathlib import Path
 
 _LOG = logging.getLogger(__name__)
 

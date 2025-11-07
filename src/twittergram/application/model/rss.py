@@ -1,10 +1,7 @@
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from datetime import datetime
 
-if TYPE_CHECKING:
-    from datetime import datetime
-
-    from .url import URL
+from .url import URL
 
 
 @dataclass(frozen=True, kw_only=True)

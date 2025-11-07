@@ -1,14 +1,11 @@
 import asyncio
 import logging
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
 
 from injector import inject
 
+from twittergram.application import ports, repos
 from twittergram.application.model import MastodonState, MediaFile, Medium, Toot
-
-if TYPE_CHECKING:
-    from twittergram.application import ports, repos
 
 _LOG = logging.getLogger(__name__)
 

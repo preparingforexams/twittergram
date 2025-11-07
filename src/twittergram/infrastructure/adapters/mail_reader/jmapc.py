@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from datetime import datetime
-from typing import TYPE_CHECKING, cast
+from typing import cast
 
 from jmapc import (
     Client,
@@ -27,9 +27,7 @@ from jmapc.methods import (
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.model import Mail
 from twittergram.application.ports import MailReader
-
-if TYPE_CHECKING:
-    from twittergram.config import MailConfig
+from twittergram.config import MailConfig
 
 _LOG = logging.getLogger(__name__)
 

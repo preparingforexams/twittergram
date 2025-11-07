@@ -1,10 +1,7 @@
 import abc
-from typing import TYPE_CHECKING
+from collections.abc import AsyncIterable
 
-if TYPE_CHECKING:
-    from collections.abc import AsyncIterable
-
-    from twittergram.application.model import RedditPost
+from twittergram.application.model import RedditPost
 
 
 class RedditReader(abc.ABC):

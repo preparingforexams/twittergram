@@ -1,13 +1,10 @@
 import logging
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
 
 from injector import inject
 
+from twittergram.application import model, ports, repos
 from twittergram.application.model import XcodeState
-
-if TYPE_CHECKING:
-    from twittergram.application import model, ports, repos
 
 _LOG = logging.getLogger(__name__)
 

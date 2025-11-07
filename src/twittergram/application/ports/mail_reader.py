@@ -1,8 +1,6 @@
 import abc
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from twittergram.application.model.mail import Mail
+from twittergram.application.model.mail import Mail
 
 
 class MailReader(abc.ABC):

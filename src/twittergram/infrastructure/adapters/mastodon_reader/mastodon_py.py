@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import TYPE_CHECKING
+from collections.abc import AsyncIterable, Iterable
 
 from mastodon import Mastodon
 from mastodon import return_types as mastotypes
@@ -8,11 +8,7 @@ from mastodon import return_types as mastotypes
 from twittergram.application.exceptions.io import IoException
 from twittergram.application.model import MediaType, Medium, Toot
 from twittergram.application.ports import MastodonReader
-
-if TYPE_CHECKING:
-    from collections.abc import AsyncIterable, Iterable
-
-    from twittergram.config import MastodonConfig
+from twittergram.config import MastodonConfig
 
 _LOG = logging.getLogger(__name__)
 
