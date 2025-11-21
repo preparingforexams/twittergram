@@ -37,7 +37,7 @@ dependencies = [
 dev = [
     "mypy ==1.18.*",
     "pytest >=9, <10",
-    "ruff ==0.14.5",
+    "ruff ==0.14.6",
     "types-aiofiles >=25, <26",
     "types-requests >=2.31, <3",
 ]
