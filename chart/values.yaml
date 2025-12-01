@@ -11,10 +11,10 @@ cron:
       hasConfigMap: false
       hasSecret: true
       configs:
-      - id: hotzo
-        targetChat: "-1001604595097"
+      - id: advent
+        targetChat: "-1001604944844"
         env:
-          BLUESKY__AUTHOR_ID: "elhotzo.bsky.social"
+          BLUESKY__AUTHOR_ID: "garygrady.bsky.social"
       - id: probahn
         schedule: "0,30 7-22 * * *"
         targetChat: "-1002474524986"
