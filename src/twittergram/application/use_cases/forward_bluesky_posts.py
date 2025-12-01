@@ -101,7 +101,7 @@ class ForwardBlueskyPosts:
 
             posts.append(post)
 
-            if until_id is None and len(posts) == 5:
+            if until_id is None and len(posts) == 2:
                 break
 
         return posts
