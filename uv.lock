@@ -130,7 +130,7 @@ wheels = [
 
 [[package]]
 name = "atproto"
-version = "0.0.64"
+version = "0.0.65"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -142,9 +142,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fb/1c/3f278263d5262669777e8018c1f4a73c30b0a2636c5f5849b56a89d86f2e/atproto-0.0.64.tar.gz", hash = "sha256:31cdc81ba5fa18c5d6483abba3ad4f01055d541d0a12ec26bef58ef9781c016d", size = 207674, upload-time = "2025-12-01T15:18:37.395Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b2/0f/b6e26f99ef730f1e5779f5833ba794343df78ee1e02041d3b05bd5005066/atproto-0.0.65.tar.gz", hash = "sha256:027c6ed98746a9e6f1bb24bc18db84b80b386037709ff3af9ef927dce3dd4938", size = 210996, upload-time = "2025-12-08T15:53:44.585Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/75/80/e3570230121cbc8b00549ee63a802ad2d3c0a35ecc5bb94af46924cdfad8/atproto-0.0.64-py3-none-any.whl", hash = "sha256:fd417f10537d35973fd19c1076653af2a1ed651ec86cdf7f166ced2883dcc451", size = 438506, upload-time = "2025-12-01T15:18:35.858Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/d9/360149e7bd9bac580496ce9fddc0ef320b3813aadd72be6abc011600862d/atproto-0.0.65-py3-none-any.whl", hash = "sha256:ea53dea57454c9e56318b5d25ceb35854d60ba238b38b0e5ca79aa1a2df85846", size = 446650, upload-time = "2025-12-08T15:53:43.029Z" },
 ]
 
 [[package]]
@@ -1022,7 +1022,7 @@ dev = [
 requires-dist = [
     { name = "aiofiles", specifier = ">=25,<26" },
     { name = "asyncpraw", specifier = ">=7,<8" },
-    { name = "atproto", specifier = "==0.0.64" },
+    { name = "atproto", specifier = "==0.0.65" },
     { name = "bs-config", extras = ["dotenv"], specifier = "==3.4.0", index = "https://pypi.bjoernpetersen.net/simple" },
     { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==3.0.0", index = "https://pypi.bjoernpetersen.net/simple" },
     { name = "click", specifier = ">=8,<9" },
