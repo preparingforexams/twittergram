@@ -11,31 +11,31 @@ cron:
       hasConfigMap: false
       hasSecret: true
       configs:
-      - id: advent
-        targetChat: "-1001604944844"
-        env:
-          BLUESKY__AUTHOR_ID: "garygrady.bsky.social"
-      - id: probahn
-        schedule: "0,30 7-22 * * *"
-        targetChat: "-1002474524986"
-        env:
-          BLUESKY__AUTHOR_ID: "pro-bahn.de"
+        #      - id: advent
+        #        targetChat: "-1001604944844"
+        #        env:
+        #          BLUESKY__AUTHOR_ID: "garygrady.bsky.social"
+        - id: probahn
+          schedule: "0,30 7-22 * * *"
+          targetChat: "-1002474524986"
+          env:
+            BLUESKY__AUTHOR_ID: "pro-bahn.de"
     mail:
       useCase: forward-mails
       hasConfigMap: false
       hasSecret: true
-      configs: []
+      configs: [ ]
     reddit:
       useCase: forward-reddit-posts
       hasConfigMap: true
       hasSecret: true
       configs:
-      - id: schnecke
-        schedule: "*/20 * * * *"
-        targetChat: "-1002055910690"
-        env:
-          REDDIT__SOURCE_USERNAME: schneckedertzchen
-          REDDIT__SUBREDDIT_FILTER: DeutscheComics
+        - id: schnecke
+          schedule: "*/20 * * * *"
+          targetChat: "-1002055910690"
+          env:
+            REDDIT__SOURCE_USERNAME: schneckedertzchen
+            REDDIT__SUBREDDIT_FILTER: DeutscheComics
     rss:
       useCase: forward-rss-feed
       hasConfigMap: false
@@ -56,7 +56,7 @@ cron:
       useCase: forward-toots
       hasConfigMap: true
       hasSecret: true
-      configs: []
+      configs: [ ]
     xcode:
       useCase: forward-xcode
       hasConfigMap: false
