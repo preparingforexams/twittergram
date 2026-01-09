@@ -490,11 +490,11 @@ wheels = [
 
 [[package]]
 name = "injector"
-version = "0.23.0"
+version = "0.24.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/1f/f5/060088d45fd57db2e2164ae289a96066d3e48320c0c99bba5e50eb245d22/injector-0.23.0.tar.gz", hash = "sha256:7e59db84faa5358474c8ee05abca6ab6bd02519fbefcf175e0b230ee7d2d4bac", size = 55720, upload-time = "2025-12-01T15:16:31.037Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/17/6c/de0f64b2b8d7d8cd3206bd6fb54ebb0c7c2e2fe0f2d16103756ff1bf803b/injector-0.24.0.tar.gz", hash = "sha256:e85a75d1516cff2f03170f3fd1219f56acb25c9a05e307819ae0dcde3dad3d3f", size = 55988, upload-time = "2026-01-09T12:10:41.782Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/54/52/2e771b1acc010f0351e703d524702db72b80ad8b375dccac8488ccc02a61/injector-0.23.0-py2.py3-none-any.whl", hash = "sha256:86ab389805b4aaabfe235b2b2b85ff515af4d0209faccf1d60de2872c92c1fa0", size = 21483, upload-time = "2025-12-01T15:16:29.664Z" },
+    { url = "https://files.pythonhosted.org/packages/5f/db/953aeee405f1466832f212f61496ee07c29f7f027f7591b71b06bd08a418/injector-0.24.0-py3-none-any.whl", hash = "sha256:47294c7a7fdb811f0d1b442a1e0152bb2fc28b2ccaaba4cba44e5e125e0da2d0", size = 21504, upload-time = "2026-01-09T12:10:40.329Z" },
 ]
 
 [[package]]
@@ -1035,7 +1035,7 @@ requires-dist = [
     { name = "click", specifier = ">=8,<9" },
     { name = "gallery-dl", specifier = "==1.31.2" },
     { name = "httpx" },
-    { name = "injector", specifier = "==0.23.0" },
+    { name = "injector", specifier = "==0.24.0" },
     { name = "jmapc", specifier = "==0.2.23" },
     { name = "mastodon-py", specifier = ">=2,<3" },
     { name = "more-itertools", specifier = ">=10,<11" },
