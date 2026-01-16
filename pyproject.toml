@@ -17,8 +17,8 @@ dependencies = [
     "aiofiles >=25, <26",
     "asyncpraw >=7, <8",
     "atproto ==0.0.65",
-    "bs-config [dotenv] ==3.4.0",
-    "bs-state [file,kubernetes] ==3.0.0",
+    "bs-config [dotenv] ==4.0.0",
+    "bs-state [file,kubernetes] ==4.0.0",
     "click >=8, <9",
     "gallery-dl ==1.31.3",
     "httpx",
@@ -45,7 +45,7 @@ dev = [
 
 [[tool.uv.index]]
 name = "internal"
-url = "https://pypi.bjoernpetersen.net/simple"
+url = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/simple"
 explicit = true
 
 [tool.uv.sources]

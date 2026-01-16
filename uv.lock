@@ -185,11 +185,11 @@ wheels = [
 
 [[package]]
 name = "bs-config"
-version = "3.4.0"
-source = { registry = "https://pypi.bjoernpetersen.net/simple" }
-sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_config-3.4.0.tar.gz", hash = "sha256:93b8a630f370be52e4b8106f1bcb0059857cdc43d43c6efed1a3f6d8f0699460" }
+version = "4.0.0"
+source = { registry = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/simple" }
+sdist = { url = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/files/bs-config/4.0.0/bs_config-4.0.0.tar.gz", hash = "sha256:bc7b2338b8a6a2d7701ed1eefd22fd79982be3173b759601c8fc99ea361ac807" }
 wheels = [
-    { url = "https://pypi.bjoernpetersen.net/packages/bs_config-3.4.0-py3-none-any.whl", hash = "sha256:036c5e3b60bd4a6eac7e0e52045e63261a0734c3cab4043caeb44f73032dbe5f" },
+    { url = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/files/bs-config/4.0.0/bs_config-4.0.0-py3-none-any.whl", hash = "sha256:a1652749c1367045e4de0720f3fe084c8518d14c710861e593dd7b10ca3516e5" },
 ]
 
 [package.optional-dependencies]
@@ -199,15 +199,15 @@ dotenv = [
 
 [[package]]
 name = "bs-state"
-version = "3.0.0"
-source = { registry = "https://pypi.bjoernpetersen.net/simple" }
+version = "4.0.0"
+source = { registry = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/simple" }
 dependencies = [
     { name = "opentelemetry-api" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://pypi.bjoernpetersen.net/packages/bs_state-3.0.0.tar.gz", hash = "sha256:3e2ea1c43007f30ae277ab16ae1883c49d5e8578fbb7ee5f20ac61dafb9347ce" }
+sdist = { url = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/files/bs-state/4.0.0/bs_state-4.0.0.tar.gz", hash = "sha256:f294584c89d54d30471ec210ef6dbb60b26262483b1433ff21d27557a5a7e1a7" }
 wheels = [
-    { url = "https://pypi.bjoernpetersen.net/packages/bs_state-3.0.0-py3-none-any.whl", hash = "sha256:d0086b8ad66ca8fb780991cb807c7889a2bb7895e3fc9e168e8bae8381d47139" },
+    { url = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/files/bs-state/4.0.0/bs_state-4.0.0-py3-none-any.whl", hash = "sha256:4c49aaa41d8518d3fa0447458584ed353975c96102cc99f4279745ebe90068d7" },
 ]
 
 [package.optional-dependencies]
@@ -1030,8 +1030,8 @@ requires-dist = [
     { name = "aiofiles", specifier = ">=25,<26" },
     { name = "asyncpraw", specifier = ">=7,<8" },
     { name = "atproto", specifier = "==0.0.65" },
-    { name = "bs-config", extras = ["dotenv"], specifier = "==3.4.0", index = "https://pypi.bjoernpetersen.net/simple" },
-    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==3.0.0", index = "https://pypi.bjoernpetersen.net/simple" },
+    { name = "bs-config", extras = ["dotenv"], specifier = "==4.0.0", index = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/simple" },
+    { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==4.0.0", index = "https://code.bjoernpetersen.net/api/packages/BjoernPetersen/pypi/simple" },
     { name = "click", specifier = ">=8,<9" },
     { name = "gallery-dl", specifier = "==1.31.3" },
     { name = "httpx" },
