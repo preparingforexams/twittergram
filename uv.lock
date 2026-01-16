@@ -411,14 +411,14 @@ wheels = [
 
 [[package]]
 name = "gallery-dl"
-version = "1.31.2"
+version = "1.31.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/89/ef/b1f6f6daf49d51bfa75b513c20885cf5c1d607be7df59e64d7c5ba4ae15c/gallery_dl-1.31.2.tar.gz", hash = "sha256:4ca3f02df89d9c8e15b4b2cb665c0cfa5e51d243644e1dcbf9c23f2d841907ab", size = 647470, upload-time = "2026-01-02T18:32:52.993Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/20/fb/a00db1f773092e881edbb52d85b93d70216b669fd8ec5093cec20363575c/gallery_dl-1.31.3.tar.gz", hash = "sha256:315ef131916de477f791fad843f49efbea716c1917a5e7e1ee8f54339300036f", size = 652809, upload-time = "2026-01-16T15:57:41.887Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/15/dd/389d9515b007fe84589ddefab815544f34f29b5c0fe13a3138bde6b3904d/gallery_dl-1.31.2-py3-none-any.whl", hash = "sha256:bb1d968d0b376857333ba7ed581109dcefc5b1fe20b5d38a0fdde71f2a81b990", size = 803163, upload-time = "2026-01-02T18:32:49.267Z" },
+    { url = "https://files.pythonhosted.org/packages/86/e3/81743d94b10fd54c8e0eb3f411058be9b35b26e31b040def1ff73bd26404/gallery_dl-1.31.3-py3-none-any.whl", hash = "sha256:41f058544cb80532b7c6bd0d264883011980dc2ccebad34a92f58759df274154", size = 808879, upload-time = "2026-01-16T15:57:38.209Z" },
 ]
 
 [[package]]
@@ -1033,7 +1033,7 @@ requires-dist = [
     { name = "bs-config", extras = ["dotenv"], specifier = "==3.4.0", index = "https://pypi.bjoernpetersen.net/simple" },
     { name = "bs-state", extras = ["file", "kubernetes"], specifier = "==3.0.0", index = "https://pypi.bjoernpetersen.net/simple" },
     { name = "click", specifier = ">=8,<9" },
-    { name = "gallery-dl", specifier = "==1.31.2" },
+    { name = "gallery-dl", specifier = "==1.31.3" },
     { name = "httpx" },
     { name = "injector", specifier = "==0.24.0" },
     { name = "jmapc", specifier = "==0.2.23" },
